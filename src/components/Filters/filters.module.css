@@ -1,0 +1,49 @@
+.root {
+  position: relative;
+}
+
+.filterToggle {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  padding: 0;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.genresGrid {
+  width: 430px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.genre {
+  list-style: none;
+  padding: 6px;
+}
+
+.genreButton {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-grey-light);
+  font-family: var(--font-primary);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.active {
+  color: var(--color-primary);
+}
+
+.filterToggle, .genreButton {
+  transition: 0.3s color;
+}
+
+.filterToggle:hover, .genreButton:hover {
+  color: var(--color-purple);
+}

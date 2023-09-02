@@ -1,0 +1,236 @@
+.playerContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: black;
+}
+
+.playerContainer video {
+  object-fit: cover;
+}
+
+.customPlayer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.videoControls {
+  position: absolute;
+  padding: 10px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.progressWrapper {
+  margin-bottom: 10px;
+}
+
+.videoProgress {
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.bottomControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomControls button {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+
+[data-title]::before {
+  content: attr(data-title);
+  position: absolute;
+  display: none;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -70px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-weight: bold;
+  padding: 4px 6px;
+  word-break: keep-all;
+  white-space: pre;
+}
+
+[data-title]:hover::before {
+  display: inline-block;
+}
+
+.progressWrapper[data-title]::before {
+  top: -30px;
+}
+
+.bottomControls button svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-grey-light);
+  transition: fill 0.3s;
+}
+
+.bottomControls button svg:hover {
+  fill: var(--color-primary);
+}
+
+.leftControls {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.volumeContainer {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.volumeRange {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  transition: width .3s;
+  position: relative;
+  cursor: pointer;
+}
+
+.volumeContainer:hover .volumeRange {
+  width: 100px;
+  height: 5px;
+  overflow: visible;
+}
+
+.timeContainer {
+  color: var(--color-white);
+  display: inline-block;
+  letter-spacing: 1.5px;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: var(--font-primary);
+  line-height: 1.5;
+}
+
+.bufferingAnimation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bufferingAnimation svg {
+  width: 80%;
+  height: 80%;
+  fill: var(--color-grey-light);
+  animation: rotation 2s linear 0s infinite;
+}
+
+.playPauseAnimation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 0;
+}
+
+.playPauseAnimation svg {
+  width: 50%;
+  height: 50%;
+  fill: var(--color-grey-light);
+}
+
+.fullScreenBtn[data-title]::before {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.playPauseBtn::before {
+  left: 0px;
+  transform: none;
+}
+
+.settingsWrapper {
+  position: relative;
+}
+
+.settingsPopup {
+  width: 50px;
+  left: 50%;
+  top: unset;
+  transform: translate(-50%, -120%);
+  border-radius: 5px;
+  z-index: 3;
+}
+
+.qualityBtn {
+  width: auto !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto 20px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-grey-light);
+  font-family: var(--font-primary);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: .3s color;
+}
+
+.qualityBtn.active {
+  color: var(--color-primary);
+}
+
+.qualityBtn:last-child {
+  margin-bottom: 0;
+}
+
+.qualityBtn:hover {
+  color: var(--color-purple)
+}

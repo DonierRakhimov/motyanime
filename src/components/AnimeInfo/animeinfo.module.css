@@ -1,0 +1,52 @@
+.root {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.mainContainer {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.trailerContent {
+  flex-grow: 1;
+  width: 33%;
+  align-self: flex-start;
+}
+
+.title {
+  display: inline-block;
+  font-family: var(--font-semi-bold);
+  color: var(--color-white);
+  font-size: 35px;
+  margin: 0 10px 20px 0;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+}
+
+.text {
+  font-size: 25px;
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  margin: 0 0 10px 0;
+}
+
+.description {
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-grey-light);
+  margin-bottom: 5px;
+  line-height: 1.5;
+  margin: 0 0 5px 0;
+  font-family: var(--font-primary);
+}
+
+.addBtn {
+  margin-left: 10px;
+}

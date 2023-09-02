@@ -1,0 +1,16 @@
+.root {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownToggle {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.dropdownToggle svg:hover * {
+  fill: var(--color-primary);
+}

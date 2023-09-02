@@ -1,0 +1,18 @@
+.episodeItem {
+  font-size: 18px;
+  color: var(--color-medium-grey);
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: var(--font-primary), sans-serif;
+  text-align: center;
+  transition: color .3s;
+  cursor: pointer;
+}
+
+.episodeItem.active {
+  color: var(--color-primary);
+}
+
+.episodeItem:hover {
+  color: var(--color-purple);
+}

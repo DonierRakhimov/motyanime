@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Noir Pro';
+  src: url(./NoirPro-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Noir Pro Bold';
+  src: url(./NoirPro-Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Noir Pro Light';
+  src: url(./NoirPro-Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Noir Pro Semi Bold';
+  src: url(./NoirPro-SemiBoldItalic.woff2) format('woff2');
+}

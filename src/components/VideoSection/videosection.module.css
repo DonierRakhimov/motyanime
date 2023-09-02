@@ -1,0 +1,16 @@
+.sectionContainer {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  height: 600px;
+}
+
+.playerWrapper {
+  width: calc(75% - 12px);
+  height: 100%;
+  margin-right: 24px;
+}
+
+.listWrapper {
+  width: calc(25% - 12px);
+}

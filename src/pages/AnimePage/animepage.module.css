@@ -1,0 +1,24 @@
+.root {
+  margin: 60px auto 0;
+  max-width: 1320px;
+}
+
+.animeInfoWrapper {
+  margin: 0;
+}
+
+.videoSectionWrapper {
+  margin: 30px 0 80px;
+}
+
+.commentSection {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.commentGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 24px;
+}

@@ -1,0 +1,84 @@
+.searchModal {
+  min-height: 150px;
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.search {
+  padding: 5px 0px 5px 50px;
+  background-color: var(--color-black-light);
+  height: 40px;
+  box-sizing: border-box;
+  border: 2px solid var(--color-grey-light);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--color-grey-light);
+  font-weight: 400;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 24px;
+  width: 400px;
+  transition: all 0.15s linear;
+  text-align: start;
+  display: block;
+}
+
+.searchIcon {
+  content: '';
+  background-image: url(../../assets/images/search-icon.svg);
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search:hover, .search:focus {
+  border-color: var(--color-purple);
+  outline: none;
+}
+
+.clearBtn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.clearBtn svg path {
+  fill: var(--color-grey-light);
+}
+
+.clearBtn:hover svg path {
+  fill: var(--color-primary);
+}
+
+.searchList {
+  padding: 0;
+  list-style: none;
+  margin: 20px 0 0;
+}
+
+.message {
+  width: 100%;
+  text-align: center;
+  margin: 50px 0 0;
+  color: var(--color-white);
+  font-weight: 400;
+  font-family: var(--font-primary);
+  font-size: 20px;
+}

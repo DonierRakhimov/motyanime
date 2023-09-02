@@ -1,0 +1,28 @@
+.swiper:hover .arrowBtn {
+  visibility: visible;
+}
+
+.arrowBtn {
+  visibility: hidden;
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.nextBtn {
+  right: 80px;
+}
+
+.prevBtn {
+  left: 80px;
+}

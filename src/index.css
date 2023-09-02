@@ -1,0 +1,24 @@
+:root {
+  --font-primary: 'Noir Pro', sans-serif;
+  --font-bold: 'Noir Pro Bold', sans-serif;
+  --font-semi-bold: 'Noir Pro Semi Bold', sans-serif;
+  --font-light: 'Noir Pro Light', sans-serif;
+  --color-primary: #f5cf49;
+  --color-purple: #a958a5;
+  --color-white: #ffffff;
+  --color-black: #111111;
+  --color-black-light: #242424;
+  --color-semi-grey: #9f9f9f;
+  --color-grey: #a4a4a4;
+  --color-medium-grey: #b4b4b4;
+  --color-dark-grey: #616161;
+  --color-darker-grey: #808080;
+  --color-grey-normal: #868686;
+  --color-grey-light: #d4d4d4;
+  --transition: 0.3s all;
+}
+
+body {
+  background-color: var(--color-black-light);
+}
+
