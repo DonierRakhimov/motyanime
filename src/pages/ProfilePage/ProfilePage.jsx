@@ -5,6 +5,8 @@ import Button from '../../components/Button/Button';
 import { buttonColors } from '../../utils/buttonColors';
 import { buttonSizes } from '../../utils/buttonSizes';
 import cover from '../../assets/images/cover.avif';
+import PlayList from '../../components/PlayList/PlayList';
+import { List } from '../../utils/mockData';
 
 export default function ProfilePage() {
   const [editIsOpen, setEditIsOpen] = React.useState(false);
@@ -66,16 +68,36 @@ export default function ProfilePage() {
               ></input>
             </label>
             <label className={s.editLabel}>
-              Новый email
+              Новый Email
               <input
                 className={s.editInput}
                 type='email'
-                placeholder='email'
+                placeholder='Email'
               ></input>
             </label>
             <Button className={s.saveBtn}>Сохранить изменения</Button>
           </form>
         </div>
+      </div>
+      <div className={s.playListWrapper}>
+        <PlayList
+          savedList={List}
+          plannedList={[
+            {
+              id: 312,
+              names: {
+                ru: 'Какое то аниме',
+              },
+              status: {
+                string: 'Завершено',
+              },
+              genres: ['Сейнен', 'Комедия'],
+              type: {
+                string: 'TV',
+              },
+            },
+          ]}
+        ></PlayList>
       </div>
     </section>
   );

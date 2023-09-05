@@ -1,0 +1,141 @@
+.playListTitle {
+  font-family: var(--font-bold);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--color-white);
+  margin: 0 0 40px;
+}
+
+.playListContainer {
+  width: 75%;
+}
+
+.playListHeader {
+  padding: 30px 70px;
+  background-color: #000000;
+  border-radius: 10px 10px 0 0;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.switchBtn {
+  color: var(--color-grey-light);
+  font-weight: 700;
+  font-size: 30px;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.switchBtn.active {
+  color: var(--color-primary);
+}
+
+.switchBtn:hover {
+  color: var(--color-purple);
+}
+
+.playList {
+  height: 910px;
+  box-sizing: border-box;
+  padding: 30px;
+  background-image: url(../../assets/images/playlistImage.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 0 10px 10px;
+  position: relative;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listItem {
+  border-bottom: 1px solid var(--color-black-light);
+  margin-bottom: 20px;
+}
+
+.messageContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+}
+
+.emptyMessage {
+  margin: 0;
+  color: var(--color-grey-light);
+  font-weight: 700;
+  font-size: 30px;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.sadIcon {
+  width: 33px;
+  height: 33px;
+  fill: var(--color-grey-light);
+  vertical-align: bottom;
+}
+
+.paginateWrapper {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.page {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.pageItem {
+  font-family: var(--font-primary);
+  line-height: 42px;
+  min-width: 42px;
+  text-align: center;
+  color: var(--color-grey-light);
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 32px;
+  transition: all 0.5s;
+  border: var(--border-light);
+  border-radius: 4px;
+  background: var(--color-dark-grey);
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.pageItem:hover {
+  background-color: var(--color-black);
+  color: var(--color-primary);
+}
+
+.pageItem.activeItem {
+  background-color: var(--color-black);
+  color: var(--color-primary);
+}
+
+.paginationContainer {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
