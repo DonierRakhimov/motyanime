@@ -1,6 +1,6 @@
 import React from 'react';
 import { DetailUl } from './styled-components';
-import Detail from '../../Detail/Detail';
+import Detail from '../Detail/Detail';
 
 export default function DetailList({ detailList }) {
   return (
