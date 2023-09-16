@@ -2,7 +2,7 @@ import React from 'react';
 import s from './spiner.module.css';
 import classNames from 'classnames';
 
-export default function Spiner({ isActive }) {
+export default function Spiner({ isActive = false }) {
   return (
     <div className={classNames(s['lds-default'], isActive ? s.active : '')}>
       <div></div>

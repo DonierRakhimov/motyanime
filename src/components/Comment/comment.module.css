@@ -11,7 +11,7 @@
 
 .fieldset {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   padding: 0;
   border: none;
   margin-top: 5px;

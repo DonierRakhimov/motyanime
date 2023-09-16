@@ -1,7 +1,12 @@
 import axios from 'axios'
-import { anilibriaBase } from './baseUrls'
+import { anilibriaBase, userBase } from './baseUrls'
+
+axios.defaults.transformResponse = [(data) => JSON.parse(data)]
 
 export const axiosInstance = axios.create({
   baseURL: anilibriaBase,
-  transformResponse: [(data) => JSON.parse(data)]
 })
+
+export const userAxios = axios.create({
+  baseURL: userBase,
+});

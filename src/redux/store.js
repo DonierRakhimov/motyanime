@@ -6,12 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { genresReducer } from './UI/Genres/genresReducer';
 import { sortReducer } from './UI/Sort/sortReducer';
 import { searchPopupReducer } from './UI/SearchPopup/searchPopupReducer';
+import { userReducer } from './entities/User/userReducer';
 
 const rootReducer = combineReducers({
   titles: titleReducer,
   genres: genresReducer,
   sort: sortReducer,
   searchPopupOpened: searchPopupReducer,
+  user: userReducer,
 })
 
 export const store = createStore(
