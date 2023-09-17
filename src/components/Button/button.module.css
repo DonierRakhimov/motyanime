@@ -9,6 +9,7 @@
   text-align: center;
   transition: var(--transition);
   cursor: pointer;
+  position: relative;
 }
 
 .btn.s {
@@ -61,4 +62,32 @@
 .btn.grey:hover {
   background-color: var(--color-primary);
   color: var(--color-black);
+}
+
+.btn:disabled .childContainer {
+  visibility: hidden;
+}
+
+.btn:disabled::before{
+  position: absolute;
+  content: '';
+  width: 8%;
+  padding: 0 0 8% 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--color-grey-light);
+  animation: rotate 1s ease infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }

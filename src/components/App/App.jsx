@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AnimePage from '../../pages/AnimePage/AnimePage';
 import LoginPage from '../../pages/LoginPage/LoginPage';
@@ -6,8 +7,16 @@ import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import Header from '../Header/Header';
 import s from './app.module.css';
 import ProfilePage from '../../pages/ProfilePage/ProfilePage';
+import { useDispatch } from 'react-redux';
+import { checkAuth } from '../../redux/entities/User/thunks/checkAuth';
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch])
+
   return (
     <BrowserRouter>
       <div className={s.headerWrapper}>

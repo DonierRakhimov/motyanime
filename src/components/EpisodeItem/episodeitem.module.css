@@ -5,8 +5,12 @@
   line-height: 1.5;
   font-family: var(--font-primary), sans-serif;
   text-align: center;
-  transition: color .3s;
+  transition: all .3s;
   cursor: pointer;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
 }
 
 .episodeItem.active {
@@ -15,4 +19,5 @@
 
 .episodeItem:hover {
   color: var(--color-purple);
+  background-color: #313136;
 }

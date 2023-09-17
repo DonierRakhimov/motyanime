@@ -9,7 +9,7 @@ export const useValidation = (value, validations) => {
       switch (validation) {
         case 'required': {
           if (!value?.replace(/\s/g, '').length) {
-            return setValidationMessage('Не все поля заполнены');
+            return setValidationMessage(validations[validation].message);
           } else {
             setValidationMessage('');
           }
@@ -17,7 +17,7 @@ export const useValidation = (value, validations) => {
         }
         case 'email': {
           if (!isEmail(value)) {
-            return setValidationMessage('Введен некорректный email');
+            return setValidationMessage(validations[validation].message);
           } else {
             setValidationMessage('');
           }
@@ -25,9 +25,23 @@ export const useValidation = (value, validations) => {
         }
         case 'password': {
           if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/.test(value)) {
-            return setValidationMessage(
-              'Ваш пароль должен состоять из не менее 8 символов и включать как минимум одну заглавную букву, одну строчную букву и одну цифру.'
-            );
+            return setValidationMessage(validations[validation].message);
+          } else {
+            setValidationMessage('');
+          }
+          break;
+        }
+        case 'minLength': {
+          if (value.length < validations[validation].value) {
+            return setValidationMessage(validations[validation].message);
+          } else {
+            setValidationMessage('');
+          }
+          break;
+        }
+        case 'maxLength': {
+          if (value.length > validations[validation].value) {
+            return setValidationMessage(validations[validation].message);
           } else {
             setValidationMessage('');
           }

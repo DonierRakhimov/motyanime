@@ -7,10 +7,77 @@ import { buttonSizes } from '../../utils/buttonSizes';
 import cover from '../../assets/images/cover.avif';
 import PlayList from '../../components/PlayList/PlayList';
 import { List } from '../../utils/mockData';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserData } from '../../redux/entities/User/selectors';
+import isEmpty from 'lodash.isempty';
+import { ReactComponent as LogoutIcon } from '../../assets/images/logoutIcon.svg';
+import { logoutUser } from '../../redux/entities/User/thunks/logoutUser';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from '../../hooks/useForm';
+import { useValidation } from '../../hooks/useValidation';
 
 export default function ProfilePage() {
-  const [editIsOpen, setEditIsOpen] = React.useState(false);
   const formRef = React.useRef(null);
+  const [editIsOpen, setEditIsOpen] = React.useState(false);
+  const userData = useSelector(selectUserData);
+  const { formData, handleChange } = useForm(userData);
+  const [userNameError] = useValidation(formData.userName, {
+    required: {
+      value: true,
+      message: 'Не все поля заполнены',
+    },
+    minLength: {
+      value: 2,
+      message: 'Имя пользователя должно содержать как минимум 2 символа',
+    },
+    maxLength: {
+      value: 30,
+      message: 'Имя пользователя не должно превышать 30 символов',
+    },
+  });
+  const [emailError] = useValidation(formData.email, {
+    required: {
+      value: true,
+      message: 'Не все поля заполнены',
+    },
+    email: {
+      value: true,
+      message: 'Введите корректный email'
+    }
+  });
+  const [formError, setFormError] = React.useState('');
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // if (isEmpty(userData)) {
+  //   return;
+  // }
+
+  const { userName = 'Xyz', email = 'donikclonik2001@mail.ru' } = userData;
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUser());
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUserUpdate = (e) => {
+    e.preventDefault();
+    const errorMessage = [userNameError, emailError].find((error) => error);
+
+    if (errorMessage) {
+      setFormError(errorMessage)
+    } else if (formData.email === userData.email && formData.userName === userData.userName) {
+      setFormError('Введите новое имя пользователя или email')
+    } else {
+      setFormError('');
+    }
+  }
+
   return (
     <section className={s.root}>
       <h1 className={s.profileTitle}>Мой профиль</h1>
@@ -39,8 +106,15 @@ export default function ProfilePage() {
           </div>
           <div className={s.infoContainer}>
             <div>
-              <p className={s.userName}>XYX USER</p>
-              <p className={s.email}>youremail@example.com</p>
+              <p className={s.userName}>{userName}</p>
+              <p className={s.email}>{email}</p>
+              <button
+                onClick={() => handleLogout()}
+                className={s.logoutBtn}
+                title='Выйти из аккаунта'
+              >
+                <LogoutIcon></LogoutIcon>
+              </button>
             </div>
             <Button
               className={s.editBtn}
@@ -58,24 +132,31 @@ export default function ProfilePage() {
             paddingBottom: editIsOpen ? 20 : 0,
           }}
         >
-          <form className={s.editForm} ref={formRef}>
+          <form className={s.editForm} ref={formRef} onSubmit={handleUserUpdate}>
             <label className={s.editLabel}>
-              Новый никнейм
+              Имя пользователя
               <input
                 className={s.editInput}
                 type='text'
                 placeholder='Имя пользователя'
+                name='userName'
+                value={formData.userName}
+                onChange={handleChange}
               ></input>
             </label>
             <label className={s.editLabel}>
-              Новый Email
+              Email
               <input
                 className={s.editInput}
                 type='email'
                 placeholder='Email'
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
               ></input>
             </label>
             <Button className={s.saveBtn}>Сохранить изменения</Button>
+            <span className={s.errorMessage}>{formError}</span>
           </form>
         </div>
       </div>

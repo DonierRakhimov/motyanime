@@ -10,10 +10,14 @@ import { Link, NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentGenres } from '../../redux/UI/Genres/selectors';
 import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
+import { selectIsAuthorized, selectUserData } from '../../redux/entities/User/selectors';
+import profilePic from '../../assets/images/profilePicture.png';
 
 export default function Header() {
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const userData = useSelector(selectUserData);
+  const isAuthorized = useSelector(selectIsAuthorized);
   const currentGenres = useSelector(selectCurrentGenres);
   const currentSort = useSelector(selectCurrentSort);
 
@@ -57,12 +61,24 @@ export default function Header() {
         <div className={s.searchWrapper}>
           <Search />
         </div>
-        <Link to='/signup' className={s.btnWrapper}>
-          <Button>SIGN UP</Button>
-        </Link>
-        <Link to='signin'>
-          <Button color={buttonColors.purple}>LOG IN</Button>
-        </Link>
+        {isAuthorized ? (
+          <Link to='/profile' className={s.profileLink}>
+            <img
+              src={profilePic}
+              className={s.profilePic}
+              alt='Аватар пользователя'
+            ></img>
+          </Link>
+        ) : (
+          <>
+            <Link to='/signup' className={s.btnWrapper}>
+              <Button>SIGN UP</Button>
+            </Link>
+            <Link to='signin'>
+              <Button color={buttonColors.purple}>LOG IN</Button>
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );

@@ -20,6 +20,7 @@ export default function Form({
   anchorText,
   submitMessage,
   theme = 'yellow',
+  isSubmitting = false,
 }) {
   const submitHandler = (evt) => {
     evt.preventDefault();
@@ -42,10 +43,12 @@ export default function Form({
           <fieldset className={s.formContent}>
             {children}
             <Button
+              disabled={isSubmitting}
               color={
                 theme === 'yellow' ? buttonColors.yellow : buttonColors.purple
               }
               size={buttonSizes.l}
+              className={s.submitBtn}
             >
               {submitText}
             </Button>

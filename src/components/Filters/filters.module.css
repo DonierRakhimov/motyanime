@@ -21,7 +21,6 @@
 
 .genre {
   list-style: none;
-  padding: 6px;
 }
 
 .genreButton {
@@ -34,6 +33,11 @@
   font-family: var(--font-primary);
   letter-spacing: 0.5px;
   cursor: pointer;
+  padding: 12px;
+  width: 100%;
+  text-align: start;
+  transition: background-color .3s ease;
+  border-radius: 10px;
 }
 
 .active {
@@ -41,9 +45,13 @@
 }
 
 .filterToggle, .genreButton {
-  transition: 0.3s color;
+  transition: 0.3s all;
 }
 
 .filterToggle:hover, .genreButton:hover {
   color: var(--color-purple);
+}
+
+.genreButton:hover {
+  background-color: #313136;
 }

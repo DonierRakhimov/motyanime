@@ -3,9 +3,10 @@ import { userLoggedOut } from '../actionCreators';
 
 export const logoutUser = () => async (dispatch) => {
   try {
-    await userAxios.post('/logout');
+    const response = await userAxios.post('/logout');
     dispatch(userLoggedOut());
+    return response;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };

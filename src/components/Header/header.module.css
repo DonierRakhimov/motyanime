@@ -16,6 +16,8 @@
 
 .navcontainer {
   display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .list {
@@ -59,3 +61,23 @@
 .btnWrapper {
   margin-right: 16px;
 }
+
+.profileLink {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+}
+
+.profilePic {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--color-purple);
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+

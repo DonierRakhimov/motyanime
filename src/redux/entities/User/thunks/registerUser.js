@@ -8,7 +8,13 @@ export const registerUser = ({ email, userName, password }) => async (dispatch) 
     });
     const { data: registeredUser } = response;
     dispatch(userLoaded(registeredUser));
+    return registeredUser;
   } catch (err) {
-    console.log(err);
+    if (err.response) {
+      const { data } = err.response;
+      throw new Error(data.message);
+    } else {
+      throw new Error('Что-то пошло не так...');
+    }
   }
 };

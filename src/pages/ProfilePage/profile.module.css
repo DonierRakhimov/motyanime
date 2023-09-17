@@ -61,6 +61,32 @@
   letter-spacing: 0.5px;
   line-height: 1.5;
   font-family: var(--font-primary);
+  display: inline-block;
+}
+
+.logoutBtn {
+  display: inline-block;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin-left: 15px;
+  width: 30px;
+  height: 30px;
+  vertical-align: bottom;
+}
+
+.logoutBtn svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-grey-light);
+  transition: .3s fill;
+}
+
+.logoutBtn:hover svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-primary);
 }
 
 .editBtn {
@@ -120,6 +146,18 @@
   box-sizing: border-box;
   line-height: 1.5;
   height: 40px;
+}
+
+.errorMessage {
+  display: inline-block;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: red;
+  letter-spacing: 0.5px;
+  margin-left: 15px;
+  text-align: center;
 }
 
 .playListWrapper {
