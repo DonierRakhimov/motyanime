@@ -15,12 +15,14 @@ import { logoutUser } from '../../redux/entities/User/thunks/logoutUser';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { useValidation } from '../../hooks/useValidation';
+import { updateUser } from '../../redux/entities/User/thunks/updateUser';
+import { notificationToggled } from '../../redux/UI/Notification/actionCreators';
 
 export default function ProfilePage() {
   const formRef = React.useRef(null);
   const [editIsOpen, setEditIsOpen] = React.useState(false);
   const userData = useSelector(selectUserData);
-  const { formData, handleChange } = useForm(userData);
+  const { formData, handleChange, setFormData } = useForm(userData);
   const [userNameError] = useValidation(formData.userName, {
     required: {
       value: true,
@@ -46,15 +48,18 @@ export default function ProfilePage() {
     }
   });
   const [formError, setFormError] = React.useState('');
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // if (isEmpty(userData)) {
-  //   return;
-  // }
+  React.useEffect(() => {
+    setFormData(userData);
+  }, [userData, setFormData])
 
-  const { userName = 'Xyz', email = 'donikclonik2001@mail.ru' } = userData;
+  if (isEmpty(userData)) {
+    return;
+  }
+
+  const { userName, email } = userData;
 
   const handleLogout = async () => {
     try {
@@ -65,7 +70,7 @@ export default function ProfilePage() {
     }
   };
 
-  const handleUserUpdate = (e) => {
+  const handleUserUpdate = async (e) => {
     e.preventDefault();
     const errorMessage = [userNameError, emailError].find((error) => error);
 
@@ -75,6 +80,12 @@ export default function ProfilePage() {
       setFormError('Введите новое имя пользователя или email')
     } else {
       setFormError('');
+      try {
+        await dispatch(updateUser(formData));
+        dispatch(notificationToggled({color: 'green', message: 'Профль успешно обновлён!'}))
+      } catch (err) {
+        setFormError(err.message);
+      }
     }
   }
 

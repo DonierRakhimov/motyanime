@@ -64,6 +64,10 @@
   color: var(--color-black);
 }
 
+.btn:disabled {
+  cursor: wait;
+}
+
 .btn:disabled .childContainer {
   visibility: hidden;
 }

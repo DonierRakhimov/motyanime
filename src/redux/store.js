@@ -7,6 +7,7 @@ import { genresReducer } from './UI/Genres/genresReducer';
 import { sortReducer } from './UI/Sort/sortReducer';
 import { searchPopupReducer } from './UI/SearchPopup/searchPopupReducer';
 import { userReducer } from './entities/User/userReducer';
+import { notificationReducer } from './UI/Notification/notificationReducer';
 
 const rootReducer = combineReducers({
   titles: titleReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   sort: sortReducer,
   searchPopupOpened: searchPopupReducer,
   user: userReducer,
+  notification: notificationReducer,
 })
 
 export const store = createStore(

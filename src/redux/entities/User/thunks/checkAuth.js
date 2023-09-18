@@ -1,9 +1,13 @@
-import { userAxios } from '../../../../utils/axiosOptions';
+import axios from 'axios';
 import { userLoaded } from '../actionCreators';
+import { userBase } from '../../../../utils/baseUrls';
 
 export const checkAuth = () => async (dispatch) => {
   try {
-    const response = await userAxios.post('/refresh');
+    const response = await axios.get('/refresh', {
+      baseURL: userBase,
+      withCredentials: true,
+    });
     const { data: userData } = response;
     dispatch(userLoaded(userData));
     return userData;
