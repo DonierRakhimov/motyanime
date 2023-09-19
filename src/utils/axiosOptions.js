@@ -22,7 +22,7 @@ userAxios.interceptors.response.use(
     const { response } = error;
     if (response && response.status === 401) {
       try {
-        const response = await axios.get('/refresh', {
+        await axios.get('/refresh', {
           baseURL: userBase,
           withCredentials: true,
         });

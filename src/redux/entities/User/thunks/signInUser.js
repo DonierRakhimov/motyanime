@@ -1,23 +1,35 @@
 import { userAxios } from '../../../../utils/axiosOptions';
+import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { userLoaded } from '../actionCreators';
 
 export const signInUser =
   ({ email, password }) =>
   async (dispatch) => {
     try {
-      const response = await userAxios.post('/signin', {
+      const signInResponse = await userAxios.post('/signin', {
         email,
         password,
       });
-      const { data: signedInUser } = response;
-      dispatch(userLoaded(signedInUser));
-      return signedInUser;
+      const savedAnimesRespone = await userAxios.get('/savedAnimes');
+      const { data: userData } = signInResponse;
+      const { data: savedAnimes } = savedAnimesRespone;
+      const payload = {
+        userData,
+        savedAnimes,
+      }
+      dispatch(userLoaded(payload));
+      return payload;
     } catch (err) {
-      if (err.response) {
-        const { data } = err.response;
-        throw new Error(data.message);
+      const { response } = err;
+      if (response && response.status === 400) {
+        throw new Error('Неправильная почта или пароль');
       } else {
-        throw new Error('Что-то пошло не так...');
+        dispatch(
+          notificationToggled({
+            color: 'red',
+            message: 'Что-то пошло не так...',
+          })
+        );
       }
     }
   };

@@ -52,7 +52,7 @@ export default function AnimeInfo({ title = {} }) {
         <div className={s.trailerContent}>
           <h2 className={s.title}>{names?.ru}</h2>
           <h3 className={s.text}>
-            Описание <ToggleButton className={s.addBtn} />
+            Описание <ToggleButton className={s.addBtn} title={title}/>
           </h3>
           <p className={s.description}>{description}</p>
         </div>

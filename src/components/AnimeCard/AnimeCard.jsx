@@ -35,11 +35,9 @@ export default function AnimeCard({ title = {} }) {
               </Button>
             </div>
           </div>
-          <ToggleButton></ToggleButton>
+          <ToggleButton title={title}/>
         </div>
-        <p className={s.title}>
-          {names.ru}
-        </p>
+        <p className={s.title}>{names.ru}</p>
       </figcaption>
     </figure>
   );

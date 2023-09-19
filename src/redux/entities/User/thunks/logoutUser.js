@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { userLoggedOut } from '../actionCreators';
 import { userBase } from '../../../../utils/baseUrls';
+import { notificationToggled } from '../../../UI/Notification/actionCreators';
 
 export const logoutUser = () => async (dispatch) => {
   try {
@@ -14,6 +15,8 @@ export const logoutUser = () => async (dispatch) => {
     dispatch(userLoggedOut());
     return response;
   } catch (err) {
-    throw err;
+    dispatch(
+      notificationToggled({ color: 'red', message: 'Не удалось выйти из аккаунта' })
+    );
   }
 };

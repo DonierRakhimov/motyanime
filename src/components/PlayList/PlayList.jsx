@@ -5,14 +5,18 @@ import isEmpty from 'lodash.isempty';
 import { ReactComponent as SadIcon } from '../../assets/images/sad.svg';
 import ReactPaginate from 'react-paginate';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
+import { animeDeleted } from '../../redux/entities/User/actionCreators';
+import { deleteAnime } from '../../redux/entities/User/thunks/deleteAnime';
 
 const itemsPerPage = 6;
 
-export default function PlayList({ savedList = [], plannedList = [] }) {
-  const [currentList, setCurrentList] = React.useState(savedList);
+export default function PlayList({ watchedList = [], plannedList = [] }) {
+  const [currentList, setCurrentList] = React.useState(watchedList);
   const [currentItems, setCurrentItems] = React.useState(() =>
-    savedList.slice(0, itemsPerPage)
+    watchedList.slice(0, itemsPerPage)
   );
+  const dispatch = useDispatch();
 
   const handlePageChange = (event) => {
     const startOffset = event.selected * itemsPerPage;
@@ -21,10 +25,10 @@ export default function PlayList({ savedList = [], plannedList = [] }) {
   };
 
   React.useEffect(() => {
-    if (!isEmpty(savedList)) {
-      setCurrentList(savedList);
+    if (!isEmpty(watchedList)) {
+      setCurrentList(watchedList);
     }
-  }, [savedList]);
+  }, [watchedList]);
 
   React.useEffect(() => {
     if (!isEmpty(currentList)) {
@@ -41,11 +45,11 @@ export default function PlayList({ savedList = [], plannedList = [] }) {
             <button
               className={classNames(
                 s.switchBtn,
-                currentList === savedList ? s.active : ''
+                currentList === watchedList ? s.active : ''
               )}
-              onClick={() => setCurrentList(savedList)}
+              onClick={() => setCurrentList(watchedList)}
             >
-              Сохранённое
+              Просмотренное
             </button>
             <button
               className={classNames(
@@ -73,6 +77,8 @@ export default function PlayList({ savedList = [], plannedList = [] }) {
                     style={{
                       backgroundColor: 'transparent',
                     }}
+                    isSaved={true}
+                    onDelete={() => dispatch(deleteAnime(savedTitle._id))}
                   ></AnimeResult>
                 </li>
               ))}

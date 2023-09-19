@@ -15,6 +15,7 @@ export default function Notification() {
         {
           top: '-200px',
           visibility: 'visible',
+          offset: '0'
         },
         {
           top: '30px',
@@ -34,12 +35,10 @@ export default function Notification() {
 
   React.useEffect(() => {
     if (didMountRef.current) {
+      animationRef.current.cancel();
       animationRef.current.play();
     }
     didMountRef.current = true;
-    return () => {
-      didMountRef.current = false;
-    };
   }, [isShown]);
 
   return (

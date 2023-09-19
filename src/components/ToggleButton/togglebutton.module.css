@@ -14,3 +14,42 @@
 .dropdownToggle svg:hover * {
   fill: var(--color-primary);
 }
+
+.addBtn {
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--color-white);
+  padding: 10px 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: .3s color;
+  width: max-content;
+  font-family: var(--font-primary);
+  line-height: 1;
+}
+
+.addBtn.active {
+  color: var(--color-purple);
+}
+
+.addBtn svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--color-white);
+  transition: .3s fill;
+  margin-right: 5px;
+  vertical-align: top;
+}
+
+.addBtn.active svg {
+  fill: var(--color-purple);
+}
+
+.addBtn:hover {
+  color: var(--color-primary);
+}
+
+.addBtn:hover svg {
+  fill: var(--color-primary);
+}

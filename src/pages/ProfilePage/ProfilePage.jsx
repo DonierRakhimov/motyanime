@@ -6,9 +6,8 @@ import { buttonColors } from '../../utils/buttonColors';
 import { buttonSizes } from '../../utils/buttonSizes';
 import cover from '../../assets/images/cover.avif';
 import PlayList from '../../components/PlayList/PlayList';
-import { List } from '../../utils/mockData';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData } from '../../redux/entities/User/selectors';
+import { selectPlannedAnimes, selectUserData, selectWatchedAnimes } from '../../redux/entities/User/selectors';
 import isEmpty from 'lodash.isempty';
 import { ReactComponent as LogoutIcon } from '../../assets/images/logoutIcon.svg';
 import { logoutUser } from '../../redux/entities/User/thunks/logoutUser';
@@ -22,6 +21,8 @@ export default function ProfilePage() {
   const formRef = React.useRef(null);
   const [editIsOpen, setEditIsOpen] = React.useState(false);
   const userData = useSelector(selectUserData);
+  const plannedAnimes = useSelector(selectPlannedAnimes);
+  const watchedAnimes = useSelector(selectWatchedAnimes);
   const { formData, handleChange, setFormData } = useForm(userData);
   const [userNameError] = useValidation(formData.userName, {
     required: {
@@ -82,7 +83,7 @@ export default function ProfilePage() {
       setFormError('');
       try {
         await dispatch(updateUser(formData));
-        dispatch(notificationToggled({color: 'green', message: 'Профль успешно обновлён!'}))
+        dispatch(notificationToggled({color: 'green', message: 'Профиль успешно обновлён!'}))
       } catch (err) {
         setFormError(err.message);
       }
@@ -173,22 +174,8 @@ export default function ProfilePage() {
       </div>
       <div className={s.playListWrapper}>
         <PlayList
-          savedList={List}
-          plannedList={[
-            {
-              id: 312,
-              names: {
-                ru: 'Какое то аниме',
-              },
-              status: {
-                string: 'Завершено',
-              },
-              genres: ['Сейнен', 'Комедия'],
-              type: {
-                string: 'TV',
-              },
-            },
-          ]}
+          watchedList={watchedAnimes}
+          plannedList={plannedAnimes}
         ></PlayList>
       </div>
     </section>

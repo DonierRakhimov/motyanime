@@ -12,6 +12,7 @@ import classNames from 'classnames';
 export default function AnimeResult({
   className = '',
   animeResult = {},
+  isSaved = false,
   onClick = () => {
     return;
   },
@@ -29,7 +30,7 @@ export default function AnimeResult({
   return (
     <div className={classNames(s.root, className)} {...props}>
       <Link
-        to={`/${id}`}
+        to={`/${isSaved ? animeResult.animeId : id}`}
         onClick={onClick}
         style={{
           textDecoration: 'none',

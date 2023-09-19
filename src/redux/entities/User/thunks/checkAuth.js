@@ -1,23 +1,32 @@
 import axios from 'axios';
 import { userLoaded } from '../actionCreators';
 import { userBase } from '../../../../utils/baseUrls';
+import { userAxios } from '../../../../utils/axiosOptions';
+import { notificationToggled } from '../../../UI/Notification/actionCreators';
 
 export const checkAuth = () => async (dispatch) => {
   try {
-    const response = await axios.get('/refresh', {
+    const refreshResponse = await axios.get('/refresh', {
       baseURL: userBase,
       withCredentials: true,
     });
-    const { data: userData } = response;
-    dispatch(userLoaded(userData));
-    return userData;
+    const savedAnimesRespone = await userAxios.get('/savedAnimes');
+    const { data: userData } = refreshResponse;
+    const { data: savedAnimes } = savedAnimesRespone;
+    const payload = {
+      userData,
+      savedAnimes,
+    };
+    dispatch(userLoaded(payload));
+    return payload;
   } catch (err) {
-    if (err.response) {
-      if (err.response.status === 401) {
-        console.log('Пользователь не авторизован')
-      }
+    const { response } = err;
+    if (response && response.status === 401) {
+      console.log('Пользователь не авторизован');
     } else {
-      console.log('Что-то пошло не так');
+      dispatch(
+        notificationToggled({ color: 'red', message: 'Не удалось авторизоваться' })
+      );
     }
   }
 };

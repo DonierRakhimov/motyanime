@@ -1,4 +1,5 @@
 import { userAxios } from '../../../../utils/axiosOptions';
+import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { userLoaded } from '../actionCreators';
 
 export const registerUser =
@@ -10,15 +11,24 @@ export const registerUser =
         userName,
         password,
       });
-      const { data: registeredUser } = response;
-      dispatch(userLoaded(registeredUser));
-      return registeredUser;
+      const { data: userData } = response;
+      const payload = {
+        userData,
+        savedAnimes: [],
+      };
+      dispatch(userLoaded(payload));
+      return payload;
     } catch (err) {
-      if (err.response) {
-        const { data } = err.response;
-        throw new Error(data.message);
+      const { response } = err;
+      if (response && response.status === 409) {
+        throw new Error('Пользователь с таким email уже существует');
       } else {
-        throw new Error('Что-то пошло не так...');
+        dispatch(
+          notificationToggled({
+            color: 'red',
+            message: 'Что-то пошло не так...',
+          })
+        );
       }
     }
   };
