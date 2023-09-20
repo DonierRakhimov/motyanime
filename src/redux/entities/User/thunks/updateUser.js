@@ -4,7 +4,7 @@ import { userUpdated } from '../actionCreators';
 
 export const updateUser =
   ({ email, userName }) =>
-  async (dispatch, getState) => {
+  async (dispatch) => {
     try {
       const response = await userAxios.patch('/users/me', {
         email,
@@ -12,6 +12,12 @@ export const updateUser =
       });
       const { data } = response;
       dispatch(userUpdated(data));
+      dispatch(
+        notificationToggled({
+          color: 'green',
+          message: 'Профиль успешно обновлён!',
+        })
+      );
     } catch (err) {
       const { response } = err;
       if (response && response.status === 401) {

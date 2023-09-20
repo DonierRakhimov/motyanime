@@ -2,7 +2,7 @@ import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { animeDeleted } from '../actionCreators';
 
-export const deleteAnime = (_id) => async (dispatch, getState) => {
+export const deleteAnime = (_id) => async (dispatch) => {
   try {
     await userAxios.delete('/savedAnimes/' + _id);
     dispatch(animeDeleted(_id));

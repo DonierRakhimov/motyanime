@@ -25,7 +25,7 @@ export default function AnimeResult({
     return;
   }
 
-  const { id, names, status, genres } = animeResult;
+  const { id, names, status, genres, image } = animeResult;
 
   return (
     <div className={classNames(s.root, className)} {...props}>
@@ -37,7 +37,7 @@ export default function AnimeResult({
         }}
       >
         <div className={s.resultContainer}>
-          <img src={profile} alt={names?.ru} className={s.animePic} />
+          <img src={image || profile} alt={names?.ru} className={s.animePic} />
           <div className={s.infoContainer}>
             <p className={s.title}>{names?.ru}</p>
             <Button

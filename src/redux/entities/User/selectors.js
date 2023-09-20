@@ -14,3 +14,4 @@ export const selectIsWatched = (state, animeId) => selectWatchedAnimes(state).fi
 
 export const selectIsPlanned = (state, animeId) => selectPlannedAnimes(state).find((plannedAnime) => plannedAnime.animeId == animeId); 
 
+export const selectCheckingAuth = (state) => selectUserSlice(state).checkingAuth;

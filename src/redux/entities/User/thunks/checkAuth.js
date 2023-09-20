@@ -1,11 +1,16 @@
 import axios from 'axios';
-import { userLoaded } from '../actionCreators';
+import {
+  userLoaded,
+  checkingAuth,
+  checkingAuthFinished,
+} from '../actionCreators';
 import { userBase } from '../../../../utils/baseUrls';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
 
 export const checkAuth = () => async (dispatch) => {
   try {
+    dispatch(checkingAuth());
     const refreshResponse = await axios.get('/refresh', {
       baseURL: userBase,
       withCredentials: true,
@@ -25,8 +30,13 @@ export const checkAuth = () => async (dispatch) => {
       console.log('Пользователь не авторизован');
     } else {
       dispatch(
-        notificationToggled({ color: 'red', message: 'Не удалось авторизоваться' })
+        notificationToggled({
+          color: 'red',
+          message: 'Не удалось авторизоваться',
+        })
       );
     }
+  } finally {
+    dispatch(checkingAuthFinished());
   }
 };

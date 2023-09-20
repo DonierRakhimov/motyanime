@@ -15,13 +15,15 @@ export default function Notification() {
         {
           top: '-200px',
           visibility: 'visible',
-          offset: '0'
+          offset: '0',
         },
         {
-          top: '30px',
+          top: '50px',
+          visibility: 'visible',
           offset: '0.1',
         },
         {
+          top: '50px',
           visibility: 'hidden',
           offset: '1.0',
         },
@@ -33,12 +35,15 @@ export default function Notification() {
     animationRef.current.cancel();
   }, []);
 
+
   React.useEffect(() => {
     if (didMountRef.current) {
-      animationRef.current.cancel();
       animationRef.current.play();
     }
     didMountRef.current = true;
+    return () => {
+      animationRef.current.cancel();
+    };
   }, [isShown]);
 
   return (

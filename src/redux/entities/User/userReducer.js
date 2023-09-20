@@ -4,12 +4,14 @@ const initialState = {
   userData: {},
   savedAnimes: [],
   isAuthorized: false,
+  checkingAuth: true,
 };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTION_TYPES.userLoaded: {
       return {
+        ...state,
         userData: action.payload.userData,
         savedAnimes: action.payload.savedAnimes,
         isAuthorized: true,
@@ -17,6 +19,7 @@ export const userReducer = (state = initialState, action) => {
     }
     case ACTION_TYPES.userLoggedOut: {
       return {
+        ...state,
         userData: {},
         isAuthorized: false,
         savedAnimes: [],
@@ -43,6 +46,18 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         savedAnimes: state.savedAnimes.filter(savedAnime => savedAnime._id !== action.payload)
+      }
+    }
+    case ACTION_TYPES.checkingAuth: {
+      return {
+        ...state,
+        checkingAuth: true,
+      }
+    }
+    case ACTION_TYPES.checkingAuthFinished: {
+      return {
+        ...state,
+        checkingAuth: false,
       }
     }
     default:

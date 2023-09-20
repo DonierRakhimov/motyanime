@@ -1,8 +1,20 @@
+import { Link } from 'react-router-dom';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { animeSaved } from '../actionCreators';
+import { selectIsAuthorized } from '../selectors';
 
 export const saveAnime = (anime, category) => async (dispatch, getState) => {
+  const isAuthorized = selectIsAuthorized(getState());
+  if (!isAuthorized) {
+    dispatch(
+      notificationToggled({
+        color: 'red',
+        message: 'Для этого действия нужна авторизация',
+      })
+    );
+    return;
+  }
   try {
     const {
       id: animeId,
@@ -15,20 +27,24 @@ export const saveAnime = (anime, category) => async (dispatch, getState) => {
       animeId,
       genres,
       status: {
-        string: status.string,
+        string: status?.string,
       },
       names: {
-        ru: names.ru,
+        ru: names?.ru,
       },
       image,
       category,
     });
     const { data: savedAnime } = response;
     dispatch(animeSaved(savedAnime));
-    dispatch(notificationToggled({
-      color: 'green',
-      message: `Добавлено в ${category === 'watched' ? 'просмотренное' : 'запланированное'}`
-    }))
+    dispatch(
+      notificationToggled({
+        color: 'green',
+        message: `Добавлено в ${
+          category === 'watched' ? 'просмотренное' : 'запланированное'
+        }`,
+      })
+    );
     return saveAnime;
   } catch (err) {
     const { response } = err;

@@ -33,7 +33,7 @@ userAxios.interceptors.response.use(
           store.dispatch(
             notificationToggled({
               color: 'red',
-              message: 'Необходима авторизация',
+              message: 'Для этого действия нужна авторизация',
             })
           );
           router.navigate('/signin');

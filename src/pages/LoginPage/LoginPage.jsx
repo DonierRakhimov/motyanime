@@ -48,8 +48,8 @@ export default function LoginPage() {
     if (errorMessage) {
       setFormValidationError(errorMessage);
     } else {
-      setIsSubmitting(true);
       try {
+        setIsSubmitting(true);
         setFormValidationError('');
         await dispatch(signInUser(formData));
         navigate('/profile');

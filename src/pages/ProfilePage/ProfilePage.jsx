@@ -15,7 +15,32 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { useValidation } from '../../hooks/useValidation';
 import { updateUser } from '../../redux/entities/User/thunks/updateUser';
-import { notificationToggled } from '../../redux/UI/Notification/actionCreators';
+
+const userNameValidations = {
+  required: {
+    value: true,
+    message: 'Не все поля заполнены',
+  },
+  minLength: {
+    value: 2,
+    message: 'Имя пользователя должно содержать как минимум 2 символа',
+  },
+  maxLength: {
+    value: 30,
+    message: 'Имя пользователя не должно превышать 30 символов',
+  },
+}
+
+const emailValidations = {
+  required: {
+    value: true,
+    message: 'Не все поля заполнены',
+  },
+  email: {
+    value: true,
+    message: 'Введите корректный email'
+  }
+}
 
 export default function ProfilePage() {
   const formRef = React.useRef(null);
@@ -23,31 +48,10 @@ export default function ProfilePage() {
   const userData = useSelector(selectUserData);
   const plannedAnimes = useSelector(selectPlannedAnimes);
   const watchedAnimes = useSelector(selectWatchedAnimes);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { formData, handleChange, setFormData } = useForm(userData);
-  const [userNameError] = useValidation(formData.userName, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    minLength: {
-      value: 2,
-      message: 'Имя пользователя должно содержать как минимум 2 символа',
-    },
-    maxLength: {
-      value: 30,
-      message: 'Имя пользователя не должно превышать 30 символов',
-    },
-  });
-  const [emailError] = useValidation(formData.email, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    email: {
-      value: true,
-      message: 'Введите корректный email'
-    }
-  });
+  const [userNameError] = useValidation(formData.userName, userNameValidations);
+  const [emailError] = useValidation(formData.email, emailValidations);
   const [formError, setFormError] = React.useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,12 +84,14 @@ export default function ProfilePage() {
     } else if (formData.email === userData.email && formData.userName === userData.userName) {
       setFormError('Введите новое имя пользователя или email')
     } else {
-      setFormError('');
       try {
+        setFormError('');
+        setIsSubmitting(true);
         await dispatch(updateUser(formData));
-        dispatch(notificationToggled({color: 'green', message: 'Профиль успешно обновлён!'}))
       } catch (err) {
         setFormError(err.message);
+      } finally {
+        setIsSubmitting(false);
       }
     }
   }
@@ -167,7 +173,7 @@ export default function ProfilePage() {
                 onChange={handleChange}
               ></input>
             </label>
-            <Button className={s.saveBtn}>Сохранить изменения</Button>
+            <Button className={s.saveBtn} disabled={isSubmitting}>Сохранить изменения</Button>
             <span className={s.errorMessage}>{formError}</span>
           </form>
         </div>

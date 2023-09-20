@@ -4,6 +4,8 @@ export const ACTION_TYPES = {
   userUpdated: 'user/userUpdated',
   animeSaved: 'user/animeSaved',
   animeDeleted: 'user/animeDeleted',
+  checkingAuth: 'user/checkingAuth',
+  checkingAuthFinished: 'user/checkingAuthFinished'
 };
 
 export const userLoaded = ({ userData, savedAnimes }) => ({
@@ -22,10 +24,18 @@ export const userUpdated = (updatedUser) => ({
 
 export const animeSaved = (savedAnime) => ({
   type: ACTION_TYPES.animeSaved,
-  payload: savedAnime
-})
+  payload: savedAnime,
+});
 
 export const animeDeleted = (_id) => ({
   type: ACTION_TYPES.animeDeleted,
   payload: _id,
+});
+
+export const checkingAuth = () => ({
+  type: ACTION_TYPES.checkingAuth,
+});
+
+export const checkingAuthFinished = () => ({
+  type: ACTION_TYPES.checkingAuthFinished,
 })

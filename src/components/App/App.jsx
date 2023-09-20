@@ -13,6 +13,7 @@ import ProfilePage from '../../pages/ProfilePage/ProfilePage';
 import { useDispatch } from 'react-redux';
 import { checkAuth } from '../../redux/entities/User/thunks/checkAuth';
 import PageWrapper from '../PageWrapper/PageWrapper';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +22,10 @@ export const router = createBrowserRouter(
       <Route path='/:animeId' element={<AnimePage></AnimePage>}></Route>
       <Route path='/signup' element={<RegisterPage></RegisterPage>}></Route>
       <Route path='/signin' element={<LoginPage></LoginPage>}></Route>
-      <Route path='/profile' element={<ProfilePage></ProfilePage>}></Route>
+      <Route
+        path='/profile'
+        element={<ProtectedRoute element={ProfilePage}></ProtectedRoute>}
+      ></Route>
       <Route path='*' element={<div>Not found page</div>}></Route>
     </Route>
   )
@@ -32,11 +36,9 @@ function App() {
 
   React.useEffect(() => {
     dispatch(checkAuth());
-  }, [dispatch]);
+  }, []);
 
-  return (
-    <RouterProvider router={router}></RouterProvider>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

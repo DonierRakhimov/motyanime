@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { usePopup } from '../../hooks/usePopup';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveAnime } from '../../redux/entities/User/thunks/saveAnime';
-import { selectIsPlanned, selectIsWatched } from '../../redux/entities/User/selectors';
+import {  selectIsPlanned, selectIsWatched } from '../../redux/entities/User/selectors';
 
 export default function ToggleButton({ className = '', title = {} }) {
   const [dropdownOpen, setDropdownOpen] = usePopup('.' + s.root);
