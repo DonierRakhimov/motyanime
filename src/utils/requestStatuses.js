@@ -1,4 +1,6 @@
-export const requestStatuses = {
+export const REQUEST_STATUSES = {
   idle: 'idle',
-  loading: 'loading',
+  pending: 'pending',
+  success: 'success',
+  failed: 'failed'
 }

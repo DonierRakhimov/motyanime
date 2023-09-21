@@ -21,6 +21,7 @@ import { anilibriaCache } from '../../utils/baseUrls';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectSearchPopupIsOpen } from '../../redux/UI/SearchPopup/selectors';
+import { selectCommentFormFocus } from '../../redux/UI/commentFormFocus/selectors';
 
 const getFirstWorkingLink = (episodeData) => {
   let firstWorkingLink;
@@ -54,6 +55,7 @@ export default function CustomPlayer({ episodeData = {} }) {
   const animationRef = React.useRef(null);
   const playerContainerRef = React.useRef(null);
   const searchPopupIsOpen = useSelector(selectSearchPopupIsOpen);
+  const commentFormFocus = useSelector(selectCommentFormFocus);
 
   const handlePlayPause = () => {
     setPlaying((prev) => !prev);
@@ -220,12 +222,12 @@ export default function CustomPlayer({ episodeData = {} }) {
       }
     };
 
-    if (!searchPopupIsOpen) {
+    if (!searchPopupIsOpen && !commentFormFocus) {
       document.addEventListener('keydown', keyboardShortcuts);
     }
 
     return () => document.removeEventListener('keydown', keyboardShortcuts);
-  }, [elapsedTime, searchPopupIsOpen, pipAvailable, handleMute]);
+  }, [elapsedTime, searchPopupIsOpen, pipAvailable, handleMute, commentFormFocus]);
 
   const handleSettingsClick = () => {
     setSettingsOpen((prev) => !prev);

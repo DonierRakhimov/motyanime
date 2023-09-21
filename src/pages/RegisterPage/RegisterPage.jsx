@@ -80,8 +80,10 @@ export default function RegisterPage() {
       try {
         setFormError('');
         setIsSubmitting(true);
-        await dispatch(registerUser(formData));
-        navigate('/profile');
+        const result = await dispatch(registerUser(formData));
+        if (result) {
+          navigate('/profile');
+        }
       } catch (err) {
         setFormError(err.message);
       } finally {

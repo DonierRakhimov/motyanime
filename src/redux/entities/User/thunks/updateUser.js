@@ -21,7 +21,7 @@ export const updateUser =
     } catch (err) {
       const { response } = err;
       if (response && response.status === 401) {
-        console.log('Ошибка обработана перехватчиком');
+        return;
       } else if (response && response.status === 409) {
         throw new Error('Пользователь с таким email уже существует');
       } else {

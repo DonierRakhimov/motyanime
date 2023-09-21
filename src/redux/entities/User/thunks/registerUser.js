@@ -26,7 +26,7 @@ export const registerUser =
         dispatch(
           notificationToggled({
             color: 'red',
-            message: 'Что-то пошло не так...',
+            message: 'Не удалось зарегестрироваться',
           })
         );
       }

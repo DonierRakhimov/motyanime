@@ -1,4 +1,4 @@
-import { requestStatuses } from '../../../utils/requestStatuses';
+import { REQUEST_STATUSES } from '../../../utils/requestStatuses';
 
 export const selectTitlesSlice = (state) => state.titles;
 
@@ -8,7 +8,7 @@ export const selectTitlesStatus = (state) => selectTitlesSlice(state).status;
 
 export const selectCurrentPage = (state) => selectTitlesSlice(state).currentPage;
 
-export const selectStatusIsLoading = (state) => selectTitlesStatus(state) === requestStatuses.loading;
+export const selectStatusIsLoading = (state) => selectTitlesStatus(state) === REQUEST_STATUSES.pending;
 
 export const selectTitleRange = (state, from, to) => selectTitles(state).slice(from, to);
 

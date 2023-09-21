@@ -27,7 +27,7 @@ export const checkAuth = () => async (dispatch) => {
   } catch (err) {
     const { response } = err;
     if (response && response.status === 401) {
-      console.log('Пользователь не авторизован');
+      return;
     } else {
       dispatch(
         notificationToggled({

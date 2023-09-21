@@ -1,8 +1,8 @@
-import { requestStatuses } from '../../../utils/requestStatuses';
+import { REQUEST_STATUSES } from '../../../utils/requestStatuses';
 import { ACTION_TYPES } from './actionCreators';
 
 const initialState = {
-  status: 'idle',
+  status: REQUEST_STATUSES.idle,
   entities: [],
   fullyLoadedTitle: {},
   currentPage: 1,
@@ -14,12 +14,12 @@ export const titleReducer = (state = initialState, action) => {
     case ACTION_TYPES.titlesLoading: {
       return {
         ...state,
-        status: requestStatuses.loading,
+        status: REQUEST_STATUSES.pending,
       }
     }
     case ACTION_TYPES.titlesLoaded: {
       return {
-        status: requestStatuses.idle,
+        status: REQUEST_STATUSES.idle,
         entities: action.payload.titles,
         currentPage: ++state.currentPage,
         totalPages: action.payload.pages,

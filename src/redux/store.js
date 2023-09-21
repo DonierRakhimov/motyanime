@@ -8,6 +8,9 @@ import { sortReducer } from './UI/Sort/sortReducer';
 import { searchPopupReducer } from './UI/SearchPopup/searchPopupReducer';
 import { userReducer } from './entities/User/userReducer';
 import { notificationReducer } from './UI/Notification/notificationReducer';
+import { commentReducer } from './entities/Comment/commentReducer';
+import { commentOwnerReducer } from './entities/CommentOwner/commentOwnerReducer';
+import { commentFormFocusReducer } from './UI/commentFormFocus/commentFormReducer';
 
 const rootReducer = combineReducers({
   titles: titleReducer,
@@ -16,6 +19,9 @@ const rootReducer = combineReducers({
   searchPopupOpened: searchPopupReducer,
   user: userReducer,
   notification: notificationReducer,
+  comment: commentReducer,
+  commentOwner: commentOwnerReducer,
+  commentFormFocus: commentFormFocusReducer,
 })
 
 export const store = createStore(

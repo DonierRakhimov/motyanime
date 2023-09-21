@@ -51,8 +51,10 @@ export default function LoginPage() {
       try {
         setIsSubmitting(true);
         setFormValidationError('');
-        await dispatch(signInUser(formData));
-        navigate('/profile');
+        const result = await dispatch(signInUser(formData));
+        if (result) {
+          navigate('/profile');
+        }
       } catch (err) {
         setFormValidationError(err.message);
       } finally {

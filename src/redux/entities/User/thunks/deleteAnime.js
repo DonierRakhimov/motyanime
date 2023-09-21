@@ -10,7 +10,7 @@ export const deleteAnime = (_id) => async (dispatch) => {
   } catch (err) {
     const { response } = err;
     if (response && response.status === 401) {
-      console.log('Ошибка обработана перехватчиком');
+      return;
     } else {
       dispatch(
         notificationToggled({ color: 'red', message: 'Не удалось удалить' })

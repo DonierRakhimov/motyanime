@@ -1,0 +1,74 @@
+.root {
+  display: flex;
+}
+
+.profilePic {
+  width: 50px;
+  height: 50px;
+  margin-right: 24px;
+  border-radius: 5px;
+}
+
+.fieldset {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  border: none;
+  margin-top: 5px;
+}
+
+.commentField {
+  background: var(--color-dark-grey);
+  border-radius: 5px;
+  padding: 4px 20px 0;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-white);
+  border: 2px solid var(--color-medium-grey);
+  box-shadow: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  line-height: 1;
+  font-family: var(--font-primary);
+  box-sizing: border-box;
+  flex-grow: 1;
+  resize: vertical;
+  overflow: hidden;
+}
+
+.commentField::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-grey-light);
+  line-height: 1;
+  font-family: var(--font-primary);
+  text-align: start;
+}
+
+.commentField:focus {
+  outline: none;
+}
+
+.postBtn {
+  margin-left: -1px;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: 2px solid var(--color-primary);
+  background: rgba(17, 17, 17, 0.3);
+  font-size: 16px;
+  font-weight: 400;
+  padding: 6px 15px;
+  color: white;
+  line-height: 1.5;
+  font-family: var(--font-primary);
+  cursor: pointer;
+}
+
+.postBtn:hover {
+  color: var(--color-primary);
+}
+
+.commentContent {
+  flex-grow: 1;
+}

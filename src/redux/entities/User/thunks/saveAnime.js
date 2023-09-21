@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { animeSaved } from '../actionCreators';
@@ -49,7 +48,7 @@ export const saveAnime = (anime, category) => async (dispatch, getState) => {
   } catch (err) {
     const { response } = err;
     if (response && response.status === 401) {
-      console.log('Ошибка обработана перехватчиком');
+      return;
     } else {
       dispatch(
         notificationToggled({ color: 'red', message: 'Не удалось сохранить' })

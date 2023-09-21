@@ -87,7 +87,7 @@ export default function AnimePage() {
           </section>
           <section className={s.commentSection}>
             <div className={s.commentGrid}>
-              <CommentsList></CommentsList>
+              <CommentsList animeId={title?.id}></CommentsList>
             </div>
           </section>
         </>

@@ -1,40 +1,34 @@
 import React from 'react';
 import s from './comment.module.css';
 import profile from '../../assets/images/profile.png';
+import { useSelector } from 'react-redux';
+import { selectCommentById } from '../../redux/entities/Comment/selectors';
+import { selectCommentOwnerById } from '../../redux/entities/CommentOwner/selectors';
+import isEmpty from 'lodash.isempty';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-export default function Comment({ commentId, postForm = false, onSubmit }) {
-  const submitHandler = (evt) => {
-    evt.preventDefault();
-    onSubmit();
+export default function Comment({ commentId }) {
+  const comment = useSelector((state) => selectCommentById(state, commentId));
+  const commentOwner = useSelector((state) =>
+    selectCommentOwnerById(state, comment?.owner)
+  );
+
+  if (isEmpty(comment)) {
+    return;
   }
+
+  const { text, createdAt } = comment;
+  const { userName } = commentOwner;
+
   return (
     <div className={s.root}>
       <img className={s.profilePic} src={profile} alt='profile' />
       <div className={s.commentContent}>
-        {postForm ? (
-          <form onSubmit={submitHandler}>
-            <fieldset className={s.fieldset}>
-              <textarea
-                className={s.commentField}
-                placeholder='Оставить комментарий'
-                name='comment'
-              />
-              <button className={s.postBtn} type='submit'>
-                Опубликовать
-              </button>
-            </fieldset>
-          </form>
-        ) : (
-          <div className={s.commentContainer}>
-            <span>@Username&nbsp;</span>
-            <b>5 minutes ago</b>
-            <p className={s.comment}>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias.
-            </p>
-          </div>
-        )}
+        <div className={s.commentContainer}>
+          <span>{userName}&nbsp;</span>
+          <b>{formatDistanceToNow(new Date(createdAt)) + ' ago'}</b>
+          <p className={s.comment}>{text}</p>
+        </div>
       </div>
     </div>
   );

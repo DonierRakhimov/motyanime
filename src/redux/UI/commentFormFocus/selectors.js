@@ -1,0 +1,1 @@
+export const selectCommentFormFocus = (state) => state.commentFormFocus;
