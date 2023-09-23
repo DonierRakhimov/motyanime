@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 import { selectCurrentGenres } from '../../redux/UI/Genres/selectors';
 import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
 import { selectIsAuthorized, selectUserData } from '../../redux/entities/User/selectors';
-import profilePic from '../../assets/images/profilePicture.png';
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -35,6 +34,7 @@ export default function Header() {
     }
     setSearchParams(searchParams.toString());
   }, [pathname, currentGenres, searchParams, currentSort, setSearchParams]);
+
 
   return (
     <header className={s.root}>
@@ -64,9 +64,9 @@ export default function Header() {
         {isAuthorized ? (
           <Link to='/profile' className={s.profileLink}>
             <img
-              src={profilePic}
+              src={userData?.avatar}
               className={s.profilePic}
-              alt='Аватар пользователя'
+              alt='аватар'
             ></img>
           </Link>
         ) : (

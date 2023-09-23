@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './comment.module.css';
-import profile from '../../assets/images/profile.png';
 import { useSelector } from 'react-redux';
 import { selectCommentById } from '../../redux/entities/Comment/selectors';
 import { selectCommentOwnerById } from '../../redux/entities/CommentOwner/selectors';
@@ -18,11 +17,11 @@ export default function Comment({ commentId }) {
   }
 
   const { text, createdAt } = comment;
-  const { userName } = commentOwner;
+  const { userName, avatar } = commentOwner;
 
   return (
     <div className={s.root}>
-      <img className={s.profilePic} src={profile} alt='profile' />
+      <img className={s.profilePic} src={avatar} alt='profile' />
       <div className={s.commentContent}>
         <div className={s.commentContainer}>
           <span>{userName}&nbsp;</span>

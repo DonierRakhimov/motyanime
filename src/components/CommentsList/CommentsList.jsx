@@ -41,7 +41,7 @@ export default function CommentsList({ animeId }) {
       {commentStatus === REQUEST_STATUSES.pending ? (
         <div>Идет загрузка</div>
       ) : commentStatus === REQUEST_STATUSES.failed ? (
-        <div>Не получилось загрузить</div>
+        <div>Не удалось загрузить комментарии</div>
       ) : (
         commentStatus === REQUEST_STATUSES.success &&
         (isEmpty(commentIds) ? (

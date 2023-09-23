@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './commentform.module.css';
-import profile from '../../assets/images/profilePicture.png';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectIsAuthorized,
@@ -26,7 +25,7 @@ export default function CommentForm({
   return (
     <div className={s.root}>
       {isAuthorized && (
-        <img className={s.profilePic} src={profile} alt='аватар пользователя' />
+        <img className={s.profilePic} src={userData?.avatar} alt='аватар пользователя' />
       )}
       <div className={s.commentContent}>
         <form onSubmit={submitHandler}>

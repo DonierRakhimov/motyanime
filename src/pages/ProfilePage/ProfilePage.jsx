@@ -1,13 +1,15 @@
 import React from 'react';
 import s from './profile.module.css';
-import profilePicture from '../../assets/images/profile.png';
 import Button from '../../components/Button/Button';
 import { buttonColors } from '../../utils/buttonColors';
 import { buttonSizes } from '../../utils/buttonSizes';
-import cover from '../../assets/images/cover.avif';
 import PlayList from '../../components/PlayList/PlayList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectPlannedAnimes, selectUserData, selectWatchedAnimes } from '../../redux/entities/User/selectors';
+import {
+  selectPlannedAnimes,
+  selectUserData,
+  selectWatchedAnimes,
+} from '../../redux/entities/User/selectors';
 import isEmpty from 'lodash.isempty';
 import { ReactComponent as LogoutIcon } from '../../assets/images/logoutIcon.svg';
 import { logoutUser } from '../../redux/entities/User/thunks/logoutUser';
@@ -15,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { useValidation } from '../../hooks/useValidation';
 import { updateUser } from '../../redux/entities/User/thunks/updateUser';
+import { ReactComponent as EditIcon } from '../../assets/images/editProfile.svg';
 
 const userNameValidations = {
   required: {
@@ -29,7 +32,7 @@ const userNameValidations = {
     value: 30,
     message: 'Имя пользователя не должно превышать 30 символов',
   },
-}
+};
 
 const emailValidations = {
   required: {
@@ -38,12 +41,16 @@ const emailValidations = {
   },
   email: {
     value: true,
-    message: 'Введите корректный email'
-  }
-}
+    message: 'Введите корректный email',
+  },
+};
 
 export default function ProfilePage() {
   const formRef = React.useRef(null);
+  const avatarRef = React.useRef(null);
+  const [avatarLink, setAvatarLink] = React.useState('');
+  const [coverLink, setCoverLink] = React.useState('');
+  const coverRef = React.useRef(null);
   const [editIsOpen, setEditIsOpen] = React.useState(false);
   const userData = useSelector(selectUserData);
   const plannedAnimes = useSelector(selectPlannedAnimes);
@@ -58,20 +65,20 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
     setFormData(userData);
-  }, [userData, setFormData])
+  }, [userData, setFormData]);
 
   if (isEmpty(userData)) {
     return;
   }
 
-  const { userName, email } = userData;
+  const { userName, email, cover, avatar } = userData;
 
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser());
       navigate('/');
     } catch (err) {
-      console.log(err);
+      return;
     }
   };
 
@@ -80,21 +87,53 @@ export default function ProfilePage() {
     const errorMessage = [userNameError, emailError].find((error) => error);
 
     if (errorMessage) {
-      setFormError(errorMessage)
-    } else if (formData.email === userData.email && formData.userName === userData.userName) {
-      setFormError('Введите новое имя пользователя или email')
+      setFormError(errorMessage);
+    } else if (
+      formData.email === userData.email &&
+      formData.userName === userData.userName &&
+      avatarRef.current.files.length === 0 &&
+      coverRef.current.files.length === 0
+    ) {
+      setFormError('Введите новые данные');
     } else {
       try {
+        const formData = new FormData(formRef.current);
         setFormError('');
         setIsSubmitting(true);
         await dispatch(updateUser(formData));
+        setAvatarLink('');
+        setCoverLink('');
+        avatarRef.current.value = '';
+        coverRef.current.value = '';
       } catch (err) {
         setFormError(err.message);
       } finally {
         setIsSubmitting(false);
       }
     }
-  }
+  };
+
+  const handleFileChange = (e) => {
+    const { files } = e.target;
+    const { name } = e.target;
+
+    if (isEmpty(files)) {
+      return;
+    } 
+
+    if (!(files[0].type.startsWith('image/'))) {
+      setFormError('Некорректный формат файла');
+      e.target.value = '';
+    } else {
+      setFormError('');
+      const url = URL.createObjectURL(files[0]);
+      if (name === 'avatar') {
+        setAvatarLink(url);
+      } else {
+        setCoverLink(url);
+      }
+    }
+  };
 
   return (
     <section className={s.root}>
@@ -103,21 +142,42 @@ export default function ProfilePage() {
         <div
           className={s.coverContainer}
           style={{
-            backgroundImage: `url(${cover})`,
+            backgroundImage: `url(${coverLink || cover})`,
           }}
         >
-          <Button
-            className={s.editCoverBtn}
-            color={buttonColors.grey}
-            size={buttonSizes.s}
-          >
-            Редактировать обложку
-          </Button>
+          {editIsOpen && (
+            <label className={s.editCoverLabel}>
+              <input
+                ref={coverRef}
+                className={s.editCoverInput}
+                type='file'
+                name='cover'
+                form='edit-form'
+                onChange={handleFileChange}
+                accept='image/*'
+              ></input>
+              Редактировать обложку
+            </label>
+          )}
         </div>
         <div className={s.profileInfo}>
           <div className={s.pictureWrapper}>
+            {editIsOpen && (
+              <label className={s.pictureLabel}>
+                {<EditIcon></EditIcon>}
+                <input
+                  className={s.pictureInput}
+                  type='file'
+                  name='avatar'
+                  form='edit-form'
+                  ref={avatarRef}
+                  onChange={handleFileChange}
+                  accept='image/*'
+                ></input>
+              </label>
+            )}
             <img
-              src={profilePicture}
+              src={avatarLink || avatar}
               className={s.profilePic}
               alt='Изображение профиля'
             ></img>
@@ -150,7 +210,12 @@ export default function ProfilePage() {
             paddingBottom: editIsOpen ? 20 : 0,
           }}
         >
-          <form className={s.editForm} ref={formRef} onSubmit={handleUserUpdate}>
+          <form
+            id='edit-form'
+            className={s.editForm}
+            ref={formRef}
+            onSubmit={handleUserUpdate}
+          >
             <label className={s.editLabel}>
               Имя пользователя
               <input
@@ -173,7 +238,9 @@ export default function ProfilePage() {
                 onChange={handleChange}
               ></input>
             </label>
-            <Button className={s.saveBtn} disabled={isSubmitting}>Сохранить изменения</Button>
+            <Button className={s.saveBtn} disabled={isSubmitting}>
+              Сохранить изменения
+            </Button>
             <span className={s.errorMessage}>{formError}</span>
           </form>
         </div>

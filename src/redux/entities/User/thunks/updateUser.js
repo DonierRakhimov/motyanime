@@ -3,13 +3,10 @@ import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { userUpdated } from '../actionCreators';
 
 export const updateUser =
-  ({ email, userName }) =>
+  (formData) =>
   async (dispatch) => {
     try {
-      const response = await userAxios.patch('/users/me', {
-        email,
-        userName,
-      });
+      const response = await userAxios.patch('/users/me', formData);
       const { data } = response;
       dispatch(userUpdated(data));
       dispatch(
