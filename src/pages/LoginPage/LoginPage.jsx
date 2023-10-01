@@ -7,6 +7,7 @@ import { useValidation } from '../../hooks/useValidation';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../../redux/entities/User/thunks/signInUser';
+import { emailValidations, passwordValidations } from '../../utils/validations';
 
 const initialState = {
   email: '',
@@ -15,27 +16,8 @@ const initialState = {
 
 export default function LoginPage() {
   const { formData, handleChange } = useForm(initialState);
-  const [emailError] = useValidation(formData.email, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    email: {
-      value: true,
-      message: 'Введен некорректный email',
-    },
-  });
-  const [passwordError] = useValidation(formData.password, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    password: {
-      value: true,
-      message:
-        'Ваш пароль должен состоять из не менее 8 символов латинского алфавита и включать как минимум одну заглавную букву, одну строчную букву и одну цифру',
-    },
-  });
+  const [emailError] = useValidation(formData.email, emailValidations);
+  const [passwordError] = useValidation(formData.password, passwordValidations);
 
   const [formValidationError, setFormValidationError] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);

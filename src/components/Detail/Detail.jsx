@@ -1,5 +1,5 @@
 import React from 'react';
-import { DetailB, DetailItem, DetailSpan } from './styled-components';
+import s from './detail.module.css';
 
 export default function Detail({ detail, detailValue }) {
   if (
@@ -10,9 +10,9 @@ export default function Detail({ detail, detailValue }) {
     return;
   }
   return (
-    <DetailItem>
-      <DetailSpan>{detail}&nbsp;</DetailSpan>
-      <DetailB>{detailValue}</DetailB>
-    </DetailItem>
+    <li className={s.root}>
+      <span className={s.detailKey}>{detail}&nbsp;</span>
+      <b className={s.detailValue}>{detailValue}</b>
+    </li>
   );
 }

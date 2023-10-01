@@ -1,18 +1,13 @@
 import React from 'react';
+import s from './sort.module.css';
 import DropDown from '../Dropdown/Dropdown';
-import {
-  CustomRadio,
-  Label,
-  RadioButton,
-  SortToggle,
-  SortWrapper,
-} from './styledComponents';
 import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortSelected } from '../../redux/UI/Sort/actionCreators';
 import { usePopup } from '../../hooks/usePopup';
 import { titlesReseted } from '../../redux/entities/Title/actionCreators';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 const sortVariants = {
   'names.ru': 'По названию',
@@ -35,36 +30,46 @@ export default function Sort() {
     if (location.pathname !== '/') {
       navigate('/');
     }
-  }
+  };
 
   React.useEffect(() => {
     const sortQueryParam = searchParams.get('sort');
     if (sortQueryParam) {
       dispatch(sortSelected(sortQueryParam));
     }
-  }, [searchParams, dispatch])
+  }, [searchParams, dispatch]);
 
   return (
-    <SortWrapper id="sort">
-      <SortToggle onClick={() => {
-          setSortIsOpen((prev) => !prev)
-        }}>
+    <div className={s.root} id='sort'>
+      <button
+        className={s.sortToggle}
+        onClick={() => {
+          setSortIsOpen((prev) => !prev);
+        }}
+      >
         Сортировка
-      </SortToggle>
+      </button>
       <DropDown isOpen={sortIsOpen}>
         {Object.keys(sortVariants).map((sortParam, index) => (
-          <Label key={index}>
-            <RadioButton
+          <label className={s.label} key={index}>
+            <input
+              className={s.radioBtn}
               name='sort'
               checked={currentSort === sortParam}
               type='radio'
               onChange={() => sortChangeHandler(sortParam)}
-            ></RadioButton>
-            <CustomRadio checked={currentSort === sortParam}></CustomRadio>
+            ></input>
+            <span
+              className={classNames(
+                s.customRadio,
+                currentSort === sortParam ? s.checked : ''
+              )}
+              checked={currentSort === sortParam}
+            ></span>
             {sortVariants[sortParam]}
-          </Label>
+          </label>
         ))}
       </DropDown>
-    </SortWrapper>
+    </div>
   );
 }

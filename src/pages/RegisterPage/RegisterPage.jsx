@@ -7,6 +7,7 @@ import { useValidation } from '../../hooks/useValidation';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/entities/User/thunks/registerUser';
 import { useNavigate } from 'react-router-dom';
+import { emailValidations, passwordValidations, repeatPasswordValidations, userNameValidations } from '../../utils/validations';
 
 const initialState = {
   userName: '',
@@ -15,49 +16,13 @@ const initialState = {
   repeatPassword: '',
 };
 
+
 export default function RegisterPage() {
   const { formData, handleChange } = useForm(initialState);
-  const [userNameError] = useValidation(formData.userName, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    minLength: {
-      value: 2,
-      message: 'Имя пользователя должно содержать как минимум 2 символа',
-    },
-    maxLength: {
-      value: 30,
-      message: 'Имя пользователя не должно превышать 30 символов'
-    }
-  });
-  const [emailError] = useValidation(formData.email, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    email: {
-      value: true,
-      message: 'Введен некорректный email',
-    },
-  });
-  const [passwordError] = useValidation(formData.password, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-    password: {
-      value: true,
-      message:
-        'Ваш пароль должен состоять из не менее 8 символов латинского алфавита и включать как минимум одну заглавную букву, одну строчную букву и одну цифру',
-    },
-  });
-  const [repeatPasswordError] = useValidation(formData.repeatPassword, {
-    required: {
-      value: true,
-      message: 'Не все поля заполнены',
-    },
-  });
+  const [userNameError] = useValidation(formData.userName, userNameValidations);
+  const [emailError] = useValidation(formData.email, emailValidations);
+  const [passwordError] = useValidation(formData.password, passwordValidations);
+  const [repeatPasswordError] = useValidation(formData.repeatPassword, repeatPasswordValidations);
 
   const [formError, setFormError] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -89,7 +54,7 @@ export default function RegisterPage() {
       } finally {
         setIsSubmitting(false);
       }
-    } 
+    }
   };
 
   return (

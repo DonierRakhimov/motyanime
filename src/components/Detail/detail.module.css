@@ -1,6 +1,4 @@
-import { styled } from 'styled-components';
-
-export const DetailItem = styled.li`
+.root {
   font-family: var(--font-primary);
   margin: 0 0 5px 0;
   font-weight: 400;
@@ -8,9 +6,9 @@ export const DetailItem = styled.li`
   display: block;
   color: var(--color-grey-light);
   letter-spacing: 0.5px;
-`;
+}
 
-export const DetailSpan = styled.span`
+.detailKey {
   color: var(--color-white);
   display: inline-block;
   letter-spacing: 1.5px;
@@ -18,9 +16,9 @@ export const DetailSpan = styled.span`
   font-size: 16px;
   font-family: var(--font-primary);
   line-height: 1.5;
-`;
+}
 
-export const DetailB = styled.b`
+.detailValue {
   color: var(--color-primary);
   font-weight: bolder;
-`;
+}

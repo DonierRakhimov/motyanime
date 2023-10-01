@@ -1,0 +1,69 @@
+.root {
+  position: relative;
+}
+
+.sortToggle {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  padding: 0;
+  line-height: inherit;
+  cursor: pointer;
+  transition: 0.3s color;
+}
+
+.sortToggle:hover {
+  color: var(--color-purple);
+}
+
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-grey-light);
+  font-family: var(--font-primary);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  transition: 0.3s color;
+}
+
+.label:hover {
+  color: var(--color-purple);
+}
+
+.radioBtn {
+  position: absolute;
+  opacity: 0;
+}
+
+.customRadio {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+.customRadio::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: var(--color-purple);
+}
+
+.customRadio.checked::before {
+  transform: scale(1);
+}
