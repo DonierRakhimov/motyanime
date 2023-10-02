@@ -7,12 +7,12 @@ import ToggleButton from '../ToggleButton/ToggleButton';
 import PictureOverlay from '../PictureOverlay/PictureOverlay';
 import isEmpty from 'lodash.isempty';
 
-export default function AnimeCard({ title = {} }) {
-  if (isEmpty(title)) {
+export default function AnimeCard({ anime = {} }) {
+  if (isEmpty(anime)) {
     return;
   }
 
-  const { id, names, status, genres, posters } = title;
+  const { id, names, status, genres, posters } = anime;
 
   return (
     <figure className={s.root}>
@@ -35,7 +35,7 @@ export default function AnimeCard({ title = {} }) {
               </Button>
             </div>
           </div>
-          <ToggleButton title={title}/>
+          <ToggleButton anime={anime}/>
         </div>
         <p className={s.title}>{names.ru}</p>
       </figcaption>

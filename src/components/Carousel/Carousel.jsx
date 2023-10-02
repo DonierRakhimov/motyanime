@@ -12,8 +12,8 @@ import classNames from 'classnames';
 import s from './carousel.module.css';
 import isEmpty from 'lodash.isempty';
 
-export default function Carousel({ titles }) {
-  if (isEmpty(titles)) {
+export default function Carousel({ animes }) {
+  if (isEmpty(animes)) {
     return;
   }
 
@@ -34,7 +34,7 @@ export default function Carousel({ titles }) {
         crossFade: true,
       }}
     >
-      {titles.map((title) => (
+      {animes.map((title) => (
         <SwiperSlide key={title.id}>
           <Slide title={title} />
         </SwiperSlide>

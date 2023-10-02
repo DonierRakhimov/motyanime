@@ -1,10 +1,10 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
-import { userLoaded } from '../actionCreators';
 
-export const signInUser =
-  ({ email, password }) =>
-  async (dispatch) => {
+export const signInUser = createAsyncThunk(
+  'user/signInUser',
+  async ({ email, password }, { dispatch }) => {
     try {
       const signInResponse = await userAxios.post('/signin', {
         email,
@@ -16,8 +16,7 @@ export const signInUser =
       const payload = {
         userData,
         savedAnimes,
-      }
-      dispatch(userLoaded(payload));
+      };
       return payload;
     } catch (err) {
       const { response } = err;
@@ -30,6 +29,8 @@ export const signInUser =
             message: 'Не удалось войти',
           })
         );
+        throw err;
       }
     }
-  };
+  }
+);

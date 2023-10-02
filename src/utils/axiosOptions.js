@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { anilibriaBase, userBase } from './baseUrls';
 import { store } from '../redux/store';
-import { userLoggedOut } from '../redux/entities/User/actionCreators';
 import { router } from '../components/App/App';
 import { notificationToggled } from '../redux/UI/Notification/actionCreators';
+import { logoutUser } from '../redux/entities/User/thunks/logoutUser';
 
 axios.defaults.transformResponse = [(data) => JSON.parse(data)];
 
@@ -29,7 +29,7 @@ userAxios.interceptors.response.use(
         return axios.request(error.config);
       } catch (err) {
         if (response && response.status === 401) {
-          store.dispatch(userLoggedOut());
+          store.dispatch(logoutUser.fulfilled());
           store.dispatch(
             notificationToggled({
               color: 'red',

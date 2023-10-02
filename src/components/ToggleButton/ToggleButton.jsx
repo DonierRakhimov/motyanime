@@ -10,14 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveAnime } from '../../redux/entities/User/thunks/saveAnime';
 import {  selectIsPlanned, selectIsWatched } from '../../redux/entities/User/selectors';
 
-export default function ToggleButton({ className = '', title = {} }) {
+export default function ToggleButton({ className = '', anime = {} }) {
   const [dropdownOpen, setDropdownOpen] = usePopup('.' + s.root);
-  const isWatched = useSelector((state) => selectIsWatched(state, title.id));
-  const isPlanned = useSelector((state) => selectIsPlanned(state, title.id));
+  const isWatched = useSelector((state) => selectIsWatched(state, anime.id));
+  const isPlanned = useSelector((state) => selectIsPlanned(state, anime.id));
   const dispatch = useDispatch();
 
   const handleAnimeSave = (category) => {
-    dispatch(saveAnime(title, category));
+    dispatch(saveAnime({anime, category}));
   }
   
   return (

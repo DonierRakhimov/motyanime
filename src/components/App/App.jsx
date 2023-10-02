@@ -36,7 +36,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(checkAuth());
-  }, []);
+  }, [dispatch]);
 
   return <RouterProvider router={router}></RouterProvider>;
 }

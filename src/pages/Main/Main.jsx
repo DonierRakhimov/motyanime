@@ -2,28 +2,29 @@ import React from 'react';
 import s from './main.module.css';
 import Carousel from '../../components/Carousel/Carousel';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectCurrentPage,
-  selectIsMoreToLoad,
-  selectRandomTitles,
-  selectStatusIsLoading,
-  selectTitleRange,
-} from '../../redux/entities/Title/selectors';
 import CardLoader from '../../components/CardLoader/CardLoader';
 import { useInView } from 'react-intersection-observer';
 import Spiner from '../../components/Spiner/Spiner';
-import { loadCurrentPage } from '../../redux/entities/Title/thunks/loadCurrentPage';
+import { loadCurrentPage } from '../../redux/entities/Anime/thunks/loadCurrentPage';
 import AnimeGrid from '../../components/AnimeGrid/AnimeGrid';
 import { selectCurrentGenres } from '../../redux/UI/Genres/selectors';
 import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
+import {
+  selectAnimeRange,
+  selectRandomAnimes,
+  selectCurrentPage,
+  selectIsMoreToLoad,
+  selectStatusIsLoading,
+} from '../../redux/entities/Anime/selectors';
+import isEmpty from 'lodash.isempty';
 
 export default function Main() {
   const dispatch = useDispatch();
   const currentPage = useSelector(selectCurrentPage);
   const isLoading = useSelector(selectStatusIsLoading);
-  const firstTitles = useSelector((state) => selectTitleRange(state, 0, 8));
-  const restTitles = useSelector((state) => selectTitleRange(state, 8));
-  const randomTitles = useSelector((state) => selectRandomTitles(state, 4));
+  const firstAnimes = useSelector((state) => selectAnimeRange(state, 0, 8));
+  const restAnimes = useSelector((state) => selectAnimeRange(state, 8));
+  const randomAnimes = useSelector((state) => selectRandomAnimes(state, 4));
   const currentGenres = useSelector(selectCurrentGenres);
   const isMoreToLoad = useSelector(selectIsMoreToLoad);
   const currentSort = useSelector(selectCurrentSort);
@@ -55,16 +56,16 @@ export default function Main() {
   return (
     <main className={s.main}>
       <h2 className={s.title}>АНИМЕ</h2>
-      <AnimeGrid titles={firstTitles}>
-        {isLoading &&
+      <AnimeGrid animes={firstAnimes}>
+        {(isLoading && isEmpty(firstAnimes)) && 
           [...Array(12)].map((_, index) => <CardLoader key={index} />)}
       </AnimeGrid>
-      {randomTitles.length && (
+      {randomAnimes.length && (
         <section className={s.animeCarousel}>
-          <Carousel titles={randomTitles}></Carousel>
+          <Carousel animes={randomAnimes}></Carousel>
         </section>
       )}
-      <AnimeGrid titles={restTitles}>
+      <AnimeGrid animes={restAnimes}>
         {isMoreToLoad && (
           <>
             <Spiner isActive={inView}></Spiner>

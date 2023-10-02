@@ -1,10 +1,10 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
-import { userLoaded } from '../actionCreators';
 
-export const registerUser =
-  ({ email, userName, password }) =>
-  async (dispatch) => {
+export const registerUser = createAsyncThunk(
+  'user/registerUser',
+  async ({ email, userName, password }, { dispatch }) => {
     try {
       const response = await userAxios.post('/signup', {
         email,
@@ -16,7 +16,6 @@ export const registerUser =
         userData,
         savedAnimes: [],
       };
-      dispatch(userLoaded(payload));
       return payload;
     } catch (err) {
       const { response } = err;
@@ -26,9 +25,11 @@ export const registerUser =
         dispatch(
           notificationToggled({
             color: 'red',
-            message: 'Не удалось зарегестрироваться',
+            message: 'Не удалось зарегистрироваться',
           })
         );
+        throw err;
       }
     }
-  };
+  }
+);

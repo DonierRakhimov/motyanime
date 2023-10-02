@@ -13,9 +13,9 @@ import {
   genreAdded,
   genreRemoved,
 } from '../../redux/UI/Genres/actionCreators'; 
-import { titlesReseted } from '../../redux/entities/Title/actionCreators';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { usePopup } from '../../hooks/usePopup';
+import { animesReseted } from '../../redux/entities/Anime/animeSlice';
 
 export default function Filters() {
   const [filterIsOpen, setFilterIsOpen] = usePopup('#filter')
@@ -41,7 +41,7 @@ export default function Filters() {
 
   const genreClickHandler = (genre) => {
     window.scrollTo(0, 0);
-    dispatch(titlesReseted());
+    dispatch(animesReseted());
     if (currentGenres.includes(genre)) {
       dispatch(genreRemoved(genre));
     } else {

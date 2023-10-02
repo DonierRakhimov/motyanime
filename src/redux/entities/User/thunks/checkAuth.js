@@ -1,16 +1,11 @@
 import axios from 'axios';
-import {
-  userLoaded,
-  checkingAuth,
-  checkingAuthFinished,
-} from '../actionCreators';
 import { userBase } from '../../../../utils/baseUrls';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { notificationToggled } from '../../../UI/Notification/actionCreators';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const checkAuth = () => async (dispatch) => {
+export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { dispatch }) => {
   try {
-    dispatch(checkingAuth());
     const refreshResponse = await axios.get('/refresh', {
       baseURL: userBase,
       withCredentials: true,
@@ -22,12 +17,11 @@ export const checkAuth = () => async (dispatch) => {
       userData,
       savedAnimes,
     };
-    dispatch(userLoaded(payload));
     return payload;
   } catch (err) {
     const { response } = err;
     if (response && response.status === 401) {
-      return;
+      throw err;
     } else {
       dispatch(
         notificationToggled({
@@ -35,8 +29,9 @@ export const checkAuth = () => async (dispatch) => {
           message: 'Не удалось авторизоваться',
         })
       );
+      throw err;
     }
-  } finally {
-    dispatch(checkingAuthFinished());
-  }
-};
+  } 
+})
+
+

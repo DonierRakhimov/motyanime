@@ -5,9 +5,9 @@ import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortSelected } from '../../redux/UI/Sort/actionCreators';
 import { usePopup } from '../../hooks/usePopup';
-import { titlesReseted } from '../../redux/entities/Title/actionCreators';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { animesReseted } from '../../redux/entities/Anime/animeSlice';
 
 const sortVariants = {
   'names.ru': 'По названию',
@@ -25,7 +25,7 @@ export default function Sort() {
 
   const sortChangeHandler = (sortParam) => {
     window.scrollTo(0, 0);
-    dispatch(titlesReseted());
+    dispatch(animesReseted());
     dispatch(sortSelected(sortParam));
     if (location.pathname !== '/') {
       navigate('/');
