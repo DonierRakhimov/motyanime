@@ -1,9 +1,9 @@
-export const selectCommentOwnerSlice = (state) => state.commentOwner;
+import { commentOwnersAdapter } from './commentOwnersSlice';
 
-export const selectCommentOwners = (state) => selectCommentOwnerSlice(state).entities;
+const selectCommentOwnersSlice = (state) => state.commentOwners;
 
-export const selectCommentOwnerIds = (state) => selectCommentOwnerSlice(state).allIds;
+const commentOwnersSelectors = commentOwnersAdapter.getSelectors(
+  selectCommentOwnersSlice
+);
 
-export const selectCommentOwnerById = (state, _id) => selectCommentOwners(state)[_id];
-
-export const selectCommentOwnersArray = (state) => Object.values(selectCommentOwners(state));
+export const { selectById: selectCommentOwnerById } = commentOwnersSelectors;

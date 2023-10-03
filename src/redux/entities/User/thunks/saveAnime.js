@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { selectIsAuthorized } from '../selectors';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
 export const saveAnime = createAsyncThunk(
   'user/saveAnime',

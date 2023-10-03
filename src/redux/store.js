@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import animeReducer from './entities/Anime/animeSlice';
-import  userReducer  from './entities/User/userSlice';
-import { genresReducer } from './UI/Genres/genresReducer';
-import { sortReducer } from './UI/Sort/sortReducer';
-import { searchPopupReducer } from './UI/SearchPopup/searchPopupReducer';
-import { notificationReducer } from './UI/Notification/notificationReducer';
-import { commentReducer } from './entities/Comment/commentReducer';
-import { commentOwnerReducer } from './entities/CommentOwner/commentOwnerReducer';
-import { commentFormFocusReducer } from './UI/commentFormFocus/commentFormReducer';
+import commentOwnersReducer from './entities/CommentOwner/commentOwnersSlice';
+import commentsReducer from './entities/Comment/commentsSlice';
+import userReducer from './entities/User/userSlice';
+import genresReducer from './UI/Genres/genresSlice';
+import  sortReducer  from './UI/Sort/sortSlice';
+import searchPopupReducer from './UI/SearchPopup/searchPopupSlice';
+import notificationReducer from './UI/Notification/notificationSlice';
+import commentFormIsFocusedReducer from './UI/commentFormIsFocused/commentFormIsFocusedSlice';
 
 export const store = configureStore({
   reducer: {
@@ -17,8 +17,8 @@ export const store = configureStore({
     searchPopupOpened: searchPopupReducer,
     user: userReducer,
     notification: notificationReducer,
-    comment: commentReducer,
-    commentOwner: commentOwnerReducer,
-    commentFormFocus: commentFormFocusReducer,
+    comments: commentsReducer,
+    commentOwners: commentOwnersReducer,
+    commentFormIsFocused: commentFormIsFocusedReducer,
   },
 });

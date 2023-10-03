@@ -1,12 +1,11 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
-import { commentOwnerAdded } from '../../CommentOwner/actionCreators';
 import { selectIsAuthorized } from '../../User/selectors';
-import { commentAdded } from '../actionCreators';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
-export const addComment =
-  (comment = {}) =>
-  async (dispatch, getState) => {
+export const addComment = createAsyncThunk(
+  'comments/addComment',
+  async (comment = {}, { dispatch, getState }) => {
     const isAuthorized = selectIsAuthorized(getState());
     if (!isAuthorized) {
       dispatch(
@@ -15,22 +14,29 @@ export const addComment =
           message: 'Для этого действия нужна авторизация',
         })
       );
-      return;
+      throw new Error();
     }
     try {
       const response = await userAxios.post('/comments', comment);
       const { data: createdComment } = response;
-      dispatch(commentAdded(createdComment));
-      dispatch(commentOwnerAdded(createdComment.owner));
+      dispatch(notificationToggled({
+        color: 'green',
+        message: 'Комментарий опубликован'
+      }))
       return createdComment;
     } catch (err) {
       const { response } = err;
       if (response && response.status === 401) {
-        return;
+        throw err;
       } else {
         dispatch(
-          notificationToggled({ color: 'red', message: 'Не удалось создать комментарий' })
+          notificationToggled({
+            color: 'red',
+            message: 'Не удалось создать комментарий',
+          })
         );
+        throw err;
       }
     }
-  };
+  }
+);

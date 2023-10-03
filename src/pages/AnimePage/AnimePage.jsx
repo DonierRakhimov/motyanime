@@ -11,22 +11,22 @@ import isEmpty from 'lodash.isempty';
 
 export default function AnimePage() {
   const { animeId } = useParams();
-  const [title, setTitle] = React.useState({});
+  const [anime, setAnime] = React.useState({});
   const [loadingStatus, setLoadingStatus] = React.useState('idle');
 
   let episodesList = {};
 
-  if (!isEmpty(title)) {
+  if (!isEmpty(anime)) {
     const {
       player: { list },
-    } = title;
+    } = anime;
     episodesList = list;
   }
 
   React.useEffect(() => {
     const controller = new AbortController();
     setLoadingStatus('pending');
-    setTitle({});
+    setAnime({});
     axiosInstance
       .get('/title', {
         params: {
@@ -37,7 +37,7 @@ export default function AnimePage() {
       })
       .then((response) => {
         const { data: loadedTitle } = response;
-        setTitle(loadedTitle);
+        setAnime(loadedTitle);
         setLoadingStatus('success');
         return loadedTitle;
       })
@@ -59,7 +59,7 @@ export default function AnimePage() {
       .then((response) => {
         const { data } = response;
         if (data.items.length) {
-          setTitle((prev) => ({
+          setAnime((prev) => ({
             ...prev,
             trailerId: data.items[0].id.videoId,
           }));
@@ -77,17 +77,17 @@ export default function AnimePage() {
   return (
     <div className={s.root}>
       {loadingStatus === 'pending' && <VideoLoader></VideoLoader>}
-      {loadingStatus === 'success' && !isEmpty(title) && (
+      {loadingStatus === 'success' && !isEmpty(anime) && (
         <>
           <section className={s.animeInfoWrapper}>
-            <AnimeInfo title={title}></AnimeInfo>
+            <AnimeInfo anime={anime}></AnimeInfo>
           </section>
           <section className={s.videoSectionWrapper}>
             <VideoSection episodesList={episodesList}></VideoSection>
           </section>
           <section className={s.commentSection}>
             <div className={s.commentGrid}>
-              <CommentsList animeId={title?.id}></CommentsList>
+              <CommentsList animeId={anime?.id}></CommentsList>
             </div>
           </section>
         </>

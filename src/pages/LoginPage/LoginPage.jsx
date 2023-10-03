@@ -19,7 +19,7 @@ export default function LoginPage() {
   const [emailError] = useValidation(formData.email, emailValidations);
   const [passwordError] = useValidation(formData.password, passwordValidations);
 
-  const [formValidationError, setFormValidationError] = React.useState('');
+  const [formError, setFormError] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,17 +28,19 @@ export default function LoginPage() {
     const errorMessage = [emailError, passwordError].find((error) => error);
 
     if (errorMessage) {
-      setFormValidationError(errorMessage);
+      setFormError(errorMessage);
     } else {
       try {
         setIsSubmitting(true);
-        setFormValidationError('');
-        const result = await dispatch(signInUser(formData));
+        setFormError('');
+        const result = await dispatch(signInUser(formData)).unwrap();
         if (result) {
           navigate('/profile');
         }
       } catch (err) {
-        setFormValidationError(err.message);
+        if (err.status === 400) {
+          setFormError('Неправильная почта или пароль');
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -53,7 +55,7 @@ export default function LoginPage() {
         navigationText='Нет аккаунта?'
         anchorText='Регистрация'
         navigationRoute='/signup'
-        submitMessage={formValidationError}
+        submitMessage={formError}
         onSubmit={handleLogin}
         theme='purple'
         isSubmitting={isSubmitting}

@@ -10,7 +10,7 @@ import { axiosInstance } from '../../utils/axiosOptions';
 import AnimeResult from '../AnimeResult/AnimeResult';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSearchPopupIsOpen } from '../../redux/UI/SearchPopup/selectors';
-import { searchPopupClosed, searchPopupOpened } from '../../redux/UI/SearchPopup/actionCreators';
+import { searchPopupClosed, searchPopupOpened } from '../../redux/UI/SearchPopup/searchPopupSlice';
 
 export default function Search() {
   const searchIsOpen = useSelector(selectSearchPopupIsOpen);

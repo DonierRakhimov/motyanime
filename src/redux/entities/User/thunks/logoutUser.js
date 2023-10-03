@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { userBase } from '../../../../utils/baseUrls';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
 export const logoutUser = createAsyncThunk(
   'user/logoutUser',

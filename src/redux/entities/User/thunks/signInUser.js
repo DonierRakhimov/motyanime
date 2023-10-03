@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
 export const signInUser = createAsyncThunk(
   'user/signInUser',
-  async ({ email, password }, { dispatch }) => {
+  async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
       const signInResponse = await userAxios.post('/signin', {
         email,
@@ -21,7 +21,7 @@ export const signInUser = createAsyncThunk(
     } catch (err) {
       const { response } = err;
       if (response && response.status === 400) {
-        throw new Error('Неправильная почта или пароль');
+        throw rejectWithValue(response);
       } else {
         dispatch(
           notificationToggled({

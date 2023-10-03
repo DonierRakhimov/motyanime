@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
 export const deleteAnime = createAsyncThunk(
   'user/animeDeleted',

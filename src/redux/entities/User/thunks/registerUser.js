@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async ({ email, userName, password }, { dispatch }) => {
+  async ({ email, userName, password }, { dispatch, rejectWithValue }) => {
     try {
       const response = await userAxios.post('/signup', {
         email,
@@ -20,7 +20,7 @@ export const registerUser = createAsyncThunk(
     } catch (err) {
       const { response } = err;
       if (response && response.status === 409) {
-        throw new Error('Пользователь с таким email уже существует');
+        throw rejectWithValue(response);
       } else {
         dispatch(
           notificationToggled({

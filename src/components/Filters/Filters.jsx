@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './filters.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadGenres } from '../../redux/UI/Genres/thunks/loadGenres';
 import {
   selectAllGenres,
   selectCurrentGenres,
@@ -12,7 +11,7 @@ import {
   currentGenresReplaced,
   genreAdded,
   genreRemoved,
-} from '../../redux/UI/Genres/actionCreators'; 
+} from '../../redux/UI/Genres/genresSlice'; 
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { usePopup } from '../../hooks/usePopup';
 import { animesReseted } from '../../redux/entities/Anime/animeSlice';
@@ -25,12 +24,6 @@ export default function Filters() {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    const controller = new AbortController();
-    dispatch(loadGenres(controller.signal));
-    return () => controller.abort();
-  }, [dispatch]);
 
   React.useEffect(() => {
     const initialGenres = searchParams.get('genres');

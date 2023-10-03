@@ -4,7 +4,7 @@ import Comment from '../Comment/Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadComments } from '../../redux/entities/Comment/thunks/loadComments';
 import {
-  selectCommentIds,
+  selectCommentsIds,
   selectCommentStatus,
 } from '../../redux/entities/Comment/selectors';
 import isEmpty from 'lodash.isempty';
@@ -13,23 +13,27 @@ import CommentForm from '../CommentForm/CommentForm';
 import { addComment } from '../../redux/entities/Comment/thunks/addComment';
 
 export default function CommentsList({ animeId }) {
-  const commentIds = useSelector(selectCommentIds);
+  const commentIds = useSelector(selectCommentsIds);
   const commentStatus = useSelector(selectCommentStatus);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     const controller = new AbortController();
-    dispatch(loadComments(controller.signal, animeId));
+    dispatch(loadComments({signal: controller.signal, animeId}));
     return () => controller.abort();
   }, [animeId, dispatch]);
 
-  const handleCommentSubmit = (text) => {
+  const handleCommentSubmit = async (text) => {
     const payload = {
       createdAt: Date.now(),
       text,
       animeId,
+    } 
+    try {
+      return await dispatch(addComment(payload)).unwrap()
+    } catch (err) {
+      throw err;
     }
-    dispatch(addComment(payload))
   } 
 
   return (
@@ -39,7 +43,7 @@ export default function CommentsList({ animeId }) {
         <CommentForm onCommentSubmit={handleCommentSubmit}></CommentForm>
       </div>
       {commentStatus === REQUEST_STATUSES.pending ? (
-        <div>Идет загрузка</div>
+        <div>Идет загрузка...</div>
       ) : commentStatus === REQUEST_STATUSES.failed ? (
         <div>Не удалось загрузить комментарии</div>
       ) : (

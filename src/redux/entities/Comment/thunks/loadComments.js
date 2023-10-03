@@ -1,19 +1,17 @@
-import { userAxios } from '../../../../utils/axiosOptions'
-import { commentOwnersLoaded } from '../../CommentOwner/actionCreators';
-import { commentsFailedToLoad, commentsLoaded, commentsLoading } from '../actionCreators';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { userAxios } from '../../../../utils/axiosOptions';
 
-export const loadComments = (signal, animeId) => async (dispatch) => {
-  try {
-    dispatch(commentsLoading());
-    const response = await userAxios.get('/comments/' + animeId, {
-      signal,
-    });
-    const { data: comments } = response;
-    const owners = comments.map(comment => comment.owner);
-    dispatch(commentsLoaded(comments));
-    dispatch(commentOwnersLoaded(owners));
-    return comments;
-  } catch (err) {
-    dispatch(commentsFailedToLoad())
+export const loadComments = createAsyncThunk(
+  'comments/loadComments',
+  async ({ signal, animeId }) => {
+    try {
+      const response = await userAxios.get('/comments/' + animeId, {
+        signal,
+      });
+      const { data: comments } = response;
+      return comments;
+    } catch (err) {
+      throw err;
+    }
   }
-}
+);

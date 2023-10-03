@@ -7,7 +7,12 @@ import { useValidation } from '../../hooks/useValidation';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/entities/User/thunks/registerUser';
 import { useNavigate } from 'react-router-dom';
-import { emailValidations, passwordValidations, repeatPasswordValidations, userNameValidations } from '../../utils/validations';
+import {
+  emailValidations,
+  passwordValidations,
+  repeatPasswordValidations,
+  userNameValidations,
+} from '../../utils/validations';
 
 const initialState = {
   userName: '',
@@ -16,13 +21,15 @@ const initialState = {
   repeatPassword: '',
 };
 
-
 export default function RegisterPage() {
   const { formData, handleChange } = useForm(initialState);
   const [userNameError] = useValidation(formData.userName, userNameValidations);
   const [emailError] = useValidation(formData.email, emailValidations);
   const [passwordError] = useValidation(formData.password, passwordValidations);
-  const [repeatPasswordError] = useValidation(formData.repeatPassword, repeatPasswordValidations);
+  const [repeatPasswordError] = useValidation(
+    formData.repeatPassword,
+    repeatPasswordValidations
+  );
 
   const [formError, setFormError] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -45,12 +52,14 @@ export default function RegisterPage() {
       try {
         setFormError('');
         setIsSubmitting(true);
-        const result = await dispatch(registerUser(formData));
+        const result = await dispatch(registerUser(formData)).unwrap();
         if (result) {
           navigate('/profile');
         }
       } catch (err) {
-        setFormError(err.message);
+        if (err.status === 409) {
+          setFormError('Пользователь с таким email уже существует');
+        }
       } finally {
         setIsSubmitting(false);
       }

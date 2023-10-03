@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { userBase } from '../../../../utils/baseUrls';
 import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/actionCreators';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
 export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { dispatch }) => {
   try {
@@ -33,5 +33,3 @@ export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { dispatch
     }
   } 
 })
-
-

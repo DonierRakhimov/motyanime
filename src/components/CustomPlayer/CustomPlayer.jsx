@@ -21,7 +21,7 @@ import { anilibriaCache } from '../../utils/baseUrls';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectSearchPopupIsOpen } from '../../redux/UI/SearchPopup/selectors';
-import { selectCommentFormFocus } from '../../redux/UI/commentFormFocus/selectors';
+import { selectCommentFormFocus } from '../../redux/UI/commentFormIsFocused/selectors';
 
 const getFirstWorkingLink = (episodeData) => {
   let firstWorkingLink;

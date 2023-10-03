@@ -3,7 +3,7 @@ import s from './sort.module.css';
 import DropDown from '../Dropdown/Dropdown';
 import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { sortSelected } from '../../redux/UI/Sort/actionCreators';
+import { sortSelected } from '../../redux/UI/Sort/sortSlice';
 import { usePopup } from '../../hooks/usePopup';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';

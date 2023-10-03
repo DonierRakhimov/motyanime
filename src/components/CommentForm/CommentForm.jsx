@@ -5,7 +5,7 @@ import {
   selectIsAuthorized,
   selectUserData,
 } from '../../redux/entities/User/selectors';
-import { focusGained, focusLost } from '../../redux/UI/commentFormFocus/actionCreators';
+import { focusGained, focusLost } from '../../redux/UI/commentFormIsFocused/commentFormIsFocusedSlice';
 
 export default function CommentForm({
   onCommentSubmit = () => {
@@ -17,9 +17,14 @@ export default function CommentForm({
   const [commentText, setCommentText] = React.useState('');
   const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    onCommentSubmit(commentText);
+    try {
+      await onCommentSubmit(commentText);
+      setCommentText('');
+    } catch (err) {
+      return;
+    }
   };
 
   return (

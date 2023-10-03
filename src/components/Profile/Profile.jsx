@@ -40,7 +40,7 @@ export default function Profile({ userData }) {
 
   const handleLogout = async () => {
     try {
-      await dispatch(logoutUser());
+      await dispatch(logoutUser()).unwrap();
       navigate('/');
     } catch (err) {
       return;
@@ -65,9 +65,13 @@ export default function Profile({ userData }) {
         const formData = new FormData(formRef.current);
         setFormError('');
         setIsSubmitting(true);
-        await dispatch(updateUser(formData));
+        await dispatch(updateUser(formData)).unwrap();
       } catch (err) {
-        setFormError(err.message);
+        if (err.status === 409) {
+          setFormError('Пользователь с таким email уже существует')
+        } else if (err.status === 400) {
+          setFormError('Переданы некорректные данные');
+        }
       } finally {
         setIsSubmitting(false);
         setAvatarLink('');

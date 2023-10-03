@@ -2,7 +2,6 @@ import React from 'react';
 import s from './form.module.css';
 import Button from '../Button/Button';
 import { buttonSizes } from '../../utils/buttonSizes';
-import user from '../../assets/images/user.png';
 import { Link } from 'react-router-dom';
 import { ReactComponent as ProfileIcon } from '../../assets/images/profile.svg';
 import { buttonColors } from '../../utils/buttonColors';

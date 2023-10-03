@@ -9,10 +9,10 @@ import popupStyles from '../Popup/popup.module.css';
 import DetailList from '../DetailList/DetailList';
 import isEmpty from 'lodash.isempty';
 
-export default function AnimeInfo({ title = {} }) {
+export default function AnimeInfo({ anime = {} }) {
   const [isTrailerOpen, setIsTrailerOpen] = usePopup(`.${popupStyles.modal}`);
 
-  if (isEmpty(title)) {
+  if (isEmpty(anime)) {
     return;
   }
 
@@ -25,7 +25,7 @@ export default function AnimeInfo({ title = {} }) {
     status,
     genres,
     trailerId = '',
-  } = title;
+  } = anime;
 
   const detailList = [
     ['Тип:', type?.string],
@@ -52,7 +52,7 @@ export default function AnimeInfo({ title = {} }) {
         <div className={s.trailerContent}>
           <h2 className={s.title}>{names?.ru}</h2>
           <h3 className={s.text}>
-            Описание <ToggleButton className={s.addBtn} title={title}/>
+            Описание <ToggleButton className={s.addBtn} anime={anime}/>
           </h3>
           <p className={s.description}>{description}</p>
         </div>

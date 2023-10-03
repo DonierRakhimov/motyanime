@@ -1,11 +1,11 @@
-export const selectCommentSlice = (state) => state.comment;
+import { commentsAdapter } from './commentsSlice';
 
-export const selectComments = (state) => selectCommentSlice(state).entities;
+export const selectCommentsSlice = (state) => state.comments;
 
-export const selectCommentIds = (state) => selectCommentSlice(state).allIds;
+const commentsSelector = commentsAdapter.getSelectors(selectCommentsSlice);
 
-export const selectCommentById = (state, _id) => selectComments(state)[_id];
+export const { selectIds: selectCommentsIds } = commentsSelector;
 
-export const selectCommentStatus = (state) => selectCommentSlice(state).status;
+export const { selectById: selectCommentById } = commentsSelector;
 
-export const selectCommentsArray = (state) => Object.values(selectComments(state));
+export const selectCommentStatus = state => selectCommentsSlice(state).status;
