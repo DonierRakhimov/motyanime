@@ -7,7 +7,7 @@ export default function AnimeGrid({ animes = [], children }) {
     <section className={s.animeGallery}>
       <div className={s.animeGrid}>
         {Boolean(animes.length) && animes.map((anime) => (
-          <AnimeCard key={anime.id} anime={anime}></AnimeCard>
+          <AnimeCard key={anime._id} anime={anime}></AnimeCard>
         ))}
         {children}
       </div>

@@ -8,6 +8,7 @@ import  sortReducer  from './UI/Sort/sortSlice';
 import searchPopupReducer from './UI/SearchPopup/searchPopupSlice';
 import notificationReducer from './UI/Notification/notificationSlice';
 import commentFormIsFocusedReducer from './UI/commentFormIsFocused/commentFormIsFocusedSlice';
+import currentAnimeReducer from './entities/CurrentAnime/currentAnimeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     comments: commentsReducer,
     commentOwners: commentOwnersReducer,
     commentFormIsFocused: commentFormIsFocusedReducer,
+    currentAnime: currentAnimeReducer,
   },
 });

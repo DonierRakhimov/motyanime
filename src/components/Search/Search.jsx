@@ -142,7 +142,7 @@ export default function Search() {
               ) : (
                 <ul className={s.searchList}>
                   {searchResult.map((searchedTitle) => (
-                    <li key={searchedTitle.id}>
+                    <li key={searchedTitle._id}>
                       <AnimeResult
                         animeResult={searchedTitle}
                         onClick={() => handleResultClick(searchedTitle)}
@@ -156,7 +156,7 @@ export default function Search() {
                 <p className={s.message}>Недавние запросы:</p>
                 <ul className={s.searchList}>
                   {searchResult.slice(0, 4).map((searchTitle) => (
-                    <li key={searchTitle.id}>
+                    <li key={searchTitle._id}>
                       <AnimeResult
                         animeResult={searchTitle}
                         onClick={() =>

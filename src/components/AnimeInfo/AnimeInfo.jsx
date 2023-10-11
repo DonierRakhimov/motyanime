@@ -17,7 +17,7 @@ export default function AnimeInfo({ anime = {} }) {
   }
 
   const {
-    id,
+    _id,
     names,
     description,
     type,
@@ -44,7 +44,7 @@ export default function AnimeInfo({ anime = {} }) {
       <div className={s.mainContainer}>
         <div className={s.trailerContent} onClick={handleTrailerClick}>
           <PictureOverlay
-            id={id}
+            id={_id}
             name={names.ru}
             trailer={true}
           ></PictureOverlay>

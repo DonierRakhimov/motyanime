@@ -12,9 +12,9 @@ export const selectStatusIsLoading = (state) => selectAnimesStatus(state) === RE
 
 export const selectAnimeRange = (state, from, to) => selectAnimes(state).slice(from, to);
 
-export const selectTotalPages = (state) => selectAnimesSlice(state).totalPages;
+export const selectTotalCount = (state) => selectAnimesSlice(state).totalCount;
 
-export const selectIsMoreToLoad = (state) => selectCurrentPage(state) <= selectTotalPages(state) 
+export const selectIsMoreToLoad = (state) => selectAnimes(state).length < selectTotalCount(state); 
 
 export const selectRandomAnimes = (state, amount) => {
   const animes = selectAnimes(state);

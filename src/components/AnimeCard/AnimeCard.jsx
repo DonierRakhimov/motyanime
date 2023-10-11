@@ -12,14 +12,14 @@ export default function AnimeCard({ anime = {} }) {
     return;
   }
 
-  const { id, names, status, genres, posters } = anime;
+  const { _id, names, status, genres, posters } = anime;
 
   return (
     <figure className={s.root}>
       <PictureOverlay
-        id={id}
+        id={_id}
         name={names.ru}
-        src={posters.small.url}
+        src={posters.small}
       ></PictureOverlay>
       <figcaption className={s.caption}>
         <div className={s.infoContainer}>

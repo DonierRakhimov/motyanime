@@ -72,15 +72,15 @@ export default function PlayList({ watchedList = [], plannedList = [] }) {
             </div>
           ) : (
             <ul className={s.list}>
-              {currentItems.map((savedTitle, index) => (
+              {currentItems.map((savedAnime, index) => (
                 <li className={s.listItem} key={index}>
                   <AnimeResult
-                    animeResult={savedTitle}
+                    animeResult={savedAnime}
                     style={{
                       backgroundColor: 'transparent',
                     }}
                     isSaved={true}
-                    onDelete={() => dispatch(deleteAnime(savedTitle._id))}
+                    onDelete={() => dispatch(deleteAnime(savedAnime._id))}
                   ></AnimeResult>
                 </li>
               ))}

@@ -6,7 +6,8 @@ const initialState = {
   status: REQUEST_STATUSES.idle,
   entities: [],
   currentPage: 1,
-  totalPages: 0,
+  totalCount: 0,
+  fullyLoadedAnime: {},
 };
 
 const animesSlice = createSlice({
@@ -23,11 +24,11 @@ const animesSlice = createSlice({
       .addCase(loadCurrentPage.fulfilled, (state, action) => {
         if (state.currentPage === 1) {
           state.status = REQUEST_STATUSES.idle;
-          state.entities = action.payload.animes;
+          state.entities = action.payload.list;
           state.currentPage = ++state.currentPage;
-          state.totalPages = action.payload.pages;
+          state.totalCount = action.payload.total;
         } else {
-          state.entities = [...state.entities, ...action.payload];
+          state.entities = [...state.entities, ...action.payload.list];
           state.currentPage = ++state.currentPage;
         }
       })
