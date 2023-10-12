@@ -10,8 +10,8 @@ export const selectWatchedAnimes = (state) => selectSavedAnimes(state).filter(sa
 
 export const selectPlannedAnimes = (state) => selectSavedAnimes(state).filter(savedAnime => savedAnime.category === 'planned');
 
-export const selectIsWatched = (state, animeId) => selectWatchedAnimes(state).find((watchedAnime) => watchedAnime.animeId == animeId); 
+export const selectIsWatched = (state, animeId) => selectWatchedAnimes(state).find((watchedAnime) => watchedAnime.animeId === animeId); 
 
-export const selectIsPlanned = (state, animeId) => selectPlannedAnimes(state).find((plannedAnime) => plannedAnime.animeId == animeId); 
+export const selectIsPlanned = (state, animeId) => selectPlannedAnimes(state).find((plannedAnime) => plannedAnime.animeId === animeId); 
 
 export const selectCheckingAuth = (state) => selectUserSlice(state).checkingAuth;

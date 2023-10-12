@@ -18,7 +18,7 @@ export const saveAnime = createAsyncThunk(
     }
     try {
       const {
-        id: animeId,
+        _id: animeId,
         genres,
         status,
         names,

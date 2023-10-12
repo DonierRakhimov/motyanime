@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  currentSort: '',
+  currentSort: 'names.ru',
 }
 
 const sortSlice = createSlice({

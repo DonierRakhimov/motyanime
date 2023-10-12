@@ -1,16 +1,16 @@
-import React from 'react';
-import profile from '../../assets/images/profile.png';
-import s from './animeresult.module.css';
-import Button from '../Button/Button';
-import { buttonSizes } from '../../utils/buttonSizes';
-import { buttonColors } from '../../utils/buttonColors';
-import { Link } from 'react-router-dom';
-import isEmpty from 'lodash.isempty';
-import { ReactComponent as DeleteIcon } from '../../assets/images/circleXmark.svg';
-import classNames from 'classnames';
+import React from "react";
+import profile from "../../assets/images/profile.png";
+import s from "./animeresult.module.css";
+import Button from "../Button/Button";
+import { buttonSizes } from "../../utils/buttonSizes";
+import { buttonColors } from "../../utils/buttonColors";
+import { Link } from "react-router-dom";
+import isEmpty from "lodash.isempty";
+import { ReactComponent as DeleteIcon } from "../../assets/images/circleXmark.svg";
+import classNames from "classnames";
 
 export default function AnimeResult({
-  className = '',
+  className = "",
   animeResult = {},
   isSaved = false,
   onClick = () => {
@@ -25,15 +25,15 @@ export default function AnimeResult({
     return;
   }
 
-  const { _id, names, status, genres, image } = animeResult;
+  const { _id, names, status, genres, image, animeId } = animeResult;
 
   return (
     <div className={classNames(s.root, className)} {...props}>
       <Link
-        to={`/${isSaved ? animeResult.animeId : _id}`}
+        to={`/${isSaved ? animeId : _id}`}
         onClick={onClick}
         style={{
-          textDecoration: 'none',
+          textDecoration: "none",
         }}
       >
         <div className={s.resultContainer}>

@@ -16,7 +16,7 @@ export const loadCurrentPage = createAsyncThunk(
 
       const params = {
         page: currentPage,
-        limit: 8
+        limit: 8,
       };
 
       if (!isEmpty(currentGenres)) {
@@ -24,14 +24,18 @@ export const loadCurrentPage = createAsyncThunk(
       }
 
       if (currentSort) {
-        params.sort = currentSort;
-      } 
+        if (currentSort === "season.year") {
+          params.sort = currentSort + ",desc";
+        } else {
+          params.sort = currentSort;
+        }
+      }
 
-      const response = await axios.get('/animes', {
+      const response = await axios.get("/animes", {
         baseURL: userBase,
         params,
         signal,
-      })
+      });
       const { data } = response;
 
       return data;

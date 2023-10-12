@@ -21,7 +21,7 @@ export default function Comment({ commentId }) {
 
   return (
     <div className={s.root}>
-      <img className={s.profilePic} src={avatar} alt='profile' />
+      <img className={s.profilePic} src={avatar} alt='аватар пользователя' />
       <div className={s.commentContent}>
         <div className={s.commentContainer}>
           <span>{userName}&nbsp;</span>

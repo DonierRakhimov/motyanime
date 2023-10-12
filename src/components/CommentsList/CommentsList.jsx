@@ -1,16 +1,16 @@
-import React from 'react';
-import s from './commentlist.module.css';
-import Comment from '../Comment/Comment';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadComments } from '../../redux/entities/Comment/thunks/loadComments';
+import React from "react";
+import s from "./commentlist.module.css";
+import Comment from "../Comment/Comment";
+import { useDispatch, useSelector } from "react-redux";
+import { loadComments } from "../../redux/entities/Comment/thunks/loadComments";
 import {
   selectCommentsIds,
   selectCommentStatus,
-} from '../../redux/entities/Comment/selectors';
-import isEmpty from 'lodash.isempty';
-import { REQUEST_STATUSES } from '../../utils/requestStatuses';
-import CommentForm from '../CommentForm/CommentForm';
-import { addComment } from '../../redux/entities/Comment/thunks/addComment';
+} from "../../redux/entities/Comment/selectors";
+import isEmpty from "lodash.isempty";
+import { REQUEST_STATUSES } from "../../utils/requestStatuses";
+import CommentForm from "../CommentForm/CommentForm";
+import { addComment } from "../../redux/entities/Comment/thunks/addComment";
 
 export default function CommentsList({ animeId }) {
   const commentIds = useSelector(selectCommentsIds);
@@ -19,7 +19,7 @@ export default function CommentsList({ animeId }) {
 
   React.useEffect(() => {
     const controller = new AbortController();
-    dispatch(loadComments({signal: controller.signal, animeId}));
+    dispatch(loadComments({ signal: controller.signal, animeId }));
     return () => controller.abort();
   }, [animeId, dispatch]);
 
@@ -28,13 +28,13 @@ export default function CommentsList({ animeId }) {
       createdAt: Date.now(),
       text,
       animeId,
-    } 
+    };
     try {
-      return await dispatch(addComment(payload)).unwrap()
+      return await dispatch(addComment(payload)).unwrap();
     } catch (err) {
       throw err;
     }
-  } 
+  };
 
   return (
     <div>

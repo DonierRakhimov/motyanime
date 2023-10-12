@@ -22,7 +22,7 @@ const commentsSlice = createSlice({
           owner: comment.owner._id,
         });
       })
-      .addCase(loadComments.pending, (state, action) => {
+      .addCase(loadComments.pending, (state) => {
         state.status = REQUEST_STATUSES.pending;
       })
       .addCase(loadComments.fulfilled, (state, action) => {

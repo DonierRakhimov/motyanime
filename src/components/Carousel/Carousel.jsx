@@ -34,9 +34,9 @@ export default function Carousel({ animes }) {
         crossFade: true,
       }}
     >
-      {animes.map((title) => (
-        <SwiperSlide key={title.id}>
-          <Slide title={title} />
+      {animes.map((anime) => (
+        <SwiperSlide key={anime._id}>
+          <Slide anime={anime} />
         </SwiperSlide>
       ))}
       <button className={classNames(s.arrowBtn, s.nextBtn)}>

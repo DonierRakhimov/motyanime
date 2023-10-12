@@ -12,7 +12,6 @@ import { animesReseted } from '../../redux/entities/Anime/animeSlice';
 const sortVariants = {
   'names.ru': 'По названию',
   'season.year': 'По дате выхода',
-  in_favorites: 'По популярности',
 };
 
 export default function Sort() {

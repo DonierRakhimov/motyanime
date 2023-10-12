@@ -14,7 +14,7 @@ const animesSlice = createSlice({
   name: 'animes',
   initialState,
   reducers: {
-    animesReseted(state, action) {
+    animesReseted(state) {
       state.entities = [];
       state.currentPage = 1;
     },

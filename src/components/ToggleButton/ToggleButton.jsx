@@ -1,25 +1,28 @@
-import React from 'react';
-import { ReactComponent as DropdownToggle } from '../../assets/images/dropdown-toggle.svg';
-import { ReactComponent as CheckIcon } from '../../assets/images/check.svg';
-import { ReactComponent as ClockIcon } from '../../assets/images/clock.svg'
-import s from './togglebutton.module.css';
-import DropDown from '../Dropdown/Dropdown';
-import classNames from 'classnames';
-import { usePopup } from '../../hooks/usePopup';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveAnime } from '../../redux/entities/User/thunks/saveAnime';
-import {  selectIsPlanned, selectIsWatched } from '../../redux/entities/User/selectors';
+import React from "react";
+import { ReactComponent as DropdownToggle } from "../../assets/images/dropdown-toggle.svg";
+import { ReactComponent as CheckIcon } from "../../assets/images/check.svg";
+import { ReactComponent as ClockIcon } from "../../assets/images/clock.svg";
+import s from "./togglebutton.module.css";
+import DropDown from "../Dropdown/Dropdown";
+import classNames from "classnames";
+import { usePopup } from "../../hooks/usePopup";
+import { useDispatch, useSelector } from "react-redux";
+import { saveAnime } from "../../redux/entities/User/thunks/saveAnime";
+import {
+  selectIsPlanned,
+  selectIsWatched,
+} from "../../redux/entities/User/selectors";
 
-export default function ToggleButton({ className = '', anime = {} }) {
-  const [dropdownOpen, setDropdownOpen] = usePopup('.' + s.root);
-  const isWatched = useSelector((state) => selectIsWatched(state, anime.id));
-  const isPlanned = useSelector((state) => selectIsPlanned(state, anime.id));
+export default function ToggleButton({ className = "", anime = {} }) {
+  const [dropdownOpen, setDropdownOpen] = usePopup("." + s.root);
+  const isWatched = useSelector((state) => selectIsWatched(state, anime._id));
+  const isPlanned = useSelector((state) => selectIsPlanned(state, anime._id));
   const dispatch = useDispatch();
 
   const handleAnimeSave = (category) => {
-    dispatch(saveAnime({anime, category}));
-  }
-  
+    dispatch(saveAnime({ anime, category }));
+  };
+
   return (
     <div className={classNames(s.root, className)}>
       <button
@@ -30,15 +33,15 @@ export default function ToggleButton({ className = '', anime = {} }) {
       </button>
       <DropDown isOpen={dropdownOpen}>
         <button
-          className={classNames(s.addBtn, isWatched ? s.active : '')}
-          onClick={() => handleAnimeSave('watched')}
+          className={classNames(s.addBtn, isWatched ? s.active : "")}
+          onClick={() => handleAnimeSave("watched")}
         >
           <CheckIcon></CheckIcon>
           Просмотренно
         </button>
         <button
-          className={classNames(s.addBtn, isPlanned ? s.active : '')}
-          onClick={() => handleAnimeSave('planned')}
+          className={classNames(s.addBtn, isPlanned ? s.active : "")}
+          onClick={() => handleAnimeSave("planned")}
         >
           <ClockIcon></ClockIcon>
           Запланированно
