@@ -1,100 +1,110 @@
-import React from 'react';
-import s from './search.module.css';
-import Popup from '../Popup/Popup';
-import popupStyles from '../Popup/popup.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import Spiner from '../Spiner/Spiner';
-import debounce from 'lodash.debounce';
-import { axiosInstance } from '../../utils/axiosOptions';
-import AnimeResult from '../AnimeResult/AnimeResult';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectSearchPopupIsOpen } from '../../redux/UI/SearchPopup/selectors';
-import { searchPopupClosed, searchPopupOpened } from '../../redux/UI/SearchPopup/searchPopupSlice';
+import React from "react";
+import s from "./search.module.css";
+import Popup from "../Popup/Popup";
+import popupStyles from "../Popup/popup.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import Spiner from "../Spiner/Spiner";
+import debounce from "lodash.debounce";
+import AnimeResult from "../AnimeResult/AnimeResult";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSearchPopupIsOpen } from "../../redux/UI/SearchPopup/selectors";
+import {
+  searchPopupClosed,
+  searchPopupOpened,
+} from "../../redux/UI/SearchPopup/searchPopupSlice";
+import {
+  selectSearchResults,
+  selectSearchStatus,
+} from "../../redux/UI/Search/selectors";
+import {
+  setSearchResults,
+  setSearchStatus,
+} from "../../redux/UI/Search/searchSlice";
+import { REQUEST_STATUSES } from "../../utils/requestStatuses";
+import { handleSearch } from "../../redux/UI/Search/thunks/handleSearch";
+import isEmpty from "lodash.isempty";
 
 export default function Search() {
   const searchIsOpen = useSelector(selectSearchPopupIsOpen);
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = React.useState('');
-  const [searchStatus, setSearchStatus] = React.useState('idle');
-  const [searchResult, setSearchResult] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState("");
+  const searchResults = useSelector(selectSearchResults);
+  const searchStatus = useSelector(selectSearchStatus);
 
   const searchAnimes = React.useCallback(
-    debounce((e) => {
-      axiosInstance
-        .get('/title/search', {
-          params: {
-            search: e.target.value,
-            filter: 'id,names.ru,genres[0],status.string,type.string',
-            limit: 5,
-          },
-        })
-        .then((result) => {
-          const { data } = result;
-          setSearchResult(data.list);
-          setSearchStatus('success');
-        })
-        .catch((err) => {
-          console.log(err);
-          setSearchStatus('failed');
-        });
-    }, 1000),
+    debounce((searchValue) => {
+      dispatch(handleSearch(searchValue));
+    }, 3000),
     []
   );
 
-  const handleSearch = (e) => {
-    setSearchValue(e.target.value);
-    searchAnimes(e);
-    setSearchStatus('pending');
+  const handleSearchChange = (e) => {
+    const { target } = e;
+    dispatch(setSearchStatus(REQUEST_STATUSES.pending));
+    setSearchValue(target.value);
+    searchAnimes(target.value);
   };
 
-  const handleResultClick = (searchedTitle) => {
-    const stringifiedSearchedTitle = JSON.stringify(searchedTitle);
-    const savedSearch = localStorage.getItem('savedSearch');
+  const handleResultClick = (searchedAnime) => {
+    const stringifiedSearchedAnime = JSON.stringify(searchedAnime);
+    const savedSearch = localStorage.getItem("savedSearch");
 
     if (savedSearch) {
       const parsedSavedSearch = JSON.parse(savedSearch);
-      if (!parsedSavedSearch.find((el) => el.id === searchedTitle.id)) {
-        parsedSavedSearch.push(searchedTitle);
-        localStorage.setItem('savedSearch', JSON.stringify(parsedSavedSearch));
+      if (!parsedSavedSearch.find((el) => el._id === searchedAnime._id)) {
+        parsedSavedSearch.push(searchedAnime);
+        localStorage.setItem("savedSearch", JSON.stringify(parsedSavedSearch));
       }
     } else {
-      localStorage.setItem('savedSearch', `[${stringifiedSearchedTitle}]`);
+      localStorage.setItem("savedSearch", `[${stringifiedSearchedAnime}]`);
     }
 
     dispatch(searchPopupClosed());
   };
 
-  React.useEffect(() => {
-    const savedSearch = localStorage.getItem('savedSearch');
+  const handleDeleteClick = (searchedAnime) => {
+    dispatch(setSearchResults(searchResults.filter((el) => el._id !== searchedAnime._id)));
+
+    const savedSearch = localStorage.getItem("savedSearch");
 
     if (savedSearch) {
       const parsedSavedSearch = JSON.parse(savedSearch);
-      setSearchResult(parsedSavedSearch);
+      const filteredSavedSearch = parsedSavedSearch.filter(el => el._id !== searchedAnime._id);
+      localStorage.setItem("savedSearch", JSON.stringify(filteredSavedSearch));
+    } 
+  }
+
+  React.useEffect(() => {
+    const savedSearch = localStorage.getItem("savedSearch");
+
+    if (savedSearch) {
+      const parsedSavedSearch = JSON.parse(savedSearch);
+      dispatch(setSearchResults(parsedSavedSearch));
     }
-  }, []);
+  }, [dispatch]);
 
   React.useEffect(() => {
     function closeEscHandler(evt) {
-      if (evt.key === 'Escape') {
+      if (evt.key === "Escape") {
         dispatch(searchPopupClosed());
       }
     }
 
     function closeClickHandler(evt) {
       if (!evt.target.closest(`.${popupStyles.modal}`)) {
-        dispatch(searchPopupClosed())
+        dispatch(searchPopupClosed());
       }
     }
 
     if (searchIsOpen) {
-      window.addEventListener('keydown', closeEscHandler);
-      window.addEventListener('click', closeClickHandler, { capture: true });
+      window.addEventListener("keydown", closeEscHandler);
+      window.addEventListener("click", closeClickHandler, { capture: true });
     }
 
     return () => {
-      window.removeEventListener('keydown', closeEscHandler);
-      window.removeEventListener('click', closeClickHandler, { capture: true });
+      window.removeEventListener("keydown", closeEscHandler);
+      window.removeEventListener("click", closeClickHandler, { capture: true });
     };
   }, [searchIsOpen, dispatch]);
 
@@ -104,7 +114,7 @@ export default function Search() {
         <span className={s.searchIcon}></span>
         <button
           onClick={() => dispatch(searchPopupOpened())}
-          type='button'
+          type="button"
           className={s.search}
         >
           Search
@@ -117,57 +127,60 @@ export default function Search() {
               <span className={s.searchIcon}></span>
               <input
                 value={searchValue}
-                onChange={handleSearch}
+                onChange={handleSearchChange}
                 className={s.search}
-                placeholder='Название...'
+                placeholder="Название..."
               />
               {Boolean(searchValue.length) && (
                 <button
                   onClick={() => {
-                    setSearchValue('');
-                    setSearchStatus('idle');
-                    setSearchResult([]);
+                    setSearchValue("");
+                    dispatch(setSearchResults([]));
+                    dispatch(setSearchStatus(REQUEST_STATUSES.idle));
                   }}
                   className={s.clearBtn}
-                  type='button'
+                  type="button"
                 >
                   <FontAwesomeIcon icon={faXmark} />
                 </button>
               )}
-              <Spiner isActive={searchStatus === 'pending'}></Spiner>
+              <Spiner
+                isActive={searchStatus === REQUEST_STATUSES.pending}
+              ></Spiner>
             </div>
-            {searchStatus === 'success' &&
-              (!searchResult.length ? (
+            {searchStatus === REQUEST_STATUSES.success &&
+              (isEmpty(searchResults) ? (
                 <p className={s.message}>Ничего не найдено</p>
               ) : (
                 <ul className={s.searchList}>
-                  {searchResult.map((searchedTitle) => (
-                    <li key={searchedTitle._id}>
+                  {searchResults.map((searchedAnime) => (
+                    <li key={searchedAnime._id}>
                       <AnimeResult
-                        animeResult={searchedTitle}
-                        onClick={() => handleResultClick(searchedTitle)}
+                        animeResult={searchedAnime}
+                        onClick={() => handleResultClick(searchedAnime)}
+                        onDelete={() => handleDeleteClick(searchedAnime)}
                       ></AnimeResult>
                     </li>
                   ))}
                 </ul>
               ))}
-            {searchStatus === 'idle' && Boolean(searchResult.length) && (
-              <>
-                <p className={s.message}>Недавние запросы:</p>
-                <ul className={s.searchList}>
-                  {searchResult.slice(0, 4).map((searchTitle) => (
-                    <li key={searchTitle._id}>
-                      <AnimeResult
-                        animeResult={searchTitle}
-                        onClick={() =>
-                          handleResultClick(searchTitle)
-                        }
-                      ></AnimeResult>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
+            {searchStatus === REQUEST_STATUSES.idle &&
+              !isEmpty(searchResults) && (
+                <>
+                  <p className={s.message}>Недавние запросы:</p>
+                  <ul className={s.searchList}>
+                    {searchResults.slice(0, 4).map((searchedAnime) => (
+                      <li key={searchedAnime._id}>
+                        <AnimeResult
+                          animeResult={searchedAnime}
+                          onClick={() => handleResultClick(searchedAnime)}
+                          onDelete={() => handleDeleteClick(searchedAnime)}
+                        ></AnimeResult>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
           </div>
         </Popup>
       )}

@@ -9,6 +9,7 @@ import searchPopupReducer from './UI/SearchPopup/searchPopupSlice';
 import notificationReducer from './UI/Notification/notificationSlice';
 import commentFormIsFocusedReducer from './UI/commentFormIsFocused/commentFormIsFocusedSlice';
 import currentAnimeReducer from './entities/CurrentAnime/currentAnimeSlice';
+import searchReducer from './UI/Search/searchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     commentOwners: commentOwnersReducer,
     commentFormIsFocused: commentFormIsFocusedReducer,
     currentAnime: currentAnimeReducer,
+    search: searchReducer,
   },
 });
