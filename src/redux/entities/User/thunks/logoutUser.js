@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userBase } from '../../../../utils/baseUrls';
+import { apiBase } from '../../../../utils/baseUrls';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { notificationToggled } from '../../../UI/Notification/notificationSlice';
 
@@ -8,7 +8,7 @@ export const logoutUser = createAsyncThunk(
   async (_, { dispatch }) => {
     try {
       const response = await axios.post(
-        userBase + '/logout',
+        apiBase + '/logout',
         {},
         {
           withCredentials: true,

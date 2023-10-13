@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { userBase } from "../../../../utils/baseUrls";
+import { apiBase } from "../../../../utils/baseUrls";
 
 export const loadCurrentAnime = createAsyncThunk('currentAnime/loadCurrentAnime', async ({signal, animeId}) => {
   try {
     const response = await axios.get('/animes/' + animeId, {
-      baseURL: userBase,
+      baseURL: apiBase,
       signal,
     });
     return response.data;

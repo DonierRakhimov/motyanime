@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userBase } from '../../../../utils/baseUrls';
+import { apiBase } from '../../../../utils/baseUrls';
 import { userAxios } from '../../../../utils/axiosOptions';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { notificationToggled } from '../../../UI/Notification/notificationSlice';
@@ -7,7 +7,7 @@ import { notificationToggled } from '../../../UI/Notification/notificationSlice'
 export const checkAuth = createAsyncThunk('user/checkAuth', async (_, { dispatch }) => {
   try {
     const refreshResponse = await axios.get('/refresh', {
-      baseURL: userBase,
+      baseURL: apiBase,
       withCredentials: true,
     });
     const savedAnimesRespone = await userAxios.get('/savedAnimes');
