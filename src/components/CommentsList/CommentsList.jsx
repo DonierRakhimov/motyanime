@@ -43,13 +43,13 @@ export default function CommentsList({ animeId }) {
         <CommentForm onCommentSubmit={handleCommentSubmit}></CommentForm>
       </div>
       {commentStatus === REQUEST_STATUSES.pending ? (
-        <div>Идет загрузка...</div>
+        <p className={s.commentStatus}>Идет загрузка...</p>
       ) : commentStatus === REQUEST_STATUSES.failed ? (
-        <div>Не удалось загрузить комментарии</div>
+        <p className={s.commentStatus}>Не удалось загрузить комментарии...</p>
       ) : (
         commentStatus === REQUEST_STATUSES.success &&
         (isEmpty(commentIds) ? (
-          <div>Коммментариев нет</div>
+          <p className={s.commentStatus}>Коммментариев пока нет...</p>
         ) : (
           commentIds.map((id) => (
             <div key={id} className={s.commentWrapper}>
