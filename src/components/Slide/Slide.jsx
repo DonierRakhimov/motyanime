@@ -3,24 +3,19 @@ import s from "./slide.module.css";
 import Button from "../Button/Button";
 import { buttonSizes } from "../../utils/buttonSizes";
 import { buttonColors } from "../../utils/buttonColors";
-import onepiece from "../../assets/images/onepiece.jpg";
 import isEmpty from "lodash.isempty";
 import { Link } from "react-router-dom";
-
-/*
-Впоследствии этот компонент будет получать данные о аниме через проп
-Соотсветственно адрес картинки нужно задавать через проп style={backgroundImage}
-*/
 
 export default function Slide({ anime = {} }) {
   if (isEmpty(anime)) {
     return;
   }
 
-  const { _id, description, season, names, genres, type, status } = anime;
+  const { _id, description, season, names, genres, type, status, posters } =
+    anime;
 
   return (
-    <div className={s.root} style={{ backgroundImage: `url(${onepiece})` }}>
+    <div className={s.root}>
       <div className={s.sliderContainer}>
         <div className={s.infoContainer}>
           <h2 className={s.animeTitle}>{names?.ru}</h2>
@@ -48,7 +43,7 @@ export default function Slide({ anime = {} }) {
           </Link>
         </div>
         <div className={s.imgWrapper}>
-          <img className={s.img} src={onepiece} alt={names?.ru} />
+          <img className={s.img} src={posters.original} alt={names?.ru} />
         </div>
       </div>
     </div>

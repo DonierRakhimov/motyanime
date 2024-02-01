@@ -1,4 +1,4 @@
-import { commentsAdapter } from './commentsSlice';
+import { commentsAdapter } from "./commentsSlice";
 
 export const selectCommentsSlice = (state) => state.comments;
 
@@ -8,4 +8,4 @@ export const { selectIds: selectCommentsIds } = commentsSelector;
 
 export const { selectById: selectCommentById } = commentsSelector;
 
-export const selectCommentStatus = state => selectCommentsSlice(state).status;
+export const selectCommentStatus = (state) => selectCommentsSlice(state).status;

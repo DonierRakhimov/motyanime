@@ -1,13 +1,13 @@
-import React from 'react';
-import s from './profile.module.css';
-import PlayList from '../../components/PlayList/PlayList';
-import { useSelector } from 'react-redux';
+import React from "react";
+import s from "./profile.module.css";
+import PlayList from "../../components/PlayList/PlayList";
+import { useSelector } from "react-redux";
 import {
   selectPlannedAnimes,
   selectUserData,
   selectWatchedAnimes,
-} from '../../redux/entities/User/selectors';
-import Profile from '../../components/Profile/Profile';
+} from "../../redux/entities/User/selectors";
+import Profile from "../../components/Profile/Profile";
 
 export default function ProfilePage() {
   const userData = useSelector(selectUserData);

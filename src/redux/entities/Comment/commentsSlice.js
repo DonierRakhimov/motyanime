@@ -1,14 +1,14 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { REQUEST_STATUSES } from '../../../utils/requestStatuses';
-import { addComment } from './thunks/addComment';
-import { loadComments } from './thunks/loadComments';
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { REQUEST_STATUSES } from "../../../utils/requestStatuses";
+import { addComment } from "./thunks/addComment";
+import { loadComments } from "./thunks/loadComments";
 
 export const commentsAdapter = createEntityAdapter({
   selectId: (comment) => comment._id,
 });
 
 const commentsSlice = createSlice({
-  name: 'comments',
+  name: "comments",
   initialState: commentsAdapter.getInitialState({
     status: REQUEST_STATUSES.idle,
   }),
@@ -40,6 +40,8 @@ const commentsSlice = createSlice({
   },
 });
 
-export const commentSelectors = commentsAdapter.getSelectors(state => state.comments)
+export const commentSelectors = commentsAdapter.getSelectors(
+  (state) => state.comments
+);
 
 export default commentsSlice.reducer;

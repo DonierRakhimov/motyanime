@@ -1,12 +1,12 @@
-import React from 'react';
-import s from './playlist.module.css';
-import AnimeResult from '../AnimeResult/AnimeResult';
-import isEmpty from 'lodash.isempty';
-import { ReactComponent as SadIcon } from '../../assets/images/sad.svg';
-import ReactPaginate from 'react-paginate';
-import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
-import { deleteAnime } from '../../redux/entities/User/thunks/deleteAnime';
+import React from "react";
+import s from "./playlist.module.css";
+import AnimeResult from "../AnimeResult/AnimeResult";
+import isEmpty from "lodash.isempty";
+import { ReactComponent as SadIcon } from "../../assets/images/sad.svg";
+import ReactPaginate from "react-paginate";
+import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { deleteAnime } from "../../redux/entities/User/thunks/deleteAnime";
 
 const itemsPerPage = 6;
 
@@ -15,12 +15,11 @@ export default function PlayList({ watchedList = [], plannedList = [] }) {
   const [currentItems, setCurrentItems] = React.useState(() =>
     watchedList.slice(0, itemsPerPage)
   );
-  const [currentCategory, setCurrentCategory] = React.useState('watched');
+  const [currentCategory, setCurrentCategory] = React.useState("watched");
   const dispatch = useDispatch();
 
-  
   React.useEffect(() => {
-    setCurrentList(currentCategory === 'watched' ? watchedList : plannedList);
+    setCurrentList(currentCategory === "watched" ? watchedList : plannedList);
   }, [watchedList, plannedList, currentCategory]);
 
   React.useEffect(() => {
@@ -32,11 +31,11 @@ export default function PlayList({ watchedList = [], plannedList = [] }) {
     const endOffset = startOffset + itemsPerPage;
     setCurrentItems(currentList.slice(startOffset, endOffset));
   };
-  
+
   const handleCategoryChange = (category) => {
-    setCurrentList(category === 'watched' ? watchedList : plannedList);
+    setCurrentList(category === "watched" ? watchedList : plannedList);
     setCurrentCategory(category);
-  }
+  };
 
   return (
     <div className={s.root}>
@@ -47,18 +46,18 @@ export default function PlayList({ watchedList = [], plannedList = [] }) {
             <button
               className={classNames(
                 s.switchBtn,
-                currentList === watchedList ? s.active : ''
+                currentList === watchedList ? s.active : ""
               )}
-              onClick={() => handleCategoryChange('watched')}
+              onClick={() => handleCategoryChange("watched")}
             >
               Просмотренное
             </button>
             <button
               className={classNames(
                 s.switchBtn,
-                currentList === plannedList ? s.active : ''
+                currentList === plannedList ? s.active : ""
               )}
-              onClick={() => handleCategoryChange('planned')}
+              onClick={() => handleCategoryChange("planned")}
             >
               Запланированное
             </button>
@@ -77,7 +76,7 @@ export default function PlayList({ watchedList = [], plannedList = [] }) {
                   <AnimeResult
                     animeResult={savedAnime}
                     style={{
-                      backgroundColor: 'transparent',
+                      backgroundColor: "transparent",
                     }}
                     isSaved={true}
                     onDelete={() => dispatch(deleteAnime(savedAnime._id))}
@@ -95,13 +94,13 @@ export default function PlayList({ watchedList = [], plannedList = [] }) {
             pageCount={Math.ceil(currentList.length / itemsPerPage)}
             pageClassName={s.page}
             pageLinkClassName={s.pageItem}
-            previousLabel='<'
+            previousLabel="<"
             previousClassName={s.page}
             previousLinkClassName={s.pageItem}
-            nextLabel='>'
+            nextLabel=">"
             nextClassName={s.page}
             nextLinkClassName={s.pageItem}
-            breakLabel='...'
+            breakLabel="..."
             breakClassName={s.page}
             breakLinkClassName={s.pageItem}
             containerClassName={s.paginationContainer}

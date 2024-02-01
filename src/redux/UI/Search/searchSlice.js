@@ -16,7 +16,7 @@ const searchSlice = createSlice({
     },
     setSearchStatus(state, action) {
       state.status = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder

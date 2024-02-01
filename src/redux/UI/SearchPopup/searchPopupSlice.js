@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = false;
 
 const searchPopupSlice = createSlice({
-  name: 'searchPopup',
+  name: "searchPopup",
   initialState,
   reducers: {
     searchPopupClosed() {

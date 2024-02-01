@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = false;
 
 const commentFormIsFocusedSlice = createSlice({
-  name: 'commentFormIsFocused',
+  name: "commentFormIsFocused",
   initialState,
   reducers: {
     focusGained() {
@@ -11,9 +11,9 @@ const commentFormIsFocusedSlice = createSlice({
     },
     focusLost() {
       return false;
-    }
-  }
-})
+    },
+  },
+});
 
 export const { focusGained, focusLost } = commentFormIsFocusedSlice.actions;
 

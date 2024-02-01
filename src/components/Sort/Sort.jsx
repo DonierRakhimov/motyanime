@@ -1,21 +1,21 @@
-import React from 'react';
-import s from './sort.module.css';
-import DropDown from '../Dropdown/Dropdown';
-import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
-import { useDispatch, useSelector } from 'react-redux';
-import { sortSelected } from '../../redux/UI/Sort/sortSlice';
-import { usePopup } from '../../hooks/usePopup';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import classNames from 'classnames';
-import { animesReseted } from '../../redux/entities/Anime/animeSlice';
+import React from "react";
+import s from "./sort.module.css";
+import DropDown from "../Dropdown/Dropdown";
+import { selectCurrentSort } from "../../redux/UI/Sort/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { sortSelected } from "../../redux/UI/Sort/sortSlice";
+import { usePopup } from "../../hooks/usePopup";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import classNames from "classnames";
+import { animesReseted } from "../../redux/entities/Anime/animeSlice";
 
 const sortVariants = {
-  'names.ru': 'По названию',
-  'season.year': 'По дате выхода',
+  "names.ru": "По названию",
+  "season.year": "По дате выхода",
 };
 
 export default function Sort() {
-  const [sortIsOpen, setSortIsOpen] = usePopup('#sort');
+  const [sortIsOpen, setSortIsOpen] = usePopup("#sort");
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const currentSort = useSelector(selectCurrentSort);
@@ -26,20 +26,20 @@ export default function Sort() {
     window.scrollTo(0, 0);
     dispatch(animesReseted());
     dispatch(sortSelected(sortParam));
-    if (location.pathname !== '/') {
-      navigate('/');
+    if (location.pathname !== "/") {
+      navigate("/");
     }
   };
 
   React.useEffect(() => {
-    const sortQueryParam = searchParams.get('sort');
+    const sortQueryParam = searchParams.get("sort");
     if (sortQueryParam) {
       dispatch(sortSelected(sortQueryParam));
     }
   }, [searchParams, dispatch]);
 
   return (
-    <div className={s.root} id='sort'>
+    <div className={s.root} id="sort">
       <button
         className={s.sortToggle}
         onClick={() => {
@@ -53,15 +53,15 @@ export default function Sort() {
           <label className={s.label} key={index}>
             <input
               className={s.radioBtn}
-              name='sort'
+              name="sort"
               checked={currentSort === sortParam}
-              type='radio'
+              type="radio"
               onChange={() => sortChangeHandler(sortParam)}
             ></input>
             <span
               className={classNames(
                 s.customRadio,
-                currentSort === sortParam ? s.checked : ''
+                currentSort === sortParam ? s.checked : ""
               )}
               checked={currentSort === sortParam}
             ></span>

@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { REQUEST_STATUSES } from '../../../utils/requestStatuses';
-import { loadCurrentPage } from './thunks/loadCurrentPage';
+import { createSlice } from "@reduxjs/toolkit";
+import { REQUEST_STATUSES } from "../../../utils/requestStatuses";
+import { loadCurrentPage } from "./thunks/loadCurrentPage";
 
 const initialState = {
   status: REQUEST_STATUSES.idle,
@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const animesSlice = createSlice({
-  name: 'animes',
+  name: "animes",
   initialState,
   reducers: {
     animesReseted(state) {

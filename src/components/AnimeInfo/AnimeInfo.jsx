@@ -1,13 +1,13 @@
-import React from 'react';
-import s from './animeinfo.module.css';
-import ToggleButton from '../ToggleButton/ToggleButton';
-import PictureOverlay from '../PictureOverlay/PictureOverlay';
-import { createPortal } from 'react-dom';
-import Popup from '../Popup/Popup';
-import { usePopup } from '../../hooks/usePopup';
-import popupStyles from '../Popup/popup.module.css';
-import DetailList from '../DetailList/DetailList';
-import isEmpty from 'lodash.isempty';
+import React from "react";
+import s from "./animeinfo.module.css";
+import ToggleButton from "../ToggleButton/ToggleButton";
+import PictureOverlay from "../PictureOverlay/PictureOverlay";
+import { createPortal } from "react-dom";
+import Popup from "../Popup/Popup";
+import { usePopup } from "../../hooks/usePopup";
+import popupStyles from "../Popup/popup.module.css";
+import DetailList from "../DetailList/DetailList";
+import isEmpty from "lodash.isempty";
 
 export default function AnimeInfo({ anime = {} }) {
   const [isTrailerOpen, setIsTrailerOpen] = usePopup(`.${popupStyles.modal}`);
@@ -24,14 +24,15 @@ export default function AnimeInfo({ anime = {} }) {
     season,
     status,
     genres,
-    trailerId = '',
+    posters,
+    youtube_id = "",
   } = anime;
 
   const detailList = [
-    ['Тип:', type?.string],
-    ['Дата премьеры:', `${season?.string}, ${season?.year}`],
-    ['Жанры:', genres?.join(', ')],
-    ['Статус:', status?.string],
+    ["Тип:", type?.string],
+    ["Дата премьеры:", `${season?.string}, ${season?.year}`],
+    ["Жанры:", genres?.join(", ")],
+    ["Статус:", status?.string],
   ];
 
   const handleTrailerClick = (evt) => {
@@ -44,6 +45,7 @@ export default function AnimeInfo({ anime = {} }) {
       <div className={s.mainContainer}>
         <div className={s.trailerContent} onClick={handleTrailerClick}>
           <PictureOverlay
+            src={posters.original}
             id={_id}
             name={names.ru}
             trailer={true}
@@ -52,7 +54,7 @@ export default function AnimeInfo({ anime = {} }) {
         <div className={s.trailerContent}>
           <h2 className={s.title}>{names?.ru}</h2>
           <h3 className={s.text}>
-            Описание <ToggleButton className={s.addBtn} anime={anime}/>
+            Описание <ToggleButton className={s.addBtn} anime={anime} />
           </h3>
           <p className={s.description}>{description}</p>
         </div>
@@ -64,15 +66,15 @@ export default function AnimeInfo({ anime = {} }) {
       {createPortal(
         <Popup isOpen={isTrailerOpen}>
           <iframe
-            title='trailer'
-            width='460'
-            height='360'
-            src={'http://www.youtube.com/embed/' + trailerId}
+            title="trailer"
+            width="460"
+            height="360"
+            src={"http://www.youtube.com/embed/" + youtube_id}
           >
-            Ваш браузер не умеет отображать iframe
+            Не удалось загрузить трейлер
           </iframe>
         </Popup>,
-        document.getElementById('root')
+        document.getElementById("root")
       )}
     </article>
   );

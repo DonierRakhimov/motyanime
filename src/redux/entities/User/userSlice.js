@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { checkAuth } from './thunks/checkAuth';
-import { deleteAnime } from './thunks/deleteAnime';
-import { logoutUser } from './thunks/logoutUser';
-import { registerUser } from './thunks/registerUser';
-import { saveAnime } from './thunks/saveAnime';
-import { signInUser } from './thunks/signInUser';
-import { updateUser } from './thunks/updateUser';
+import { createSlice } from "@reduxjs/toolkit";
+import { checkAuth } from "./thunks/checkAuth";
+import { deleteAnime } from "./thunks/deleteAnime";
+import { logoutUser } from "./thunks/logoutUser";
+import { registerUser } from "./thunks/registerUser";
+import { saveAnime } from "./thunks/saveAnime";
+import { signInUser } from "./thunks/signInUser";
+import { updateUser } from "./thunks/updateUser";
 
 const initialState = {
   userData: {},
@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -62,9 +62,8 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.userData = action.payload;
-      })
+      });
   },
 });
 
 export default userSlice.reducer;
-

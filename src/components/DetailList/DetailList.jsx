@@ -1,6 +1,6 @@
-import React from 'react';
-import Detail from '../Detail/Detail';
-import s from './detaillist.module.css';
+import React from "react";
+import Detail from "../Detail/Detail";
+import s from "./detaillist.module.css";
 
 export default function DetailList({ detailList }) {
   return (

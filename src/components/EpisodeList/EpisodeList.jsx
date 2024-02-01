@@ -1,7 +1,7 @@
-import React from 'react';
-import s from './episodelist.module.css';
-import EpisodeItem from '../EpisodeItem/EpisodeItem';
-import isEmpty from 'lodash.isempty';
+import React from "react";
+import s from "./episodelist.module.css";
+import EpisodeItem from "../EpisodeItem/EpisodeItem";
+import isEmpty from "lodash.isempty";
 
 export default function EpisodeList({
   episodeList = [],

@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { apiBase } from './baseUrls';
-import { router } from '../components/App/App';
-import { logoutUser } from '../redux/entities/User/thunks/logoutUser';
-import { notificationToggled } from '../redux/UI/Notification/notificationSlice';
+import axios from "axios";
+import { apiBase } from "./baseUrls";
+import { router } from "../components/App/App";
+import { logoutUser } from "../redux/entities/User/thunks/logoutUser";
+import { notificationToggled } from "../redux/UI/Notification/notificationSlice";
 
 axios.defaults.transformResponse = [(data) => JSON.parse(data)];
 
@@ -18,7 +18,7 @@ export const setInterceptor = (store) => {
       const { response } = error;
       if (response && response.status === 401) {
         try {
-          await axios.get('/refresh', {
+          await axios.get("/refresh", {
             baseURL: apiBase,
             withCredentials: true,
           });
@@ -28,11 +28,11 @@ export const setInterceptor = (store) => {
             store.dispatch(logoutUser.fulfilled());
             store.dispatch(
               notificationToggled({
-                color: 'red',
-                message: 'Для этого действия нужна авторизация',
+                color: "red",
+                message: "Для этого действия нужна авторизация",
               })
             );
-            router.navigate('/signin');
+            router.navigate("/signin");
           }
         }
       }

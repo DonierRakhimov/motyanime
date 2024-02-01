@@ -1,22 +1,22 @@
-import React from 'react';
-import s from './main.module.css';
-import Carousel from '../../components/Carousel/Carousel';
-import { useDispatch, useSelector } from 'react-redux';
-import CardLoader from '../../components/CardLoader/CardLoader';
-import { useInView } from 'react-intersection-observer';
-import Spiner from '../../components/Spiner/Spiner';
-import { loadCurrentPage } from '../../redux/entities/Anime/thunks/loadCurrentPage';
-import AnimeGrid from '../../components/AnimeGrid/AnimeGrid';
-import { selectCurrentGenres } from '../../redux/UI/Genres/selectors';
-import { selectCurrentSort } from '../../redux/UI/Sort/selectors';
+import React from "react";
+import s from "./main.module.css";
+import Carousel from "../../components/Carousel/Carousel";
+import { useDispatch, useSelector } from "react-redux";
+import CardLoader from "../../components/CardLoader/CardLoader";
+import { useInView } from "react-intersection-observer";
+import Spiner from "../../components/Spiner/Spiner";
+import { loadCurrentPage } from "../../redux/entities/Anime/thunks/loadCurrentPage";
+import AnimeGrid from "../../components/AnimeGrid/AnimeGrid";
+import { selectCurrentGenres } from "../../redux/UI/Genres/selectors";
+import { selectCurrentSort } from "../../redux/UI/Sort/selectors";
 import {
   selectAnimeRange,
   selectRandomAnimes,
   selectCurrentPage,
   selectIsMoreToLoad,
   selectStatusIsLoading,
-} from '../../redux/entities/Anime/selectors';
-import isEmpty from 'lodash.isempty';
+} from "../../redux/entities/Anime/selectors";
+import isEmpty from "lodash.isempty";
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -57,7 +57,8 @@ export default function Main() {
     <main className={s.main}>
       <h2 className={s.title}>АНИМЕ</h2>
       <AnimeGrid animes={firstAnimes}>
-        {(isLoading && isEmpty(firstAnimes)) && 
+        {isLoading &&
+          isEmpty(firstAnimes) &&
           [...Array(12)].map((_, index) => <CardLoader key={index} />)}
       </AnimeGrid>
       {randomAnimes.length && (

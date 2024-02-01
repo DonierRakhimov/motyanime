@@ -1,24 +1,24 @@
-import React from 'react';
-import Form from '../../components/Form/Form';
-import s from './registerpage.module.css';
-import PasswordInput from '../../components/PasswordInput/PasswordInput';
-import { useForm } from '../../hooks/useForm';
-import { useValidation } from '../../hooks/useValidation';
-import { useDispatch } from 'react-redux';
-import { registerUser } from '../../redux/entities/User/thunks/registerUser';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Form from "../../components/Form/Form";
+import s from "./registerpage.module.css";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import { useForm } from "../../hooks/useForm";
+import { useValidation } from "../../hooks/useValidation";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../redux/entities/User/thunks/registerUser";
+import { useNavigate } from "react-router-dom";
 import {
   emailValidations,
   passwordValidations,
   repeatPasswordValidations,
   userNameValidations,
-} from '../../utils/validations';
+} from "../../utils/validations";
 
 const initialState = {
-  userName: '',
-  email: '',
-  password: '',
-  repeatPassword: '',
+  userName: "",
+  email: "",
+  password: "",
+  repeatPassword: "",
 };
 
 export default function RegisterPage() {
@@ -31,7 +31,7 @@ export default function RegisterPage() {
     repeatPasswordValidations
   );
 
-  const [formError, setFormError] = React.useState('');
+  const [formError, setFormError] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,18 +47,18 @@ export default function RegisterPage() {
     if (errorMessage) {
       setFormError(errorMessage);
     } else if (formData.password !== formData.repeatPassword) {
-      setFormError('Пароли не совпадают');
+      setFormError("Пароли не совпадают");
     } else {
       try {
-        setFormError('');
+        setFormError("");
         setIsSubmitting(true);
         const result = await dispatch(registerUser(formData)).unwrap();
         if (result) {
-          navigate('/profile');
+          navigate("/profile");
         }
       } catch (err) {
         if (err.status === 409) {
-          setFormError('Пользователь с таким email уже существует');
+          setFormError("Пользователь с таким email уже существует");
         }
       } finally {
         setIsSubmitting(false);
@@ -69,39 +69,39 @@ export default function RegisterPage() {
   return (
     <div className={s.root}>
       <Form
-        title='Регистрация'
-        submitText='Зарегистрироваться'
-        navigationText='Уже есть аккаунт?'
-        anchorText='Вход'
-        navigationRoute='/signin'
+        title="Регистрация"
+        submitText="Зарегистрироваться"
+        navigationText="Уже есть аккаунт?"
+        anchorText="Вход"
+        navigationRoute="/signin"
         onSubmit={handleRegister}
         submitMessage={formError}
         isSubmitting={isSubmitting}
       >
         <input
           value={formData.userName}
-          name='userName'
-          type='text'
-          placeholder='Имя пользователя'
+          name="userName"
+          type="text"
+          placeholder="Имя пользователя"
           onChange={handleChange}
         ></input>
         <input
           value={formData.email}
-          type='email'
-          name='email'
-          placeholder='Email'
+          type="email"
+          name="email"
+          placeholder="Email"
           onChange={handleChange}
         ></input>
         <PasswordInput
           value={formData.password}
-          name='password'
-          placeholder='Пароль'
+          name="password"
+          placeholder="Пароль"
           onChange={handleChange}
         />
         <PasswordInput
           value={formData.repeatPassword}
-          name='repeatPassword'
-          placeholder='Повторите пароль'
+          name="repeatPassword"
+          placeholder="Повторите пароль"
           onChange={handleChange}
         />
       </Form>

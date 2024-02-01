@@ -1,11 +1,11 @@
-import React from 'react';
-import s from './form.module.css';
-import Button from '../Button/Button';
-import { buttonSizes } from '../../utils/buttonSizes';
-import { Link } from 'react-router-dom';
-import { ReactComponent as ProfileIcon } from '../../assets/images/profile.svg';
-import { buttonColors } from '../../utils/buttonColors';
-import classNames from 'classnames';
+import React from "react";
+import s from "./form.module.css";
+import Button from "../Button/Button";
+import { buttonSizes } from "../../utils/buttonSizes";
+import { Link } from "react-router-dom";
+import { ReactComponent as ProfileIcon } from "../../assets/images/profile.svg";
+import { buttonColors } from "../../utils/buttonColors";
+import classNames from "classnames";
 
 export default function Form({
   onSubmit = (evt) => {
@@ -15,10 +15,10 @@ export default function Form({
   children,
   submitText,
   navigationText,
-  navigationRoute = '/',
+  navigationRoute = "/",
   anchorText,
   submitMessage,
-  theme = 'yellow',
+  theme = "yellow",
   isSubmitting = false,
 }) {
   const submitHandler = (evt) => {
@@ -32,9 +32,9 @@ export default function Form({
           className={s.profilePic}
           style={{
             fill:
-              theme === 'yellow'
-                ? 'var(--color-primary)'
-                : 'var(--color-purple)',
+              theme === "yellow"
+                ? "var(--color-primary)"
+                : "var(--color-purple)",
           }}
         ></ProfileIcon>
         <h3 className={s.title}>{title}</h3>
@@ -44,7 +44,7 @@ export default function Form({
             <Button
               disabled={isSubmitting}
               color={
-                theme === 'yellow' ? buttonColors.yellow : buttonColors.purple
+                theme === "yellow" ? buttonColors.yellow : buttonColors.purple
               }
               size={buttonSizes.l}
               className={s.submitBtn}
@@ -58,7 +58,7 @@ export default function Form({
           {navigationText}&nbsp;
           <Link
             to={navigationRoute}
-            className={classNames(s.ref, theme !== 'yellow' ? s.purple : '')}
+            className={classNames(s.ref, theme !== "yellow" ? s.purple : "")}
           >
             {anchorText}
           </Link>

@@ -1,4 +1,4 @@
-import { commentOwnersAdapter } from './commentOwnersSlice';
+import { commentOwnersAdapter } from "./commentOwnersSlice";
 
 const selectCommentOwnersSlice = (state) => state.commentOwners;
 

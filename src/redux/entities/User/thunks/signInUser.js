@@ -1,16 +1,16 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/notificationSlice';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { userAxios } from "../../../../utils/axiosOptions";
+import { notificationToggled } from "../../../UI/Notification/notificationSlice";
 
 export const signInUser = createAsyncThunk(
-  'user/signInUser',
+  "user/signInUser",
   async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
-      const signInResponse = await userAxios.post('/signin', {
+      const signInResponse = await userAxios.post("/signin", {
         email,
         password,
       });
-      const savedAnimesRespone = await userAxios.get('/savedAnimes');
+      const savedAnimesRespone = await userAxios.get("/savedAnimes");
       const { data: userData } = signInResponse;
       const { data: savedAnimes } = savedAnimesRespone;
       const payload = {
@@ -25,8 +25,8 @@ export const signInUser = createAsyncThunk(
       } else {
         dispatch(
           notificationToggled({
-            color: 'red',
-            message: 'Не удалось войти',
+            color: "red",
+            message: "Не удалось войти",
           })
         );
         throw err;

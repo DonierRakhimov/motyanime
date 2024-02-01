@@ -1,11 +1,11 @@
-import React from 'react';
-import { buttonSizes } from '../../utils/buttonSizes';
-import s from './button.module.css';
-import classNames from 'classnames';
-import { buttonColors } from '../../utils/buttonColors';
+import React from "react";
+import { buttonSizes } from "../../utils/buttonSizes";
+import s from "./button.module.css";
+import classNames from "classnames";
+import { buttonColors } from "../../utils/buttonColors";
 
 export default function Button({
-  className = '',
+  className = "",
   color = buttonColors.yellow,
   children,
   onClick = () => {

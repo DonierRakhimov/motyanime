@@ -1,8 +1,8 @@
-import React from 'react';
-import s from './videosection.module.css';
-import CustomPlayer from '../CustomPlayer/CustomPlayer';
-import EpisodeList from '../EpisodeList/EpisodeList';
-import isEmpty from 'lodash.isempty';
+import React from "react";
+import s from "./videosection.module.css";
+import CustomPlayer from "../CustomPlayer/CustomPlayer";
+import EpisodeList from "../EpisodeList/EpisodeList";
+import isEmpty from "lodash.isempty";
 
 export default function VideoSection({ episodesList = {} }) {
   const episodesArray = React.useMemo(

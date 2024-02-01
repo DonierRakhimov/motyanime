@@ -19,7 +19,7 @@ export default function AnimeCard({ anime = {} }) {
       <PictureOverlay
         id={_id}
         name={names.ru}
-        src={posters.small}
+        src={posters.original}
       ></PictureOverlay>
       <figcaption className={s.caption}>
         <div className={s.infoContainer}>

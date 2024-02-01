@@ -1,20 +1,20 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userAxios } from '../../../../utils/axiosOptions';
-import { selectIsAuthorized } from '../selectors';
-import { notificationToggled } from '../../../UI/Notification/notificationSlice';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { userAxios } from "../../../../utils/axiosOptions";
+import { selectIsAuthorized } from "../selectors";
+import { notificationToggled } from "../../../UI/Notification/notificationSlice";
 
 export const saveAnime = createAsyncThunk(
-  'user/saveAnime',
+  "user/saveAnime",
   async ({ anime, category }, { dispatch, getState }) => {
     const isAuthorized = selectIsAuthorized(getState());
     if (!isAuthorized) {
       dispatch(
         notificationToggled({
-          color: 'red',
-          message: 'Для этого действия нужна авторизация',
+          color: "red",
+          message: "Для этого действия нужна авторизация",
         })
       );
-      throw new Error('');
+      throw new Error("");
     }
     try {
       const {
@@ -22,9 +22,9 @@ export const saveAnime = createAsyncThunk(
         genres,
         status,
         names,
-        image = 'https://upload.wikimedia.org/wikipedia/ru/1/11/Naruto-manga.jpg',
+        image = "https://upload.wikimedia.org/wikipedia/ru/1/11/Naruto-manga.jpg",
       } = anime;
-      const response = await userAxios.post('/savedAnimes', {
+      const response = await userAxios.post("/savedAnimes", {
         animeId,
         genres,
         status: {
@@ -39,9 +39,9 @@ export const saveAnime = createAsyncThunk(
       const { data: savedAnime } = response;
       dispatch(
         notificationToggled({
-          color: 'green',
+          color: "green",
           message: `Добавлено в ${
-            category === 'watched' ? 'просмотренное' : 'запланированное'
+            category === "watched" ? "просмотренное" : "запланированное"
           }`,
         })
       );
@@ -52,7 +52,7 @@ export const saveAnime = createAsyncThunk(
         throw err;
       } else {
         dispatch(
-          notificationToggled({ color: 'red', message: 'Не удалось сохранить' })
+          notificationToggled({ color: "red", message: "Не удалось сохранить" })
         );
         throw err;
       }

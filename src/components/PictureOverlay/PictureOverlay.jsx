@@ -1,16 +1,14 @@
-import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import s from './pictureoverlay.module.css';
 import classNames from 'classnames';
-import naruto from '../../assets/images/naruto.jpg';
 import { Link } from 'react-router-dom';
+import { ReactComponent as PlayIcon } from '../../assets/images/play.svg';
 
 export default function PictureOverlay({ id, name, src, trailer = false }) {
   return (
     <div className={s.imgContainer}>
       <img
-        src={naruto}
+        src={src}
         alt={name}
         className={classNames(s.animePic, trailer ? s.trailerPic : '')}
       />
@@ -19,7 +17,7 @@ export default function PictureOverlay({ id, name, src, trailer = false }) {
         className={classNames(s.watchLink, trailer ? s.trailerLink : '')}
         onClick={() => window.scrollTo(0, 0)}
       >
-        <FontAwesomeIcon icon={faCirclePlay} />
+        <PlayIcon />
         <span className={s.playText}>
           {trailer ? 'Смотреть трейлер' : 'Смотреть'}
         </span>

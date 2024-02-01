@@ -1,7 +1,7 @@
-import React from 'react';
-import s from './notification.module.css';
-import { useSelector } from 'react-redux';
-import { selectNotificationSlice } from '../../redux/UI/Notification/selectors';
+import React from "react";
+import s from "./notification.module.css";
+import { useSelector } from "react-redux";
+import { selectNotificationSlice } from "../../redux/UI/Notification/selectors";
 
 export default function Notification() {
   const { isShown, color, message } = useSelector(selectNotificationSlice);
@@ -13,19 +13,19 @@ export default function Notification() {
     animationRef.current = noitifactionRef.current.animate(
       [
         {
-          top: '-200px',
-          visibility: 'visible',
-          offset: '0',
+          top: "-200px",
+          visibility: "visible",
+          offset: "0",
         },
         {
-          top: '50px',
-          visibility: 'visible',
-          offset: '0.1',
+          top: "50px",
+          visibility: "visible",
+          offset: "0.1",
         },
         {
-          top: '50px',
-          visibility: 'hidden',
-          offset: '1.0',
+          top: "50px",
+          visibility: "hidden",
+          offset: "1.0",
         },
       ],
       {
@@ -34,7 +34,6 @@ export default function Notification() {
     );
     animationRef.current.cancel();
   }, []);
-
 
   React.useEffect(() => {
     if (didMountRef.current) {

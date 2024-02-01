@@ -1,30 +1,30 @@
-import React from 'react';
-import s from './profile.module.css';
-import Button from '../Button/Button';
-import { buttonSizes } from '../../utils/buttonSizes';
-import { ReactComponent as LogoutIcon } from '../../assets/images/logoutIcon.svg';
-import { ReactComponent as EditIcon } from '../../assets/images/editProfile.svg';
-import { useForm } from '../../hooks/useForm';
-import { emailValidations, userNameValidations } from '../../utils/validations';
-import { useValidation } from '../../hooks/useValidation';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import isEmpty from 'lodash.isempty';
-import { logoutUser } from '../../redux/entities/User/thunks/logoutUser';
-import { updateUser } from '../../redux/entities/User/thunks/updateUser';
+import React from "react";
+import s from "./profile.module.css";
+import Button from "../Button/Button";
+import { buttonSizes } from "../../utils/buttonSizes";
+import { ReactComponent as LogoutIcon } from "../../assets/images/logoutIcon.svg";
+import { ReactComponent as EditIcon } from "../../assets/images/editProfile.svg";
+import { useForm } from "../../hooks/useForm";
+import { emailValidations, userNameValidations } from "../../utils/validations";
+import { useValidation } from "../../hooks/useValidation";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import isEmpty from "lodash.isempty";
+import { logoutUser } from "../../redux/entities/User/thunks/logoutUser";
+import { updateUser } from "../../redux/entities/User/thunks/updateUser";
 
 export default function Profile({ userData }) {
   const formRef = React.useRef(null);
   const avatarInputRef = React.useRef(null);
   const coverInputRef = React.useRef(null);
-  const [avatarLink, setAvatarLink] = React.useState('');
-  const [coverLink, setCoverLink] = React.useState('');
+  const [avatarLink, setAvatarLink] = React.useState("");
+  const [coverLink, setCoverLink] = React.useState("");
   const [editIsOpen, setEditIsOpen] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { formData, handleChange, setFormData } = useForm(userData);
   const [userNameError] = useValidation(formData.userName, userNameValidations);
   const [emailError] = useValidation(formData.email, emailValidations);
-  const [formError, setFormError] = React.useState('');
+  const [formError, setFormError] = React.useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ export default function Profile({ userData }) {
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser()).unwrap();
-      navigate('/');
+      navigate("/");
     } catch (err) {
       return;
     }
@@ -59,25 +59,25 @@ export default function Profile({ userData }) {
       avatarInputRef.current.files.length === 0 &&
       coverInputRef.current.files.length === 0
     ) {
-      setFormError('Введите новые данные');
+      setFormError("Введите новые данные");
     } else {
       try {
         const formData = new FormData(formRef.current);
-        setFormError('');
+        setFormError("");
         setIsSubmitting(true);
         await dispatch(updateUser(formData)).unwrap();
       } catch (err) {
         if (err.status === 409) {
-          setFormError('Пользователь с таким email уже существует')
+          setFormError("Пользователь с таким email уже существует");
         } else if (err.status === 400) {
-          setFormError('Переданы некорректные данные');
+          setFormError("Переданы некорректные данные");
         }
       } finally {
         setIsSubmitting(false);
-        setAvatarLink('');
-        setCoverLink('');
-        avatarInputRef.current.value = '';
-        coverInputRef.current.value = '';
+        setAvatarLink("");
+        setCoverLink("");
+        avatarInputRef.current.value = "";
+        coverInputRef.current.value = "";
       }
     }
   };
@@ -90,13 +90,13 @@ export default function Profile({ userData }) {
       return;
     }
 
-    if (!files[0].type.startsWith('image/')) {
-      setFormError('Некорректный формат файла');
-      e.target.value = '';
+    if (!files[0].type.startsWith("image/")) {
+      setFormError("Некорректный формат файла");
+      e.target.value = "";
     } else {
-      setFormError('');
+      setFormError("");
       const url = URL.createObjectURL(files[0]);
-      if (name === 'avatar') {
+      if (name === "avatar") {
         setAvatarLink(url);
       } else {
         setCoverLink(url);
@@ -115,17 +115,17 @@ export default function Profile({ userData }) {
         <label
           className={s.editCoverLabel}
           style={{
-            display: editIsOpen ? 'block' : 'none',
+            display: editIsOpen ? "block" : "none",
           }}
         >
           <input
             ref={coverInputRef}
             className={s.editCoverInput}
-            type='file'
-            name='cover'
-            form='edit-form'
+            type="file"
+            name="cover"
+            form="edit-form"
             onChange={handleFileChange}
-            accept='image/*'
+            accept="image/*"
           ></input>
           Редактировать обложку
         </label>
@@ -135,24 +135,24 @@ export default function Profile({ userData }) {
           <label
             className={s.pictureLabel}
             style={{
-              display: editIsOpen ? 'block' : 'none',
+              display: editIsOpen ? "block" : "none",
             }}
           >
             <EditIcon></EditIcon>
             <input
               className={s.pictureInput}
-              type='file'
-              name='avatar'
-              form='edit-form'
+              type="file"
+              name="avatar"
+              form="edit-form"
               ref={avatarInputRef}
               onChange={handleFileChange}
-              accept='image/*'
+              accept="image/*"
             ></input>
           </label>
           <img
             src={avatarLink || avatar}
             className={s.profilePic}
-            alt='Изображение профиля'
+            alt="Изображение профиля"
           ></img>
         </div>
         <div className={s.infoContainer}>
@@ -162,7 +162,7 @@ export default function Profile({ userData }) {
             <button
               onClick={() => handleLogout()}
               className={s.logoutBtn}
-              title='Выйти из аккаунта'
+              title="Выйти из аккаунта"
             >
               <LogoutIcon></LogoutIcon>
             </button>
@@ -184,7 +184,7 @@ export default function Profile({ userData }) {
         }}
       >
         <form
-          id='edit-form'
+          id="edit-form"
           className={s.editForm}
           ref={formRef}
           onSubmit={handleUserUpdate}
@@ -193,9 +193,9 @@ export default function Profile({ userData }) {
             Имя пользователя
             <input
               className={s.editInput}
-              type='text'
-              placeholder='Имя пользователя'
-              name='userName'
+              type="text"
+              placeholder="Имя пользователя"
+              name="userName"
               value={formData.userName}
               onChange={handleChange}
             ></input>
@@ -204,9 +204,9 @@ export default function Profile({ userData }) {
             Email
             <input
               className={s.editInput}
-              type='email'
-              placeholder='Email'
-              name='email'
+              type="email"
+              placeholder="Email"
+              name="email"
               value={formData.email}
               onChange={handleChange}
             ></input>

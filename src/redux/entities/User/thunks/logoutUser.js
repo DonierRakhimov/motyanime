@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { apiBase } from '../../../../utils/baseUrls';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { notificationToggled } from '../../../UI/Notification/notificationSlice';
+import axios from "axios";
+import { apiBase } from "../../../../utils/baseUrls";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { notificationToggled } from "../../../UI/Notification/notificationSlice";
 
 export const logoutUser = createAsyncThunk(
-  'user/logoutUser',
+  "user/logoutUser",
   async (_, { dispatch }) => {
     try {
       const response = await axios.post(
-        apiBase + '/logout',
+        apiBase + "/logout",
         {},
         {
           withCredentials: true,
@@ -18,13 +18,11 @@ export const logoutUser = createAsyncThunk(
     } catch (err) {
       dispatch(
         notificationToggled({
-          color: 'red',
-          message: 'Не удалось выйти из аккаунта',
+          color: "red",
+          message: "Не удалось выйти из аккаунта",
         })
       );
       throw err;
     }
   }
 );
-
-

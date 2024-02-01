@@ -39,8 +39,10 @@ export default function AnimePage() {
 
   return (
     <div className={s.root}>
-      {loadingStatus === REQUEST_STATUSES.pending && <VideoLoader></VideoLoader>}
-      {(loadingStatus === REQUEST_STATUSES.success && !isEmpty(currentAnime)) && (
+      {loadingStatus === REQUEST_STATUSES.pending && (
+        <VideoLoader></VideoLoader>
+      )}
+      {loadingStatus === REQUEST_STATUSES.success && !isEmpty(currentAnime) && (
         <>
           <section className={s.animeInfoWrapper}>
             <AnimeInfo anime={currentAnime}></AnimeInfo>

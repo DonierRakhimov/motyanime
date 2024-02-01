@@ -1,13 +1,13 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userAxios } from '../../../../utils/axiosOptions';
-import { notificationToggled } from '../../../UI/Notification/notificationSlice';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { userAxios } from "../../../../utils/axiosOptions";
+import { notificationToggled } from "../../../UI/Notification/notificationSlice";
 
 export const deleteAnime = createAsyncThunk(
-  'user/animeDeleted',
+  "user/animeDeleted",
   async (_id, { dispatch }) => {
     try {
-      await userAxios.delete('/savedAnimes/' + _id);
-      dispatch(notificationToggled({ color: 'green', message: 'Удалено!' }));
+      await userAxios.delete("/savedAnimes/" + _id);
+      dispatch(notificationToggled({ color: "green", message: "Удалено!" }));
       return _id;
     } catch (err) {
       const { response } = err;
@@ -15,12 +15,10 @@ export const deleteAnime = createAsyncThunk(
         throw err;
       } else {
         dispatch(
-          notificationToggled({ color: 'red', message: 'Не удалось удалить' })
+          notificationToggled({ color: "red", message: "Не удалось удалить" })
         );
         throw err;
       }
     }
   }
 );
-
-
