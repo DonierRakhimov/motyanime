@@ -1,14 +1,3 @@
-.playerContainer {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-color: black;
-}
-
-.playerContainer video {
-  object-fit: cover;
-}
-
 .customPlayer {
   width: 100%;
   height: 100%;
@@ -51,7 +40,6 @@
   cursor: pointer;
   position: relative;
 }
-
 
 [data-title]::before {
   content: attr(data-title);
@@ -99,7 +87,7 @@
   gap: 30px;
 }
 
-.volumeContainer {
+.volumeBtnWrapper {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -114,7 +102,7 @@
   cursor: pointer;
 }
 
-.volumeContainer:hover .volumeRange {
+.volumeBtnWrapper .volumeRange {
   width: 100px;
   height: 5px;
   overflow: visible;
@@ -130,64 +118,6 @@
   line-height: 1.5;
 }
 
-.bufferingAnimation {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80px;
-  height: 80px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.bufferingAnimation svg {
-  width: 80%;
-  height: 80%;
-  fill: var(--color-grey-light);
-  animation: rotation 2s linear 0s infinite;
-}
-
-.playPauseAnimation {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.6);
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  opacity: 0;
-}
-
-.playPauseAnimation svg {
-  width: 50%;
-  height: 50%;
-  fill: var(--color-grey-light);
-}
-
-.fullScreenBtn[data-title]::before {
-  left: auto;
-  right: 0;
-  transform: none;
-}
-
 .playPauseBtn::before {
   left: 0px;
   transform: none;
@@ -197,40 +127,8 @@
   position: relative;
 }
 
-.settingsPopup {
-  width: 50px;
-  left: 50%;
-  top: unset;
-  transform: translate(-50%, -120%);
-  border-radius: 5px;
-  z-index: 3;
-}
-
-.qualityBtn {
-  width: auto !important;
-  height: auto !important;
-  display: block;
-  margin: 0 auto 20px;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  font-weight: 400;
-  font-size: 16px;
-  color: var(--color-grey-light);
-  font-family: var(--font-primary);
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: .3s color;
-}
-
-.qualityBtn.active {
-  color: var(--color-primary);
-}
-
-.qualityBtn:last-child {
-  margin-bottom: 0;
-}
-
-.qualityBtn:hover {
-  color: var(--color-purple)
+.fullScreenBtn[data-title]::before {
+  left: auto;
+  right: 0;
+  transform: none;
 }

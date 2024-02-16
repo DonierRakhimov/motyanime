@@ -1,35 +1,37 @@
+import { VALIDATION_OPTIONS } from "./validationOptions";
+
 export const userNameValidations = {
-  required: {
+  [VALIDATION_OPTIONS.required]: {
     value: true,
     message: "Не все поля заполнены",
   },
-  minLength: {
+  [VALIDATION_OPTIONS.minLength]: {
     value: 2,
     message: "Имя пользователя должно содержать как минимум 2 символа",
   },
-  maxLength: {
+  [VALIDATION_OPTIONS.maxLength]: {
     value: 30,
     message: "Имя пользователя не должно превышать 30 символов",
   },
 };
 
 export const emailValidations = {
-  required: {
+  [VALIDATION_OPTIONS.required]: {
     value: true,
     message: "Не все поля заполнены",
   },
-  email: {
+  [VALIDATION_OPTIONS.email]: {
     value: true,
     message: "Введен некорректный email",
   },
 };
 
 export const passwordValidations = {
-  required: {
+  [VALIDATION_OPTIONS.required]: {
     value: true,
     message: "Не все поля заполнены",
   },
-  password: {
+  [VALIDATION_OPTIONS.password]: {
     value: true,
     message:
       "Ваш пароль должен состоять из не менее 8 символов латинского алфавита и включать как минимум одну заглавную букву, одну строчную букву и одну цифру",
@@ -37,7 +39,7 @@ export const passwordValidations = {
 };
 
 export const repeatPasswordValidations = {
-  required: {
+  [VALIDATION_OPTIONS.required]: {
     value: true,
     message: "Не все поля заполнены",
   },

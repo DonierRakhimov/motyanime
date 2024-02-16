@@ -1,5 +1,4 @@
 import React from "react";
-import s from "./search.module.css";
 import popupStyles from "../Popup/popup.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSearchPopupIsOpen } from "../../redux/UI/SearchPopup/selectors";
@@ -8,6 +7,7 @@ import {
   searchPopupOpened,
 } from "../../redux/UI/SearchPopup/searchPopupSlice";
 import SearchModal from "../SearchModal/SearchModal";
+import SearchInput from "../SearchInput/SearchInput";
 
 export default function Search() {
   const searchIsOpen = useSelector(selectSearchPopupIsOpen);
@@ -39,16 +39,10 @@ export default function Search() {
 
   return (
     <>
-      <div className={s.searchContainer}>
-        <span className={s.searchIcon}></span>
-        <button
-          onClick={() => dispatch(searchPopupOpened())}
-          type="button"
-          className={s.search}
-        >
-          Search
-        </button>
-      </div>
+      <SearchInput
+        onClick={() => dispatch(searchPopupOpened())}
+        placeholder="Поиск"
+      ></SearchInput>
       <SearchModal isOpen={searchIsOpen} />
     </>
   );

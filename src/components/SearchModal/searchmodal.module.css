@@ -15,7 +15,12 @@
   width: 20px;
   height: 20px;
 }
-  
+
+.clearBtn svg {
+  width: 100%;
+  height: 100%;
+}
+
 .clearBtn svg path {
   fill: var(--color-grey-light);
 }

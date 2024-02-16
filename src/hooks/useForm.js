@@ -5,10 +5,12 @@ export const useForm = (initalState) => {
 
   const handleChange = React.useCallback((e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    
   }, []);
 
   return { formData, handleChange, setFormData };

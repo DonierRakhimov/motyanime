@@ -1,0 +1,51 @@
+.bufferingAnimation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+  
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+  
+.bufferingAnimation svg {
+    width: 80%;
+    height: 80%;
+    fill: var(--color-grey-light);
+    animation: rotation 2s linear 0s infinite;
+}
+
+.playPauseAnimation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    opacity: 0;
+  }
+  
+  .playPauseAnimation svg {
+    width: 50%;
+    height: 50%;
+    fill: var(--color-grey-light);
+  }

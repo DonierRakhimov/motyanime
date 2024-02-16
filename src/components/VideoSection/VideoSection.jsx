@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./videosection.module.css";
-import CustomPlayer from "../CustomPlayer/CustomPlayer";
 import EpisodeList from "../EpisodeList/EpisodeList";
 import isEmpty from "lodash.isempty";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 export default function VideoSection({ episodesList = {} }) {
   const episodesArray = React.useMemo(
@@ -19,7 +19,6 @@ export default function VideoSection({ episodesList = {} }) {
   }, [episodesArray]);
 
   if (isEmpty(episodesArray)) {
-    // тут вообще следовало бы отразить какой-то UI который бы сказал что серий нету
     return;
   }
 
@@ -33,7 +32,7 @@ export default function VideoSection({ episodesList = {} }) {
     <div>
       <div className={s.sectionContainer}>
         <div className={s.playerWrapper}>
-          <CustomPlayer episodeData={episodeData}></CustomPlayer>
+          <VideoPlayer episodeData={episodeData}></VideoPlayer>
         </div>
         <div className={s.listWrapper}>
           <EpisodeList

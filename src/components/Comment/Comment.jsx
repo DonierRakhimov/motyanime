@@ -8,6 +8,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 export default function Comment({ commentId }) {
   const comment = useSelector((state) => selectCommentById(state, commentId));
+  
   const commentOwner = useSelector((state) =>
     selectCommentOwnerById(state, comment?.owner)
   );

@@ -1,19 +1,19 @@
 import React from "react";
-import { ReactComponent as DropdownToggle } from "../../assets/images/dropdown-toggle.svg";
+import s from "./savebutton.module.css";
+import classNames from "classnames";
+import DropDown from "../Dropdown/Dropdown";
+import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as CheckIcon } from "../../assets/images/check.svg";
 import { ReactComponent as ClockIcon } from "../../assets/images/clock.svg";
-import s from "./togglebutton.module.css";
-import DropDown from "../Dropdown/Dropdown";
-import classNames from "classnames";
+import { ReactComponent as DropdownToggle } from "../../assets/images/dropdown-toggle.svg";
 import { usePopup } from "../../hooks/usePopup";
-import { useDispatch, useSelector } from "react-redux";
 import { saveAnime } from "../../redux/entities/User/thunks/saveAnime";
 import {
   selectIsPlanned,
   selectIsWatched,
 } from "../../redux/entities/User/selectors";
 
-export default function ToggleButton({ className = "", anime = {} }) {
+export default function SaveButton({ className = "", anime = {} }) {
   const [dropdownOpen, setDropdownOpen] = usePopup("." + s.root);
   const isWatched = useSelector((state) => selectIsWatched(state, anime._id));
   const isPlanned = useSelector((state) => selectIsPlanned(state, anime._id));

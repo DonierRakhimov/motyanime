@@ -2,7 +2,7 @@ import React from "react";
 import Detail from "../Detail/Detail";
 import s from "./detaillist.module.css";
 
-export default function DetailList({ detailList }) {
+export default function DetailList({ detailList = [] }) {
   return (
     <ul className={s.root}>
       {detailList.map((detail, index) => (

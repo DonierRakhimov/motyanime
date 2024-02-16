@@ -1,5 +1,4 @@
 import React from "react";
-import profile from "../../assets/images/profile.png";
 import s from "./animeresult.module.css";
 import Button from "../Button/Button";
 import { buttonSizes } from "../../utils/buttonSizes";
@@ -25,7 +24,7 @@ export default function AnimeResult({
     return;
   }
 
-  const { _id, names, status, genres, image, animeId } = animeResult;
+  const { _id, names, status, genres, animeId, posters, image } = animeResult;
 
   return (
     <div className={classNames(s.root, className)} {...props}>
@@ -37,7 +36,7 @@ export default function AnimeResult({
         }}
       >
         <div className={s.resultContainer}>
-          <img src={image || profile} alt={names?.ru} className={s.animePic} />
+          <img src={isSaved ? image : posters.original} alt={names?.ru} className={s.animePic} />
           <div className={s.infoContainer}>
             <p className={s.title}>{names?.ru}</p>
             <Button

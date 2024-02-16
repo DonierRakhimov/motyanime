@@ -22,7 +22,7 @@ export const saveAnime = createAsyncThunk(
         genres,
         status,
         names,
-        image = "https://upload.wikimedia.org/wikipedia/ru/1/11/Naruto-manga.jpg",
+        posters
       } = anime;
       const response = await userAxios.post("/savedAnimes", {
         animeId,
@@ -33,7 +33,7 @@ export const saveAnime = createAsyncThunk(
         names: {
           ru: names?.ru,
         },
-        image,
+        image: posters.original,
         category,
       });
       const { data: savedAnime } = response;

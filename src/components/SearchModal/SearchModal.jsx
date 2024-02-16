@@ -17,25 +17,37 @@ import { ReactComponent as Xmark } from "../../assets/images/xmark.svg";
 import { REQUEST_STATUSES } from "../../utils/requestStatuses";
 import isEmpty from "lodash.isempty";
 import SearchResults from "../SearchResults/SearchResults";
+import Spiner from "../Spiner/Spiner";
+import SearchInput from "../SearchInput/SearchInput";
 
-export default function SearchModal({ isOpen }) {
+export default function SearchModal({ isOpen = false }) {
   const dispatch = useDispatch();
   const searchStatus = useSelector(selectSearchStatus);
   const searchResults = useSelector(selectSearchResults);
   const [searchValue, setSearchValue] = React.useState("");
+  const searchRef = React.useRef(null);
+  const makeRequestRef = React.useRef(true);
 
   const searchAnimes = React.useCallback(
     debounce((searchValue) => {
-      dispatch(handleSearch(searchValue));
+      dispatch(
+        handleSearch({ searchValue, makeRequest: makeRequestRef.current })
+      );
     }, 3000),
     []
   );
 
   const handleSearchChange = (e) => {
     const { target } = e;
-    dispatch(setSearchStatus(REQUEST_STATUSES.pending));
     setSearchValue(target.value);
-    searchAnimes(target.value);
+    if (target.value) {
+      makeRequestRef.current = true;
+      dispatch(setSearchStatus(REQUEST_STATUSES.pending));
+      searchAnimes(target.value);
+    } else {
+      makeRequestRef.current = false;
+      dispatch(setSearchStatus(REQUEST_STATUSES.idle));
+    }
   };
 
   const handleResultClick = (searchedAnime) => {
@@ -82,52 +94,66 @@ export default function SearchModal({ isOpen }) {
     }
   }, [dispatch]);
 
+  React.useEffect(() => {
+    if (isOpen && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [isOpen]);
+
+  let resultsToRender = [];
+  let messageToRender = "";
+
+  if (searchStatus === REQUEST_STATUSES.success) {
+    resultsToRender = searchResults;
+    if (!isEmpty(searchResults)) {
+      messageToRender = "Найденные аниме:";
+    } else {
+      messageToRender = "Ничего не найдено";
+    }
+  } else if (searchStatus === REQUEST_STATUSES.idle) {
+    resultsToRender = searchResults.slice(0, 4);
+
+    if (!isEmpty(searchResults)) {
+      messageToRender = "Недавние запросы:";
+    }
+  }
+
   return (
-    <Popup isOpen={isOpen}>
-      <div className={s.searchModal}>
-        <div className={s.searchContainer}>
-          <span className={s.searchIcon}></span>
-          <input
+    isOpen && (
+      <Popup isOpen={isOpen}>
+        <div className={s.searchModal}>
+          <SearchInput
             value={searchValue}
             onChange={handleSearchChange}
-            className={s.search}
             placeholder="Название..."
-          />
-          {Boolean(searchValue.length) && (
-            <button
-              onClick={() => {
-                setSearchValue("");
-                dispatch(setSearchResults([]));
-                dispatch(setSearchStatus(REQUEST_STATUSES.idle));
-              }}
-              className={s.clearBtn}
-              type="button"
-            >
-              <Xmark></Xmark>
-            </button>
-          )}
-          <Spiner isActive={searchStatus === REQUEST_STATUSES.pending}></Spiner>
+            ref={searchRef}
+          >
+            {Boolean(searchValue.length) && (
+              <button
+                onClick={() => {
+                  setSearchValue("");
+                  dispatch(setSearchResults([]));
+                  dispatch(setSearchStatus(REQUEST_STATUSES.idle));
+                  makeRequestRef.current = false;
+                }}
+                className={s.clearBtn}
+                type="button"
+              >
+                <Xmark></Xmark>
+              </button>
+            )}
+            <Spiner
+              isActive={searchStatus === REQUEST_STATUSES.pending}
+            ></Spiner>
+          </SearchInput>
+          <SearchResults
+            searchResults={resultsToRender}
+            message={messageToRender}
+            onAnimeClick={(searchedAnime) => handleResultClick(searchedAnime)}
+            onAnimeDelete={(searchedAnime) => handleDeleteClick(searchedAnime)}
+          ></SearchResults>
         </div>
-        <SearchResults
-          searchResults={
-            searchStatus === REQUEST_STATUSES.success
-              ? searchResults
-              : searchStatus === REQUEST_STATUSES.idle &&
-                searchResults.slice(0, 4)
-          }
-          message={
-            searchStatus === REQUEST_STATUSES.success
-              ? isEmpty(searchResults)
-                ? "Ничего не найдено"
-                : "Найденные аниме:"
-              : searchStatus === REQUEST_STATUSES.idle &&
-                !isEmpty(searchResults) &&
-                "Недавние запросы:"
-          }
-          onAnimeClick={(searchedAnime) => handleResultClick(searchedAnime)}
-          onAnimeDelete={(searchedAnime) => handleDeleteClick(searchedAnime)}
-        ></SearchResults>
-      </div>
-    </Popup>
+      </Popup>
+    )
   );
 }

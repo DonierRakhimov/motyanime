@@ -19,7 +19,9 @@ export default function CommentsList({ animeId }) {
 
   React.useEffect(() => {
     const controller = new AbortController();
+
     dispatch(loadComments({ signal: controller.signal, animeId }));
+    
     return () => controller.abort();
   }, [animeId, dispatch]);
 

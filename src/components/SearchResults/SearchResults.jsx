@@ -12,7 +12,7 @@ export default function SearchResults({
     <>
       <p className={s.message}>{message}</p>
       <ul className={s.searchList}>
-        {searchResults.map((searchedAnime) => (
+        {searchResults?.map((searchedAnime) => (
           <li key={searchedAnime._id}>
             <AnimeResult
               animeResult={searchedAnime}

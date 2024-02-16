@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./animeinfo.module.css";
-import ToggleButton from "../ToggleButton/ToggleButton";
+import SaveButton from "../SaveButton/SaveButton";
 import PictureOverlay from "../PictureOverlay/PictureOverlay";
 import { createPortal } from "react-dom";
 import Popup from "../Popup/Popup";
@@ -54,7 +54,7 @@ export default function AnimeInfo({ anime = {} }) {
         <div className={s.trailerContent}>
           <h2 className={s.title}>{names?.ru}</h2>
           <h3 className={s.text}>
-            Описание <ToggleButton className={s.addBtn} anime={anime} />
+            Описание <SaveButton className={s.addBtn} anime={anime} />
           </h3>
           <p className={s.description}>{description}</p>
         </div>

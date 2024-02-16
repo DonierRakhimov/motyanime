@@ -1,0 +1,37 @@
+.settingsPopup {
+    width: 50px;
+    left: 50%;
+    top: unset;
+    transform: translate(-50%, -120%);
+    border-radius: 5px;
+    z-index: 3;
+}
+  
+.qualityBtn {
+    width: auto !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto 20px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--color-grey-light);
+    font-family: var(--font-primary);
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: .3s color;
+}
+  
+.qualityBtn.active {
+    color: var(--color-primary);
+}
+  
+.qualityBtn:last-child {
+    margin-bottom: 0;
+}
+  
+.qualityBtn:hover {
+    color: var(--color-purple)
+}

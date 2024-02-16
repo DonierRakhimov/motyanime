@@ -3,7 +3,7 @@ import s from "./animeCard.module.css";
 import Button from "../Button/Button";
 import { buttonSizes } from "../../utils/buttonSizes";
 import { buttonColors } from "../../utils/buttonColors";
-import ToggleButton from "../ToggleButton/ToggleButton";
+import SaveButton from "../SaveButton/SaveButton";
 import PictureOverlay from "../PictureOverlay/PictureOverlay";
 import isEmpty from "lodash.isempty";
 
@@ -39,7 +39,7 @@ export default function AnimeCard({ anime = {} }) {
               </div>
             )}
           </div>
-          <ToggleButton anime={anime} />
+          <SaveButton anime={anime} />
         </div>
         <p className={s.title}>{names.ru}</p>
       </figcaption>
