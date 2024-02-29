@@ -123,6 +123,7 @@ export default function SearchModal({ isOpen = false }) {
       <Popup isOpen={isOpen}>
         <div className={s.searchModal}>
           <SearchInput
+            className={s.search}
             value={searchValue}
             onChange={handleSearchChange}
             placeholder="Название..."

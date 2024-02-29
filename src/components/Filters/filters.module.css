@@ -13,7 +13,6 @@
 }
 
 .genresGrid {
-  width: 430px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0;
@@ -40,6 +39,13 @@
   border-radius: 10px;
 }
 
+@media screen and (max-width: 575px) {
+  .genreButton {
+    font-size: 11px;
+    padding: 5px;
+  }
+}
+
 .active {
   color: var(--color-primary);
 }
@@ -54,4 +60,10 @@
 
 .genreButton:hover {
   background-color: #313136;
+}
+
+@media screen and (max-width: 991px) {
+  .filterDropdown {
+    position: static;
+  }
 }

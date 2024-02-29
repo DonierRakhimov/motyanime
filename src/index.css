@@ -20,5 +20,6 @@
 
 body {
   background-color: var(--color-black-light);
+  min-width: 320px;
 }
 

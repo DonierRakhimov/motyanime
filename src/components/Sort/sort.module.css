@@ -17,7 +17,17 @@
   color: var(--color-purple);
 }
 
-.label {
+.sortBtnWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.sortBtnWrapper:first-of-type {
+  margin-bottom: 10px;
+}
+
+.sortBtn {
   font-weight: 400;
   font-size: 16px;
   color: var(--color-grey-light);
@@ -28,42 +38,26 @@
   align-items: center;
   width: max-content;
   transition: 0.3s color;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
 }
 
-.label:hover {
+.sortBtn:hover {
   color: var(--color-purple);
 }
 
-.radioBtn {
-  position: absolute;
-  opacity: 0;
+.markIcon {
+  width: 20px;
+  visibility: hidden;
 }
 
-.customRadio {
-  display: inline-block;
-  position: relative;
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--color-primary);
-  border-radius: 50%;
-  box-sizing: border-box;
-  margin-right: 10px;
+.markIcon.marked {
+  visibility: visible;
 }
 
-.customRadio::before {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  background-color: var(--color-purple);
-}
-
-.customRadio.checked::before {
-  transform: scale(1);
+@media screen and (max-width: 991px) {
+  .sortDropdown {
+    position: static;
+  }
 }

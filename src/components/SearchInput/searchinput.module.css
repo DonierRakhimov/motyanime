@@ -16,6 +16,18 @@
     text-align: start;
     display: block;
   }
+
+  @media screen and (max-width: 1399px) {
+    .search {
+      width: 250px;
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    .search {
+      width: 200px;
+    }
+  }
   
   .searchIcon {
     content: '';

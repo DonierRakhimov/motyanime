@@ -55,7 +55,7 @@ export default function Filters() {
       >
         Жанры
       </button>
-      <DropDown isOpen={filterIsOpen}>
+      <DropDown isOpen={filterIsOpen} className={s.filterDropdown}>
         {
           <ul className={s.genresGrid}>
             {allGenres.map((genre, index) => (

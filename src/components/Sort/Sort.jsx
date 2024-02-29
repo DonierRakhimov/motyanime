@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { sortSelected } from "../../redux/UI/Sort/sortSlice";
 import { usePopup } from "../../hooks/usePopup";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import classNames from "classnames";
 import { animesReseted } from "../../redux/entities/Anime/animeSlice";
+import { ReactComponent as MarkIcon } from "../../assets/images/marked.svg";
+import classNames from "classnames";
 
 const sortVariants = {
   "names.ru": "По названию",
@@ -48,25 +49,22 @@ export default function Sort() {
       >
         Сортировка
       </button>
-      <DropDown isOpen={sortIsOpen}>
+      <DropDown className={s.sortDropdown} isOpen={sortIsOpen}>
         {Object.keys(sortVariants).map((sortParam, index) => (
-          <label className={s.label} key={index}>
-            <input
-              className={s.radioBtn}
-              name="sort"
-              checked={currentSort === sortParam}
-              type="radio"
-              onChange={() => sortChangeHandler(sortParam)}
-            ></input>
-            <span
+          <div className={s.sortBtnWrapper} key={index}>
+            <button
+              className={s.sortBtn}
+              onClick={() => sortChangeHandler(sortParam)}
+            >
+              {sortVariants[sortParam]}
+            </button>
+            <MarkIcon
               className={classNames(
-                s.customRadio,
-                currentSort === sortParam ? s.checked : ""
+                s.markIcon,
+                currentSort === sortParam ? s.marked : ""
               )}
-              checked={currentSort === sortParam}
-            ></span>
-            {sortVariants[sortParam]}
-          </label>
+            ></MarkIcon>
+          </div>
         ))}
       </DropDown>
     </div>

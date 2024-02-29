@@ -1,25 +1,19 @@
 import React from "react";
 import s from "./header.module.css";
 import logo from "../../assets/images/logo-color.png";
-import Button from "../Button/Button";
-import { buttonColors } from "../../utils/buttonColors";
-import Filters from "../Filters/Filters";
-import Sort from "../Sort/Sort";
-import Search from "../Search/Search";
-import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentGenres } from "../../redux/UI/Genres/selectors";
 import { selectCurrentSort } from "../../redux/UI/Sort/selectors";
-import {
-  selectIsAuthorized,
-  selectUserData,
-} from "../../redux/entities/User/selectors";
+
+import { ReactComponent as BurgerIcon } from "../../assets/images/bars.svg";
+import NavList from "../NavList/NavList";
+import classNames from "classnames";
 
 export default function Header() {
   const { pathname } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const userData = useSelector(selectUserData);
-  const isAuthorized = useSelector(selectIsAuthorized);
+  const [menuIsOpen, setMenuIsOpen] = React.useState(false);
   const currentGenres = useSelector(selectCurrentGenres);
   const currentSort = useSelector(selectCurrentSort);
 
@@ -41,46 +35,16 @@ export default function Header() {
   return (
     <header className={s.root}>
       <img src={logo} alt="логотип" className={s.logo} />
-      <div className={s.navcontainer}>
-        <ul className={s.list}>
-          <li className={s.listitem}>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? s.mainLink + " " + s.active : s.mainLink
-              }
-              to="/"
-            >
-              Аниме
-            </NavLink>
-          </li>
-          <li className={s.listitem}>
-            <Filters />
-          </li>
-          <li className={s.listitem}>
-            <Sort />
-          </li>
-        </ul>
-        <div className={s.searchWrapper}>
-          <Search />
-        </div>
-        {isAuthorized ? (
-          <Link to="/profile" className={s.profileLink}>
-            <img
-              src={userData?.avatar}
-              className={s.profilePic}
-              alt="аватар"
-            ></img>
-          </Link>
-        ) : (
-          <>
-            <Link to="/signup" className={s.btnWrapper}>
-              <Button>SIGN UP</Button>
-            </Link>
-            <Link to="signin">
-              <Button color={buttonColors.purple}>LOG IN</Button>
-            </Link>
-          </>
-        )}
+      <button
+        className={s.burger}
+        onClick={() => setMenuIsOpen((prev) => !prev)}
+      >
+        <BurgerIcon></BurgerIcon>
+      </button>
+      <div className={classNames(s.navWrapper, menuIsOpen ? s.navWrapperOpen : "")}>
+        <nav className={s.navcontainer}>
+          <NavList></NavList>
+        </nav>
       </div>
     </header>
   );
