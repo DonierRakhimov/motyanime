@@ -31,7 +31,7 @@ export default function SaveButton({ className = "", anime = {} }) {
       >
         <DropdownToggle />
       </button>
-      <DropDown isOpen={dropdownOpen}>
+      <DropDown isOpen={dropdownOpen} className={s.saveDropdown}>
         <button
           className={classNames(s.addBtn, isWatched ? s.active : "")}
           onClick={() => handleAnimeSave("watched")}

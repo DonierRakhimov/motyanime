@@ -15,6 +15,7 @@ import {
   selectCurrentPage,
   selectIsMoreToLoad,
   selectStatusIsLoading,
+  selectAnimes,
 } from "../../redux/entities/Anime/selectors";
 import isEmpty from "lodash.isempty";
 
@@ -28,6 +29,7 @@ export default function Main() {
   const currentGenres = useSelector(selectCurrentGenres);
   const isMoreToLoad = useSelector(selectIsMoreToLoad);
   const currentSort = useSelector(selectCurrentSort);
+  const allAnimes = useSelector(selectAnimes)
 
   const { ref, inView } = useInView({
     threshold: 0.3,
@@ -63,7 +65,7 @@ export default function Main() {
       </AnimeGrid>
       {randomAnimes.length && (
         <section className={s.animeCarousel}>
-          <Carousel animes={randomAnimes}></Carousel>
+          <Carousel animes={allAnimes}></Carousel>
         </section>
       )}
       <AnimeGrid animes={restAnimes}>

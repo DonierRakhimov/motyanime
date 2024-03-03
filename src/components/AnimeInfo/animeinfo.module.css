@@ -4,15 +4,22 @@
 }
 
 .mainContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
   margin-bottom: 30px;
 }
 
-.trailerContent {
-  flex-grow: 1;
-  width: 33%;
-  align-self: flex-start;
+@media screen and (max-width: 991px) {
+  .mainContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mainContainer {
+    grid-template-columns: 1fr;
+  }
 }
 
 .title {
@@ -26,6 +33,13 @@
   line-height: 1.1;
 }
 
+@media screen and (max-width: 1399px) {
+  .title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+}
+
 .text {
   font-size: 25px;
   color: var(--color-white);
@@ -34,6 +48,12 @@
   letter-spacing: 1.5px;
   line-height: 1.1;
   margin: 0 0 10px 0;
+}
+
+@media screen and (max-width: 1399px) {
+  .title {
+    font-size: 20px;
+  }
 }
 
 .description {
@@ -45,6 +65,12 @@
   line-height: 1.5;
   margin: 0 0 5px 0;
   font-family: var(--font-primary);
+}
+
+@media screen and (max-width: 1399px) {
+  .description {
+    font-size: 14px;
+  }
 }
 
 .addBtn {

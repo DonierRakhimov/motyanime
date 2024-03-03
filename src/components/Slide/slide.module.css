@@ -1,11 +1,9 @@
 .root {
   position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 700px;
 }
 
 .root::after {
@@ -19,19 +17,54 @@
   left: 0;
 }
 
+@media screen and (max-width: 992px) {
+  .root {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 .sliderContainer {
   max-width: 1320px;
   padding: 0 12px;
   z-index: 999;
   position: relative;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  width: 100%;
+  height: 630px;
   align-items: center;
 }
 
+@media screen and (max-width: 1399px) {
+  .sliderContainer {
+    max-width: 1140px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .sliderContainer {
+    max-width: 960px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .sliderContainer {
+    max-width: 720px;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sliderContainer {
+    max-width: 540px;
+  }
+}
+
 .infoContainer {
-  width: 41.6%;
   display: inline-block;
 }
 
@@ -46,16 +79,11 @@
   margin-bottom: 20px;
 }
 
-/* .text {
-  font-family: var(--font-primary);
-  font-size: 40px;
-  color: var(--color-white);
-  text-transform: uppercase;
-  margin: 0;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-} */
+@media screen and (max-width: 576px) {
+  .animeTitle {
+    font-size: 30px;
+  }
+}
 
 .tags {
   display: flex;
@@ -74,6 +102,12 @@
   text-transform: uppercase;
 }
 
+@media screen and (max-width: 576px) {
+  .date {
+    font-size: 22px;
+  }
+}
+
 .description {
   font-family: var(--font-primary);
   color: var(--color-grey-light);
@@ -86,15 +120,20 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 576px) {
+  .description {
+    font-size: 14px;
+  }
+}
+
 .imgWrapper {
-  margin-left: 24px;
-  width: 58.6%;
   display: inline-block;
 }
 
 .img {
   width: 100%;
-  height: 600px;
+  height: 400px;
   object-fit: cover;
   border-radius: 15px;
+  object-position: center;
 }

@@ -4,7 +4,7 @@ import AnimeCard from "../AnimeCard/AnimeCard";
 
 export default function AnimeGrid({ animes = [], children }) {
   return (
-    <section className={s.animeGallery}>
+    <section className={s.root}>
       <div className={s.animeGrid}>
         {Boolean(animes.length) &&
           animes.map((anime) => (

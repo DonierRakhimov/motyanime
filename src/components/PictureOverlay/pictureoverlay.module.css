@@ -7,11 +7,11 @@
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
-  min-height: 400px;
+  height: 400px;
 }
 
 .trailerPic {
-  max-height: 307px;
+  height: 307px;
   min-height: unset;
 }
 
@@ -35,6 +35,18 @@
   transition: all 0.5s ease;
   visibility: hidden;
   opacity: 0;
+}
+
+@media screen and (max-width: 1399px) {
+  .watchLink {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .watchLink {
+    font-size: 25px;
+  }
 }
 
 .imgContainer:hover .watchLink {

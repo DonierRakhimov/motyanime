@@ -41,6 +41,13 @@
   position: relative;
 }
 
+@media screen and (max-width: 767px) {
+  .bottomControls button {
+    width: 25px;
+    height: 25px;
+  }
+}
+
 [data-title]::before {
   content: attr(data-title);
   position: absolute;
@@ -81,16 +88,34 @@
   gap: 30px;
 }
 
+@media screen and (max-width: 767px) {
+  .leftControls {
+    gap: 10px;
+  }
+}
+
 .rightControls {
   display: flex;
   align-items: center;
   gap: 30px;
 }
 
+@media screen and (max-width: 767px) {
+  .rightControls {
+    gap: 10px;
+  }
+}
+
 .volumeBtnWrapper {
   display: flex;
   align-items: center;
   gap: 30px;
+}
+
+@media screen and (max-width: 767px) {
+  .volumeBtnWrapper {
+    gap: 10px;
+  }
 }
 
 .volumeRange {
@@ -116,6 +141,12 @@
   font-size: 16px;
   font-family: var(--font-primary);
   line-height: 1.5;
+}
+
+@media screen and (max-width: 575px) {
+  .timeContainer {
+    display: none;
+  }
 }
 
 .playPauseBtn::before {

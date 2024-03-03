@@ -1,12 +1,40 @@
 import React from "react";
 import s from "./slide.module.css";
 import Button from "../Button/Button";
-import { buttonSizes } from "../../utils/buttonSizes";
 import { buttonColors } from "../../utils/buttonColors";
 import isEmpty from "lodash.isempty";
 import { Link } from "react-router-dom";
+import { buttonSizes } from "../../utils/buttonSizes";
 
 export default function Slide({ anime = {} }) {
+  const [showBackgroundImg, setShowBackgroundImg] = React.useState(false);
+  const [tagsBtnSize, setTagsBtnSize] = React.useState(buttonSizes.m);
+  const [watchBtnSize, setwatchBtnSize] = React.useState(buttonSizes.xl);
+
+  function handleResize() {
+    if (document.documentElement.clientWidth <= 992) {
+      setShowBackgroundImg(true);
+    } else {
+      setShowBackgroundImg(false);
+    }
+
+    if (document.documentElement.clientWidth <= 576) {
+      setTagsBtnSize(buttonSizes.s);
+      setwatchBtnSize(buttonSizes.l);
+    } else {
+      setTagsBtnSize(buttonSizes.m);
+      setwatchBtnSize(buttonSizes.xl);
+    }
+  }
+
+  React.useEffect(() => {
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [anime]);
+
   if (isEmpty(anime)) {
     return;
   }
@@ -15,21 +43,28 @@ export default function Slide({ anime = {} }) {
     anime;
 
   return (
-    <div className={s.root}>
+    <div
+      className={s.root}
+      style={{
+        backgroundImage: showBackgroundImg ? `url(${posters.original})` : "none",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className={s.sliderContainer}>
         <div className={s.infoContainer}>
           <h2 className={s.animeTitle}>{names?.ru}</h2>
           <div className={s.tags}>
             {type?.string && (
-              <Button size={buttonSizes.m}>{type?.string}</Button>
+              <Button size={tagsBtnSize}>{type?.string}</Button>
             )}
             {status?.string && (
-              <Button size={buttonSizes.m} color={buttonColors.grey}>
+              <Button size={tagsBtnSize} color={buttonColors.grey}>
                 {status?.string}
               </Button>
             )}
             {!isEmpty(genres) && (
-              <Button size={buttonSizes.m} color={buttonColors.grey}>
+              <Button size={tagsBtnSize} color={buttonColors.grey}>
                 {genres[0]}
               </Button>
             )}
@@ -39,12 +74,14 @@ export default function Slide({ anime = {} }) {
           }`}</p>
           <p className={s.description}>{description}</p>
           <Link to={`/${_id}`}>
-            <Button size={buttonSizes.xl}>СМОТРЕТЬ</Button>
+            <Button size={watchBtnSize}>СМОТРЕТЬ</Button>
           </Link>
         </div>
-        <div className={s.imgWrapper}>
-          <img className={s.img} src={posters.original} alt={names?.ru} />
-        </div>
+        {!showBackgroundImg && (
+          <div className={s.imgWrapper}>
+            <img className={s.img} src={posters.original} alt={names?.ru} />
+          </div>
+        )}
       </div>
     </div>
   );

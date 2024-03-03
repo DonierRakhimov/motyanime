@@ -2,13 +2,6 @@
   background-color: var(--color-black-light);
 }
 
-.animeGallery {
-  margin: 0 auto;
-  max-width: 1320px;
-  padding-top: 30px;
-  padding: 30px 12px 0;
-}
-
 .animeGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(246px, 1fr));
@@ -23,6 +16,32 @@
   color: var(--color-white);
   margin: 30px auto 40px;
   max-width: 1320px;
+  padding: 0px 12px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1399px) {
+  .title {
+    max-width: 1140px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .title {
+    max-width: 960px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .title {
+    max-width: 720px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    max-width: 540px;
+  }
 }
 
 .animeCarousel {

@@ -53,3 +53,7 @@
 .addBtn:hover svg {
   fill: var(--color-primary);
 }
+
+.saveDropdown {
+  right: 0px;
+}

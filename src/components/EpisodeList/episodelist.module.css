@@ -17,6 +17,14 @@
   scrollbar-color: var(--color-purple) var(--color-dark-grey);
 }
 
+@media screen and (max-width: 991px) {
+  .episodeList {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+  }
+}
+
 .episodeList::-webkit-scrollbar {
   width: 8px;
   background-color: var(--color-dark-grey);

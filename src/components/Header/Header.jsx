@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./header.module.css";
 import logo from "../../assets/images/logo-color.png";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentGenres } from "../../redux/UI/Genres/selectors";
 import { selectCurrentSort } from "../../redux/UI/Sort/selectors";
@@ -34,14 +34,18 @@ export default function Header() {
 
   return (
     <header className={s.root}>
-      <img src={logo} alt="логотип" className={s.logo} />
+      <Link to="/">
+        <img src={logo} alt="логотип" className={s.logo} />
+      </Link>
       <button
         className={s.burger}
         onClick={() => setMenuIsOpen((prev) => !prev)}
       >
         <BurgerIcon></BurgerIcon>
       </button>
-      <div className={classNames(s.navWrapper, menuIsOpen ? s.navWrapperOpen : "")}>
+      <div
+        className={classNames(s.navWrapper, menuIsOpen ? s.navWrapperOpen : "")}
+      >
         <nav className={s.navcontainer}>
           <NavList></NavList>
         </nav>

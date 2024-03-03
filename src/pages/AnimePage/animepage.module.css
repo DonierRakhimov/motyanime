@@ -1,6 +1,32 @@
 .root {
   margin: 60px auto 0;
   max-width: 1320px;
+  box-sizing: border-box;
+  padding: 0px 12px;
+}
+
+@media screen and (max-width: 1399px) {
+  .root {
+    max-width: 1140px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .root {
+    max-width: 960px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .root {
+    max-width: 720px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .root {
+    max-width: 540px;
+  }
 }
 
 .animeInfoWrapper {
@@ -12,9 +38,7 @@
 }
 
 .commentSection {
-  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 12px;
 }
 
 .commentGrid {
