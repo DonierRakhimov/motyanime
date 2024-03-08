@@ -2,11 +2,23 @@
   display: flex;
 }
 
+@media screen and (max-width: 575px) {
+  .root {
+    flex-direction: column;
+  }
+}
+
 .profilePic {
   width: 50px;
   height: 50px;
   margin-right: 24px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 575px) {
+  .profilePic {
+    display: none;
+  }
 }
 
 .fieldset {
@@ -15,6 +27,12 @@
   padding: 0;
   border: none;
   margin-top: 5px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-block-start: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-block-end: 0;
 }
 
 .commentField {
@@ -28,12 +46,18 @@
   box-shadow: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  line-height: 1;
+  line-height: 16px;
   font-family: var(--font-primary);
   box-sizing: border-box;
   flex-grow: 1;
   resize: vertical;
   overflow: hidden;
+}
+
+@media screen and (max-width: 575px) {
+  .commentField {
+    padding: 2px 4px;
+  }
 }
 
 .commentField::placeholder {

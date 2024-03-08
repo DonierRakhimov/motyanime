@@ -1,5 +1,12 @@
 .searchModal {
+  width: 500px;
   min-height: 150px;
+}
+
+@media screen and (max-width: 575px) {
+  .searchModal {
+    width: 100%;
+  }
 }
 
 .clearBtn {
@@ -14,10 +21,11 @@
   cursor: pointer;
   width: 20px;
   height: 20px;
+  box-sizing: border-box;
 }
 
 .search {
-  width: 400px !important;
+  width: 100% !important;
 }
 
 .clearBtn svg {

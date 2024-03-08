@@ -156,7 +156,7 @@ export default function Profile({ userData }) {
           ></img>
         </div>
         <div className={s.infoContainer}>
-          <div>
+          <div className={s.userData}>
             <p className={s.userName}>{userName}</p>
             <p className={s.email}>{email}</p>
             <button

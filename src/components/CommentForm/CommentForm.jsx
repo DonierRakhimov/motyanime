@@ -46,10 +46,11 @@ export default function CommentForm({
               onFocus={() => dispatch(focusGained())}
               onBlur={() => dispatch(focusLost())}
               className={s.commentField}
-              placeholder="Оставить комментарий"
+              placeholder="Комментарий..."
               name="comment"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
+              cols={1}
             />
             <button className={s.postBtn} type="submit">
               Опубликовать

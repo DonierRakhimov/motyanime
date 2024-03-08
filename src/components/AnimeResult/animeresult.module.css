@@ -20,22 +20,21 @@
   width: 70px;
   height: 92px;
   border-radius: 10px;
-}
-
-.infoContainer {
-  padding: 15px;
+  margin-right: 10px;
+  flex-shrink: 0;
 }
 
 .title {
   margin: 0;
-  margin-bottom: 16px;
-  height: 20px;
+  margin: 0px;
   font-size: 15px;
   font-weight: 400;
   letter-spacing: 0.5px;
   line-height: 1.5;
   color: var(--color-white);
   font-family: var(--font-primary);
+  max-height: 92px;
+  overflow-y: hidden;
 }
 
 .statusBtn {
@@ -50,6 +49,7 @@
   height: 25px;
   cursor: pointer;
   align-self: center;
+  flex-shrink: 0;
 }
 
 .deleteBtn svg {

@@ -10,16 +10,40 @@
   width: 75%;
 }
 
+@media screen and (max-width: 991px) {
+  .playListContainer {
+    width: 100%;
+  }
+}
+
 .playListHeader {
   padding: 30px 70px;
   background-color: #000000;
   border-radius: 10px 10px 0 0;
 }
 
+@media screen and (max-width: 767px) {
+  .playListHeader {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .playListHeader {
+    padding: 20px 10px;
+  }
+}
+
 .btnContainer {
   display: flex;
   justify-content: center;
   gap: 40px;
+}
+
+@media screen and (max-width: 575px) {
+  .btnContainer {
+    gap: 10px;
+  }
 }
 
 .switchBtn {
@@ -34,6 +58,18 @@
   cursor: pointer;
   border: none;
   padding: 0;
+}
+
+@media screen and (max-width: 991px) {
+  .switchBtn {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .switchBtn {
+    font-size: 12px;
+  }
 }
 
 .switchBtn.active {
@@ -54,6 +90,12 @@
   background-position: center;
   border-radius: 0 0 10px 10px;
   position: relative;
+}
+
+@media screen and (max-width: 575px) {
+  .playList {
+    padding: 10px;
+  }
 }
 
 .list {

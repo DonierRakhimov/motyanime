@@ -66,9 +66,8 @@ export default function AnimeInfo({ anime = {} }) {
       {createPortal(
         <Popup isOpen={isTrailerOpen}>
           <iframe
+            className={s.trailer}
             title="trailer"
-            width="460"
-            height="360"
             src={"http://www.youtube.com/embed/" + youtube_id}
           >
             Не удалось загрузить трейлер
