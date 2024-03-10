@@ -26,7 +26,7 @@ export default function AnimeResult({
   return (
     <div className={classNames(s.root, className)} {...props}>
       <Link
-        to={`/${isSaved ? animeId : _id}`}
+        to={`/anime/${isSaved ? animeId : _id}`}
         onClick={onClick}
         style={{
           textDecoration: "none",

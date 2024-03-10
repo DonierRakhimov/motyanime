@@ -59,7 +59,7 @@ export default function Main() {
       <AnimeGrid animes={firstAnimes}>
         {isLoading &&
           isEmpty(firstAnimes) &&
-          [...Array(12)].map((_, index) => <CardLoader key={index} />)}
+          [...new Array(12)].map((_, index) => <CardLoader key={index} />)}
       </AnimeGrid>
       {randomAnimes.length && (
         <section className={s.animeCarousel}>

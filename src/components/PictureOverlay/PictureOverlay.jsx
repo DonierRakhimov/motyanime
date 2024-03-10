@@ -13,7 +13,7 @@ export default function PictureOverlay({ id, name, src, trailer = false }) {
         className={classNames(s.animePic, trailer ? s.trailerPic : '')}
       />
       <Link
-        to={`/${id}`}
+        to={`/anime/${id}`}
         className={classNames(s.watchLink, trailer ? s.trailerLink : '')}
         onClick={() => window.scrollTo(0, 0)}
       >

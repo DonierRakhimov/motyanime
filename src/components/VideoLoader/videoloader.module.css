@@ -1,0 +1,18 @@
+.root {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+  
+@media screen and (max-width: 991px) {
+    .root {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .root {
+        grid-template-columns: 1fr;
+    }
+}

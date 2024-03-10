@@ -14,19 +14,20 @@ import { useDispatch } from "react-redux";
 import { checkAuth } from "../../redux/entities/User/thunks/checkAuth";
 import PageWrapper from "../PageWrapper/PageWrapper";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<PageWrapper></PageWrapper>}>
-      <Route path="/" element={<Main></Main>}></Route>
-      <Route path="/:animeId" element={<AnimePage></AnimePage>}></Route>
-      <Route path="/signup" element={<RegisterPage></RegisterPage>}></Route>
-      <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
+      <Route path="/" element={<Main />}></Route>
+      <Route path="/anime/:animeId" element={<AnimePage />}></Route>
+      <Route path="/signup" element={<RegisterPage />}></Route>
+      <Route path="/signin" element={<LoginPage />}></Route>
       <Route
         path="/profile"
         element={<ProtectedRoute element={ProfilePage}></ProtectedRoute>}
       ></Route>
-      <Route path="*" element={<div>Not found page</div>}></Route>
+      <Route path="*" element={<NotFoundPage />}></Route>
     </Route>
   )
 );

@@ -2,9 +2,21 @@
   background: rgba(0, 0, 0, 0.8);
   max-width: 450px;
   margin: 0 auto;
-  padding: 50px 50px;
+  padding: 50px;
   height: 100vh;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+  .root {
+    padding: 25px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .root {
+    padding: 10px;
+  }
 }
 
 .formContainer {
@@ -12,7 +24,7 @@
 }
 
 .form {
-  margin-bottom: 120px;
+  margin-bottom: 130px;
   position: relative;
 }
 
@@ -33,6 +45,18 @@
   font-family: var(--font-primary);
   letter-spacing: 1.5px;
   text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: 25px;
+  }
 }
 
 .formContent {
@@ -64,6 +88,18 @@
   font-size: 15px;
   line-height: 18px;
   color: var(--color-grey-light);
+}
+
+@media screen and (max-width: 767px) {
+  .formContent input[type='text'],
+  .formContent input[type='email'],
+  .formContent input[type='password'] {
+      font-size: 12px;
+  }
+
+  .formContent input::placeholder {
+    font-size: 12px;
+  }
 }
 
 .guide {
@@ -107,4 +143,16 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media screen and (max-width: 991px) {
+  .submitBtn {
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .submitBtn {
+    font-size: 16px !important;
+  }
 }
