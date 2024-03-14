@@ -26,7 +26,7 @@ export default function Carousel({ animes }) {
         prevEl: `.${s.prevBtn}`,
       }}
       loop={true}
-      
+      autoplay={true}
       effect={'fade'}
       fadeEffect={{
         crossFade: true,

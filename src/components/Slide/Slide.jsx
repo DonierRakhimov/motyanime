@@ -3,13 +3,14 @@ import s from "./slide.module.css";
 import Button from "../Button/Button";
 import { buttonColors } from "../../utils/buttonColors";
 import isEmpty from "lodash.isempty";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { buttonSizes } from "../../utils/buttonSizes";
 
 export default function Slide({ anime = {} }) {
   const [showBackgroundImg, setShowBackgroundImg] = React.useState(false);
   const [tagsBtnSize, setTagsBtnSize] = React.useState(buttonSizes.m);
   const [watchBtnSize, setwatchBtnSize] = React.useState(buttonSizes.xl);
+  const navigate = useNavigate();
 
   function handleResize() {
     if (document.documentElement.clientWidth <= 992) {
@@ -46,7 +47,9 @@ export default function Slide({ anime = {} }) {
     <div
       className={s.root}
       style={{
-        backgroundImage: showBackgroundImg ? `url(${posters.original})` : "none",
+        backgroundImage: showBackgroundImg
+          ? `url(${posters.original})`
+          : "none",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
@@ -55,9 +58,7 @@ export default function Slide({ anime = {} }) {
         <div className={s.infoContainer}>
           <h2 className={s.animeTitle}>{names?.ru}</h2>
           <div className={s.tags}>
-            {type?.string && (
-              <Button size={tagsBtnSize}>{type?.string}</Button>
-            )}
+            {type?.string && <Button size={tagsBtnSize}>{type?.string}</Button>}
             {status?.string && (
               <Button size={tagsBtnSize} color={buttonColors.grey}>
                 {status?.string}
@@ -73,9 +74,9 @@ export default function Slide({ anime = {} }) {
             season?.string ? ", " + season?.string : ""
           }`}</p>
           <p className={s.description}>{description}</p>
-          <Link to={`/${_id}`}>
-            <Button size={watchBtnSize}>СМОТРЕТЬ</Button>
-          </Link>
+          <Button onClick={() => navigate(`/anime/${_id}`)} size={watchBtnSize}>
+            СМОТРЕТЬ
+          </Button>
         </div>
         {!showBackgroundImg && (
           <div className={s.imgWrapper}>

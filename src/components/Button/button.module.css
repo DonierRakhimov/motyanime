@@ -68,6 +68,10 @@
   cursor: wait;
 }
 
+.childContainer {
+  
+}
+
 .btn:disabled .childContainer {
   visibility: hidden;
 }

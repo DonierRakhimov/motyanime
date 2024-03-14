@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./navlist.module.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Filters from "../Filters/Filters";
 import Sort from "../Sort/Sort";
 import Search from "../Search/Search";
@@ -15,6 +15,8 @@ import {
 export default function NavList() {
   const userData = useSelector(selectUserData);
   const isAuthorized = useSelector(selectIsAuthorized);
+  const navigate = useNavigate();
+
   return (
     <>
       <ul className={s.list}>
@@ -48,12 +50,15 @@ export default function NavList() {
         </Link>
       ) : (
         <>
-          <Link to="/signup" className={s.btnWrapper}>
-            <Button>SIGN UP</Button>
-          </Link>
-          <Link to="signin">
-            <Button color={buttonColors.purple}>LOG IN</Button>
-          </Link>
+          <Button className={s.btnWrapper} onClick={() => navigate("/signup")}>
+            SIGN UP
+          </Button>
+          <Button
+            onClick={() => navigate("/signin")}
+            color={buttonColors.purple}
+          >
+            LOG IN
+          </Button>
         </>
       )}
     </>

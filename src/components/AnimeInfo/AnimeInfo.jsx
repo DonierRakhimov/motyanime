@@ -53,9 +53,10 @@ export default function AnimeInfo({ anime = {} }) {
         </div>
         <div className={s.trailerContent}>
           <h2 className={s.title}>{names?.ru}</h2>
-          <h3 className={s.text}>
-            Описание <SaveButton className={s.addBtn} anime={anime} />
-          </h3>
+          <div>
+            <h3 className={s.text}>Описание</h3>
+            <SaveButton className={s.addBtn} anime={anime} />
+          </div>
           <p className={s.description}>{description}</p>
         </div>
         <div className={s.trailerContent}>
@@ -70,7 +71,6 @@ export default function AnimeInfo({ anime = {} }) {
             title="trailer"
             src={"http://www.youtube.com/embed/" + youtube_id}
           >
-            Не удалось загрузить трейлер
           </iframe>
         </Popup>,
         document.getElementById("root")

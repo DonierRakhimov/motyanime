@@ -22,7 +22,7 @@ export default function Button({
       disabled={disabled}
       onClick={onClick}
     >
-      <div className={s.childContainer}>{children}</div>
+      <span className={s.childContainer}>{children}</span>
     </button>
   );
 }
