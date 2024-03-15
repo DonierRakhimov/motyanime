@@ -3,7 +3,7 @@ import s from "./slide.module.css";
 import Button from "../Button/Button";
 import { buttonColors } from "../../utils/buttonColors";
 import isEmpty from "lodash.isempty";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { buttonSizes } from "../../utils/buttonSizes";
 
 export default function Slide({ anime = {} }) {
