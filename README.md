@@ -9,6 +9,16 @@ __Motyanime__
 - Поиск 
 - Фильтрация по категориям
 - Сортировка
+
+____
+## Используемые технологии:
+- React
+- css modules
+- Redux Toolkit
+- react router dom
+- JWT
+- axios
+  
 ____
 ## Скриншоты:
 
@@ -26,13 +36,3 @@ ____
 
 ### Регистрация
 ![Регистрация](https://storage.yandexcloud.net/motyanime/screenshots/register.png)
-
-____
-## Используемые технологии:
-- React
-- css modules
-- Redux Toolkit
-- react router dom
-- JWT
-- axios
-
