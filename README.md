@@ -18,6 +18,9 @@ ____
 - react router dom
 - JWT
 - axios
+- express
+- mongoDB
+- mongoose
   
 ____
 ## Скриншоты:
